@@ -6,17 +6,26 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] float moveSpeed;
+    private float moveSpeed;
+    [SerializeField] float walkSpeed;
+    [SerializeField] float sprintSpeed;
 
-
+    [Header("Jump")]
     [SerializeField] float jumpForce;
     [SerializeField] float jumpCoolDown;
     [SerializeField] float airMultiplier;
     private bool canJump;
 
-    [SerializeField] float groundDrag;
-    [SerializeField] float stoppingDrag = 20f;
+    [Header("Crouch")]
+    [SerializeField] float crouchSpeed;
+    [SerializeField] float crouchYScale;
+    private float normalYScale;
 
+    [Header("Drag")]
+    private float groundDrag;
+    [SerializeField] float walkDrag = 1f;
+    [SerializeField] float sprintDrag = 3f;
+    [SerializeField] float stoppingDrag = 20f;
 
     [Header("GroundCheck")]
     [SerializeField] float playerHeight;
@@ -25,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("KeyBinds")]
     [SerializeField] KeyCode jumpKey = KeyCode.Space;
+    [SerializeField] KeyCode sprintKey = KeyCode.LeftShift;
+    [SerializeField] KeyCode crouchKey = KeyCode.LeftControl;
 
     [SerializeField] Transform orientation;
 
@@ -34,12 +45,26 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 moveDirection;
     private Rigidbody rb;
 
+    public enum MovementState
+    {
+        Walking,
+        Sprinting,
+        Crouching,
+        Air
+    }
+
+    private MovementState currentState;
+
+
     private void Start()
     {
         TryGetComponent(out rb);
         rb.freezeRotation = true;
 
         canJump = true;
+        currentState = MovementState.Walking;
+
+        normalYScale = transform.localScale.y;
     }
 
     private void Update()
@@ -47,6 +72,8 @@ public class PlayerMovement : MonoBehaviour
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.1f, groundLayer);
 
         GetInput();
+        SpeedControl();
+        StateHandler();
 
         if (grounded)
         {
@@ -68,7 +95,35 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
-        SpeedControl();
+    }
+
+    private void StateHandler()
+    {
+        if (Input.GetKey(crouchKey))
+        {
+            currentState = MovementState.Crouching;
+            moveSpeed = crouchSpeed;
+            groundDrag = walkDrag;
+            return;
+        }
+
+        if (grounded && Input.GetKey(sprintKey) && verticalInput > 0)
+        {
+            currentState = MovementState.Sprinting;
+            moveSpeed = sprintSpeed;
+            groundDrag = sprintDrag;
+            return;
+        }
+        
+        if (grounded)
+        {
+            currentState = MovementState.Walking;
+            moveSpeed = walkSpeed;
+            groundDrag = walkDrag;
+            return;
+        }
+
+        currentState = MovementState.Air;
     }
 
     private void GetInput()
@@ -76,11 +131,26 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKey(jumpKey) && canJump && grounded)
+        if (Input.GetKeyDown(jumpKey) && canJump && grounded)
         {
             canJump = false;
             Jump();
             Invoke(nameof(ResetCanJump), jumpCoolDown);
+        }
+
+        if (Input.GetKeyDown(crouchKey))
+        {
+            transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
+            
+            if (grounded)
+            {
+                rb.AddForce(5f * Vector3.down, ForceMode.Impulse);
+            }
+        }
+
+        if (Input.GetKeyUp(crouchKey))
+        {
+            transform.localScale = new Vector3(transform.localScale.x, normalYScale, transform.localScale.z);
         }
     }
 
@@ -90,20 +160,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (grounded)
         {
-            Vector3 newVector = rb.velocity;
-
-            if (moveDirection.x * rb.velocity.x <= 0)
-            {
-                newVector.x = 0;
-            }
-
-            if (moveDirection.z * rb.velocity.z <= 0)
-            {
-                newVector.z = 0;
-            }
-
-            rb.velocity = newVector;
-            rb.AddForce(moveDirection * moveSpeed * 5f, ForceMode.Force);
+            rb.AddForce(5f * moveSpeed * moveDirection, ForceMode.Force);
         }
         else if (!grounded)
         {
@@ -111,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        print(rb.velocity.y);
+        print(rb.velocity.magnitude);
     }
 
     private void Jump()
