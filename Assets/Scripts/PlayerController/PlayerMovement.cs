@@ -189,7 +189,7 @@ public class PlayerMovement : MonoBehaviour
     private void SlideMovement()
     {
         //movement += forwardDirection;
-        movement = Vector3.ClampMagnitude(movement, speed * 2f);
+        movement = Vector3.ClampMagnitude(movement, speed);
     }
 
     private void Jump()
@@ -241,6 +241,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void DecreaseSpeed(float reduceSpeed)
     {
+        if (controller.velocity.y < 0f)
+        {
+            return;
+        }
+
         speed -= reduceSpeed * Time.deltaTime;
     }
 

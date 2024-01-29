@@ -120,8 +120,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  slideSpeedUp: 2.5
-  slideSpeedDown: 3
+  slideSpeedUp: 2
+  slideSpeedDown: 5
   lurchTimer: 0.3
 --- !u!1 &6581444815636151019
 GameObject:
