@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerCameraScript : MonoBehaviour
 {
-    [SerializeField] float xSens;
-    [SerializeField] float ySens;
+    [SerializeField] float sensitivity;
 
     [SerializeField] Transform orientation;
 
@@ -20,8 +19,8 @@ public class PlayerCameraScript : MonoBehaviour
 
     private void Update()
     {
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.fixedDeltaTime * xSens;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.fixedDeltaTime * ySens;
+        float mouseX = Input.GetAxisRaw("Mouse X") * Time.fixedDeltaTime * sensitivity;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.fixedDeltaTime * sensitivity;
 
         rotationY += mouseX;
         rotationX -= mouseY;

@@ -1,195 +1,263 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Movement")]
-    private float moveSpeed;
-    [SerializeField] float walkSpeed;
-    [SerializeField] float sprintSpeed;
+    CharacterController controller;
 
-    [Header("Jump")]
-    [SerializeField] float jumpForce;
-    [SerializeField] float jumpCoolDown;
-    [SerializeField] float airMultiplier;
-    private bool canJump;
+    private Vector3 movement;
+    private Vector3 input;
 
-    [Header("Crouch")]
-    [SerializeField] float crouchSpeed;
-    [SerializeField] float crouchYScale;
-    private float normalYScale;
-
-    [Header("Drag")]
-    private float groundDrag;
-    [SerializeField] float walkDrag = 1f;
-    [SerializeField] float sprintDrag = 3f;
-    [SerializeField] float stoppingDrag = 20f;
-
-    [Header("GroundCheck")]
-    [SerializeField] float playerHeight;
-    [SerializeField] LayerMask groundLayer;
-    private bool grounded;
-
-    [Header("KeyBinds")]
+    [Header("KeyBind")]
     [SerializeField] KeyCode jumpKey = KeyCode.Space;
     [SerializeField] KeyCode sprintKey = KeyCode.LeftShift;
     [SerializeField] KeyCode crouchKey = KeyCode.LeftControl;
 
-    [SerializeField] Transform orientation;
+    [Header("Movement")]
+    [SerializeField] float walkSpeed;
+    [SerializeField] float sprintSpeed;
+    [SerializeField] float crouchSpeed;
+    [SerializeField] float airSpeed;
+    [SerializeField] float defaultGravity;
+    [SerializeField] float jumpHeight;
+    [SerializeField] float crouchHeight;
+    private float defaultHeight;
+    private float defaultScale, crouchScale;
+    private float speed;
 
-    private float horizontalInput;
-    private float verticalInput;
+    [Header("Ground")]
+    [SerializeField] Transform groundCheck;
+    [SerializeField] LayerMask groundLayer;
+    private Vector3 YVelocity;
+    private int jumpCharges;
+    private bool grounded;
 
-    private Vector3 moveDirection;
-    private Rigidbody rb;
+    private float gravity;
 
-    public enum MovementState
-    {
-        Walking,
-        Sprinting,
-        Crouching,
-        Air
-    }
+    private bool isSprinting;
+    private bool isCrouching;
+    private bool isSliding;
 
-    private MovementState currentState;
+    [Header("Sliding")]
+    //[SerializeField] float maxSlideTimer;
+    [SerializeField] float slideSpeedUp;
+    [SerializeField] float slideSpeedDown;
+    //private Vector3 forwardDirection;
+    //private float slideTimer;
 
+    //[SerializeField] Vector3 crouchingCenter = new Vector3(0f, 0.5f, 0f);
+    //[SerializeField] Vector3 standingCenter = new Vector3(0f, 0f, 0f);
+
+    [SerializeField] float lurchTimer;
+    private float lurchTimeLeft;
 
     private void Start()
     {
-        TryGetComponent(out rb);
-        rb.freezeRotation = true;
-
-        canJump = true;
-        currentState = MovementState.Walking;
-
-        normalYScale = transform.localScale.y;
+        TryGetComponent(out controller);
+        defaultHeight = controller.height;
+        defaultScale = transform.localScale.y;
+        crouchScale = crouchHeight / defaultHeight;
     }
 
     private void Update()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.1f, groundLayer);
-
         GetInput();
-        SpeedControl();
-        StateHandler();
+        ApplyGravity();
+        CheckGround();
 
-        if (grounded)
+        if (grounded && !isSliding)
         {
-            if (moveDirection.normalized.magnitude == 0)
+            GroundedMovement();
+        }
+        else if (!grounded)
+        {
+            AirMovement();
+        }
+        else if (isSliding)
+        {
+            SlideMovement();
+            DecreaseSpeed(slideSpeedDown);
+
+            //slideTimer -= Time.deltaTime;
+            //if (slideTimer < 0)
+            //{
+            //    isSliding = false;
+            //}
+
+            if (speed <= walkSpeed)
             {
-                rb.drag = stoppingDrag;
-            }
-            else
-            {
-                rb.drag = groundDrag;
+                isSliding = false;
             }
         }
-        else
-        {
-            rb.drag = 0;
-        }
+
+        controller.Move(movement * Time.deltaTime);
+
+        print(controller.velocity.magnitude);
     }
 
-    private void FixedUpdate()
+    private void OnCollisionEnter(Collision collision)
     {
-        MovePlayer();
-    }
-
-    private void StateHandler()
-    {
-        if (Input.GetKey(crouchKey))
-        {
-            currentState = MovementState.Crouching;
-            moveSpeed = crouchSpeed;
-            groundDrag = walkDrag;
-            return;
-        }
-
-        if (grounded && Input.GetKey(sprintKey) && verticalInput > 0)
-        {
-            currentState = MovementState.Sprinting;
-            moveSpeed = sprintSpeed;
-            groundDrag = sprintDrag;
-            return;
-        }
-        
-        if (grounded)
-        {
-            currentState = MovementState.Walking;
-            moveSpeed = walkSpeed;
-            groundDrag = walkDrag;
-            return;
-        }
-
-        currentState = MovementState.Air;
+        speed = 0f;
     }
 
     private void GetInput()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
+        input = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
 
-        if (Input.GetKeyDown(jumpKey) && canJump && grounded)
+        input = transform.TransformDirection(input);
+        input = Vector3.ClampMagnitude(input, 1f);
+
+        if (Input.GetKeyDown(jumpKey) && jumpCharges > 0)
         {
-            canJump = false;
             Jump();
-            Invoke(nameof(ResetCanJump), jumpCoolDown);
         }
 
         if (Input.GetKeyDown(crouchKey))
         {
-            transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
-            
-            if (grounded)
-            {
-                rb.AddForce(5f * Vector3.down, ForceMode.Impulse);
-            }
+            EnterCrouch();
         }
-
         if (Input.GetKeyUp(crouchKey))
         {
-            transform.localScale = new Vector3(transform.localScale.x, normalYScale, transform.localScale.z);
+            ExitCrouch();
+        }
+
+        if (Input.GetKey(sprintKey) && grounded && Input.GetAxisRaw("Vertical") > 0f && !isCrouching)
+        {
+            isSprinting = true;
+        }
+        if (Input.GetKeyUp(sprintKey) || Input.GetAxisRaw("Vertical") <= 0f)
+        {
+            isSprinting = false;
         }
     }
 
-    private void MovePlayer()
+    private void GroundedMovement()
     {
-        moveDirection = (orientation.forward * verticalInput) + (orientation.right * horizontalInput);
-
-        if (grounded)
+        if (isSprinting)
         {
-            rb.AddForce(5f * moveSpeed * moveDirection, ForceMode.Force);
+            speed = sprintSpeed;
         }
-        else if (!grounded)
+        else if (isCrouching)
         {
-            rb.AddForce(moveDirection * moveSpeed * 5f * airMultiplier, ForceMode.Force);
+            speed = crouchSpeed;
+        }
+        else
+        {
+            speed = walkSpeed;
         }
 
+        if (input.x != 0f)
+        {
+            movement.x += input.x * speed;
+        }
+        else
+        {
+            movement.x = 0f;
 
-        print(rb.velocity.magnitude);
+        }
+
+        if (input.z != 0f)
+        {
+            movement.z += input.z * speed;
+        }
+        else
+        {
+            movement.z = 0f;
+
+        }
+
+        movement = Vector3.ClampMagnitude(movement, speed);
+
+        lurchTimeLeft = lurchTimer;
+    }
+
+    private void AirMovement()
+    {
+        if (lurchTimeLeft > 0f)
+        {
+            movement.x += input.x * airSpeed;
+            movement.z += input.z * airSpeed;
+
+            lurchTimeLeft -= Time.deltaTime;
+        }
+
+        movement = Vector3.ClampMagnitude(movement, speed * 1.1f);
+    }
+
+    private void SlideMovement()
+    {
+        //movement += forwardDirection;
+        movement = Vector3.ClampMagnitude(movement, speed * 2f);
     }
 
     private void Jump()
     {
-        rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+        jumpCharges--;
+        YVelocity.y = Mathf.Sqrt(jumpHeight * -2f * defaultGravity);
+        /* v2 = u2 + 2gs
+           v2 = 0 + 2gs
+            v = sqrt(2gs) // g is negative
+         */
     }
 
-    private void ResetCanJump()
+    private void EnterCrouch()
     {
-        canJump = true;
-    }
+        controller.height = crouchHeight;
+        //controller.center = crouchingCenter;
 
-    private void SpeedControl()
-    {
-        Vector3 currentSpeed = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-        float currentYSpeed = rb.velocity.y;
+        transform.localScale = new Vector3(transform.localScale.x, crouchScale, transform.localScale.z);
+        isCrouching = true;
 
-        if (currentSpeed.magnitude > moveSpeed * 5f && grounded)
+        if (speed > walkSpeed)
         {
-            Vector3 newSpeed = currentSpeed.normalized * moveSpeed;
-            rb.velocity = new Vector3(newSpeed.x, currentYSpeed, newSpeed.z);
+            isSliding = true;
+            //forwardDirection = transform.forward;
+
+            if (grounded)
+            {
+                IncreaseSpeed(slideSpeedUp);
+            }
+
+            //slideTimer = maxSlideTimer;
         }
+    }
+
+    private void ExitCrouch()
+    {
+        controller.height = defaultHeight;
+        //controller.center = standingCenter;
+
+        transform.localScale = new Vector3(transform.localScale.x, defaultScale, transform.localScale.z);
+        isCrouching = false;
+        isSliding = false;
+    }
+
+    private void IncreaseSpeed(float addSpeed)
+    {
+        speed += addSpeed;
+    }
+
+    private void DecreaseSpeed(float reduceSpeed)
+    {
+        speed -= reduceSpeed * Time.deltaTime;
+    }
+
+    private void CheckGround()
+    {
+        grounded = Physics.CheckSphere(groundCheck.position, 0.2f, groundLayer);
+
+        if (grounded)
+        {
+            jumpCharges = 1;
+        }
+    }
+
+    private void ApplyGravity()
+    {
+        gravity = grounded ? 0f : defaultGravity;
+        YVelocity.y += gravity * Time.deltaTime;
+        controller.Move(YVelocity * Time.deltaTime);
     }
 }
