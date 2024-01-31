@@ -40,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isCrouching;
     private bool isSliding;
 
+    [SerializeField] float lurchTimer;
+
     [Header("Sliding")]
     //[SerializeField] float maxSlideTimer;
     [SerializeField] float slideSpeedUp;
@@ -50,7 +52,6 @@ public class PlayerMovement : MonoBehaviour
     //[SerializeField] Vector3 crouchingCenter = new Vector3(0f, 0.5f, 0f);
     //[SerializeField] Vector3 standingCenter = new Vector3(0f, 0f, 0f);
 
-    [SerializeField] float lurchTimer;
     private float lurchTimeLeft;
 
     private void Start()
@@ -86,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
             //    isSliding = false;
             //}
 
-            if (speed <= walkSpeed)
+            if (speed <= 0f || (Input.GetAxisRaw("Vertical") > 0f && speed <= crouchSpeed))
             {
                 isSliding = false;
             }
@@ -241,8 +242,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void DecreaseSpeed(float reduceSpeed)
     {
-        if (controller.velocity.y < 0f)
+        if (controller.velocity.y < -1f)
         {
+            speed += reduceSpeed * (-controller.velocity.y / 2f) * Time.deltaTime;
             return;
         }
 
