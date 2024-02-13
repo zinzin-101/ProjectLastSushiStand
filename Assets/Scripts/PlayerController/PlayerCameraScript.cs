@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerCameraScript : MonoBehaviour
 {
+    [SerializeField] PlayerMovement playerMovement;
+
     [SerializeField] float sensitivity;
 
     [SerializeField] Transform orientation;
@@ -13,6 +15,8 @@ public class PlayerCameraScript : MonoBehaviour
 
     private void Start()
     {
+        playerMovement = GetComponentInParent<PlayerMovement>();
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -28,7 +32,8 @@ public class PlayerCameraScript : MonoBehaviour
         rotationX = Mathf.Clamp(rotationX, -90f, 90f);
 
         //rotate the camera and rotate the player object towards the camera
-        transform.rotation = Quaternion.Euler(rotationX, rotationY, 0);
+        transform.rotation = Quaternion.Euler(rotationX, rotationY, playerMovement.CamTilt);
+
         orientation.rotation = Quaternion.Euler(0, rotationY, 0);
     }
 }
