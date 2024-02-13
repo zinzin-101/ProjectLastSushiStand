@@ -127,11 +127,14 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
-  wallrunGravity: 1
+  wallrunGravity: 0.5
   wallrunSpeed: 15
-  wallrunSpeedDecrease: 5
   wallJumpBoost: 5
   wallrunTimer: 4
+  playerCamera: {fileID: 609626799828088031}
+  specialFov: 110
+  cameraTransitionTime: 5
+  wallrunCamTiltAmount: 15
 --- !u!1 &6581444815636151019
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,6 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21665b62fa8f1b841994f133644ddbec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMovement: {fileID: 0}
   sensitivity: 100
   orientation: {fileID: 2304703377434062977}
 --- !u!1 &6613575511669904081

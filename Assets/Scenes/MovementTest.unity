@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &77030056 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4094051134191980531, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
+  m_PrefabInstance: {fileID: 624210821}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e7394bd06c58f4e9e19bb2d2da1107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &624210821
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -131,6 +142,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1101144931963873537, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
+      propertyPath: playerMovement
+      value: 
+      objectReference: {fileID: 77030056}
     - target: {fileID: 2304703377434062977, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -172,12 +187,32 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4094051134191980531, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
+      propertyPath: specialFov
+      value: 110
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094051134191980531, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 1024201394}
+    - target: {fileID: 4094051134191980531, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
       propertyPath: wallrunGravity
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094051134191980531, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
+      propertyPath: cameraTransitionTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094051134191980531, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
+      propertyPath: wallrunCamTiltAmount
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4855941615488928288, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5587398352805195554, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
+      propertyPath: m_Material
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -289,6 +324,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &1024201394 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 609626799828088031, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
+  m_PrefabInstance: {fileID: 624210821}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1167364906
 GameObject:
   m_ObjectHideFlags: 0

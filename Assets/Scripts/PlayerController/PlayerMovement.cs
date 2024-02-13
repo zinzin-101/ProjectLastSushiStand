@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -70,6 +71,16 @@ public class PlayerMovement : MonoBehaviour
 
     private float lurchTimeLeft;
 
+    [Header("Player Camera")]
+    [SerializeField] Camera playerCamera;
+    [SerializeField] float specialFov;
+    [SerializeField] float cameraTransitionTime;
+    [SerializeField] float wallrunCamTiltAmount;
+    private float camTilt;
+    public float CamTilt => camTilt;
+    private float normalFov;
+
+
     private void Start()
     {
         TryGetComponent(out controller);
@@ -78,6 +89,10 @@ public class PlayerMovement : MonoBehaviour
         crouchScale = crouchHeight / defaultHeight;
 
         hasWallrun = false;
+
+        playerCamera = GetComponentInChildren<Camera>();
+
+        normalFov = playerCamera.fieldOfView;
     }
 
     private void Update()
@@ -86,6 +101,8 @@ public class PlayerMovement : MonoBehaviour
         ApplyGravity();
         CheckWallHit();
         CheckGround();
+
+        CameraEffect();
 
         if (grounded && !isSliding)
         {
@@ -124,6 +141,40 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //speed = 0f;
+    }
+
+    private void CameraEffect()
+    {
+        float fov;
+
+        if (isWallRunning || isSliding)
+        {
+            fov = specialFov;
+        }
+        else
+        {
+            fov = normalFov;
+        }
+
+        playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, fov, cameraTransitionTime * Time.deltaTime);
+
+        if (isWallRunning )
+        {
+            if (onRightWall)
+            {
+                camTilt = Mathf.Lerp(camTilt, wallrunCamTiltAmount, cameraTransitionTime * Time.deltaTime);
+            }
+
+            if (onLeftWall)
+            {
+                camTilt = Mathf.Lerp(camTilt, -wallrunCamTiltAmount, cameraTransitionTime * Time.deltaTime);
+            }
+        }
+
+        if (!isWallRunning )
+        {
+            camTilt = Mathf.Lerp(camTilt, 0f, cameraTransitionTime * Time.deltaTime);
+        }
     }
 
     private void GetInput()
@@ -210,6 +261,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void SlideMovement()
     {
+        if (!grounded)
+        {
+            return;
+        }
+
         if (controller.velocity.y < -1f)
         {
             speed += slideSpeedDown * (-controller.velocity.y / 4f) * Time.deltaTime;
@@ -228,6 +284,8 @@ public class PlayerMovement : MonoBehaviour
         if (wallrunTimerLeft <= 0f)
         {
             ExitWallRun();
+            IncreaseSpeed(wallJumpBoost);
+            movement += wallNormal;
         }
 
         wallrunTimerLeft -= Time.deltaTime;
@@ -243,6 +301,7 @@ public class PlayerMovement : MonoBehaviour
             movement.z = 0f;
             ExitWallRun();
         }
+
         movement.x += input.x * (wallrunSpeed / 2f);
 
         movement = Vector3.ClampMagnitude(movement, speed);
@@ -258,7 +317,7 @@ public class PlayerMovement : MonoBehaviour
         {
             ExitWallRun();
             IncreaseSpeed(wallJumpBoost);
-            movement += wallNormal * 0.5f;
+            movement += wallNormal * 2f;
         }
 
         YVelocity.y = Mathf.Sqrt(jumpHeight * -2f * defaultGravity);
@@ -270,11 +329,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void EnterCrouch()
     {
+        if (isWallRunning)
+        {
+            ExitWallRun();
+        }
+
         controller.height = crouchHeight;
         //controller.center = crouchingCenter;
 
         transform.localScale = new Vector3(transform.localScale.x, crouchScale, transform.localScale.z);
         isCrouching = true;
+
 
         if (speed > walkSpeed)
         {
@@ -390,8 +455,16 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        EnterWallRun();
-        hasWallrun = true;
+        if (isCrouching)
+        {
+            IncreaseSpeed(wallJumpBoost);
+            movement += wallNormal;
+        }
+        else
+        {
+            EnterWallRun();
+            hasWallrun = true;
+        }
     }
 
     private void ApplyGravity()
