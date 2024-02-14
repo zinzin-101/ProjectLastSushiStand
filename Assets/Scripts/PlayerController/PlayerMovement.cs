@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
@@ -57,28 +58,37 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Wallrun")]
     [SerializeField] LayerMask wallLayer;
-    [SerializeField] float wallrunGravity;
+    [SerializeField] float defaultWallrunGravity;
+    [SerializeField] float wallHangGravity;
     [SerializeField] float wallrunSpeed;
     //[SerializeField] float wallrunSpeedDecrease;
     [SerializeField] float wallJumpBoost;
     [SerializeField] float wallrunTimer;
+    [SerializeField] float wallJumpBoostWindow = 0.4f;
+    [SerializeField] float wallJumpMaintainSpeedWindow = 0.25f;
     private float wallrunTimerLeft;
     private bool onRightWall, onLeftWall;
     private RaycastHit leftWallHit, rightWallhit;
     private Vector3 wallNormal;
     private Vector3 lastWallNormal;
     private bool hasWallrun = false;
+    //private bool lastWallRight;
+    //private bool lastWallLeft;
+    private float wallrunGravity;
 
     private float lurchTimeLeft;
 
     [Header("Player Camera")]
     [SerializeField] Camera playerCamera;
     [SerializeField] float specialFov;
-    [SerializeField] float cameraTransitionTime;
+    [SerializeField] float cameraTransitionTime = 8f;
     [SerializeField] float wallrunCamTiltAmount;
+    [SerializeField] float fovLimit = 120f;
     private float camTilt;
     public float CamTilt => camTilt;
     private float normalFov;
+    private float fovDifference;
+    private float fovSpeedScaler;
 
 
     private void Start()
@@ -89,10 +99,15 @@ public class PlayerMovement : MonoBehaviour
         crouchScale = crouchHeight / defaultHeight;
 
         hasWallrun = false;
+        //lastWallRight = false;
+        //lastWallLeft = false;
 
         playerCamera = GetComponentInChildren<Camera>();
 
         normalFov = playerCamera.fieldOfView;
+        fovDifference = Mathf.Max(specialFov, normalFov) - Mathf.Min(specialFov, normalFov);
+
+        fovSpeedScaler = (sprintSpeed + wallrunSpeed) / 2f;
     }
 
     private void Update()
@@ -140,38 +155,47 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //speed = 0f;
+        if (collision.gameObject.layer == wallLayer)
+        {
+            movement = Vector3.zero;
+            speed = 0f;
+        }
     }
 
     private void CameraEffect()
     {
-        float fov;
+        float fov = normalFov + (fovDifference * ((speed - 5f) / fovSpeedScaler));
 
-        if (isWallRunning || isSliding)
+        if (fov > fovLimit)
         {
-            fov = specialFov;
-        }
-        else
-        {
-            fov = normalFov;
+            fov = fovLimit;
         }
 
-        playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, fov, cameraTransitionTime * Time.deltaTime);
+        playerCamera.fieldOfView = Mathf.MoveTowards(playerCamera.fieldOfView, fov, cameraTransitionTime * Time.deltaTime);
 
-        if (isWallRunning )
+        if (isWallRunning)
         {
+            float tiltScale = (wallrunTimerLeft / wallrunTimer);
+            if (tiltScale > 0.5f)
+            {
+                tiltScale = 1f;
+            }
+            else
+            {
+                tiltScale += 0.5f;
+            }
+
             if (onRightWall)
             {
-                camTilt = Mathf.Lerp(camTilt, wallrunCamTiltAmount, cameraTransitionTime * Time.deltaTime);
+                camTilt = Mathf.Lerp(camTilt, wallrunCamTiltAmount * tiltScale, cameraTransitionTime * Time.deltaTime);
             }
 
             if (onLeftWall)
             {
-                camTilt = Mathf.Lerp(camTilt, -wallrunCamTiltAmount, cameraTransitionTime * Time.deltaTime);
+                camTilt = Mathf.Lerp(camTilt, -wallrunCamTiltAmount * tiltScale, cameraTransitionTime * Time.deltaTime);
             }
         }
-
-        if (!isWallRunning )
+        else
         {
             camTilt = Mathf.Lerp(camTilt, 0f, cameraTransitionTime * Time.deltaTime);
         }
@@ -283,27 +307,39 @@ public class PlayerMovement : MonoBehaviour
     {
         if (wallrunTimerLeft <= 0f)
         {
-            ExitWallRun();
-            IncreaseSpeed(wallJumpBoost);
+            IncreaseSpeed(wallJumpBoost / 2f);
             movement += wallNormal;
+            ExitWallRun();
         }
 
         wallrunTimerLeft -= Time.deltaTime;
 
-        if ((forwardDirection.z - 10f) < input.z && input.z < (forwardDirection.z + 10f))
+        if (!(wallrunTimer - wallrunTimerLeft <= wallJumpMaintainSpeedWindow))
         {
-            movement.x += forwardDirection.x;
-            movement.z += forwardDirection.z;
-        }
-        else if (input.z < (forwardDirection.z - 10f) && (forwardDirection.z + 10f) < input.z)
-        {
-            movement.x = 0f;
-            movement.z = 0f;
-            ExitWallRun();
+            speed = wallrunSpeed;
         }
 
-        movement.x += input.x * (wallrunSpeed / 2f);
+        if ((forwardDirection.z - 45f) < input.z && input.z < (forwardDirection.z + 45f) && Mathf.Abs(input.z) > 0.5f)
+        {
+            wallrunGravity = defaultWallrunGravity;
+            //movement += forwardDirection;
+            movement = Vector3.MoveTowards(movement, forwardDirection.normalized * speed, wallrunSpeed * Time.deltaTime);
 
+            if (wallrunTimerLeft <= (wallrunTimer * 0.25f))
+            {
+                wallrunGravity = wallHangGravity * 0.5f;
+            }
+        }
+        else if (input.z < (forwardDirection.z - 45f) && (forwardDirection.z + 45f) < input.z || Mathf.Abs(input.z) < 0.5f)
+        {
+            wallrunGravity = wallHangGravity;
+            movement.x = Mathf.MoveTowards(movement.x, 0f, 2f * wallrunSpeed * Time.deltaTime);   
+            movement.z = Mathf.MoveTowards(movement.z, 0f, 2f * wallrunSpeed * Time.deltaTime);
+            //ExitWallRun();
+        }
+
+        //movement.x += input.x * (wallrunSpeed / 2f);
+        //movement *= wallrunSpeed;
         movement = Vector3.ClampMagnitude(movement, speed);
     }
 
@@ -316,7 +352,15 @@ public class PlayerMovement : MonoBehaviour
         else if (isWallRunning)
         {
             ExitWallRun();
-            IncreaseSpeed(wallJumpBoost);
+
+            if (wallrunTimer - wallrunTimerLeft <= wallJumpBoostWindow)
+            {
+                IncreaseSpeed(wallJumpBoost * 1.5f);
+            }
+            else
+            {
+                IncreaseSpeed(wallJumpBoost);
+            }
             movement += wallNormal * 2f;
         }
 
@@ -325,6 +369,8 @@ public class PlayerMovement : MonoBehaviour
            v2 = 0 + 2gs
             v = sqrt(2gs) // g is negative
          */
+
+        lurchTimeLeft = lurchTimer;
     }
 
     private void EnterCrouch()
@@ -353,11 +399,6 @@ public class PlayerMovement : MonoBehaviour
 
             //slideTimer = maxSlideTimer;
         }
-
-        if (isSliding)
-        {
-            ExitWallRun();
-        }
     }
 
     private void ExitCrouch()
@@ -372,11 +413,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void EnterWallRun()
     {
-        isWallRunning = true;
+        if (-0.5f <= controller.velocity.y && controller.velocity.y <= 0.5f)
+        {
+            return;
+        }
+
+        if (isCrouching)
+        {
+            IncreaseSpeed(wallJumpBoost / 2f);
+            movement += wallNormal;
+            return;
+        }
+
+        Vector3 currentMovingDirection = new Vector3(controller.velocity.x, 0f, controller.velocity.z);
+
+        wallrunGravity = defaultWallrunGravity;
         jumpCharges = defaultJumpCharges;
         wallrunTimerLeft = wallrunTimer;
-
-        speed = wallrunSpeed;
 
         YVelocity = new Vector3(0f, 0f, 0f);
 
@@ -386,6 +439,21 @@ public class PlayerMovement : MonoBehaviour
         {
             forwardDirection = -forwardDirection;
         }
+
+        movement += -wallNormal.normalized * 2f;
+
+        float angleChange = Vector3.Angle(forwardDirection, currentMovingDirection);
+        if (angleChange > 80f)
+        {
+            movement = Vector3.zero;
+            speed = 0f;
+        }
+        else if (angleChange > 45f)
+        {
+            speed *= 1f - (angleChange / 180f);
+        }
+
+        isWallRunning = true;
     }
 
     private void ExitWallRun()
@@ -442,6 +510,11 @@ public class PlayerMovement : MonoBehaviour
             wallNormal = rightWallhit.normal;
         }
 
+        //if ((lastWallRight && onLeftWall) || (lastWallLeft && onRightWall))
+        //{
+        //    hasWallrun = false;
+        //}
+
         if (hasWallrun)
         {
             float wallAngle = Vector3.Angle(wallNormal, lastWallNormal);
@@ -455,16 +528,12 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        if (isCrouching)
-        {
-            IncreaseSpeed(wallJumpBoost);
-            movement += wallNormal;
-        }
-        else
-        {
-            EnterWallRun();
-            hasWallrun = true;
-        }
+        EnterWallRun();
+
+        //lastWallRight = onRightWall;
+        //lastWallLeft = onLeftWall;
+
+        hasWallrun = true;
     }
 
     private void ApplyGravity()
