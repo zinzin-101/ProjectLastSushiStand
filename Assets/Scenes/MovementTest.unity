@@ -239,6 +239,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &495896790 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8062655998918511432, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
+  m_PrefabInstance: {fileID: 624210821}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &624210821
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -298,11 +303,11 @@ PrefabInstance:
     - target: {fileID: 4094051134191980531, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
       propertyPath: groundCheck
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 495896790}
     - target: {fileID: 4094051134191980531, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
       propertyPath: playerCamera
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1115770266}
     - target: {fileID: 4094051134191980531, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
       propertyPath: defaultGravity
       value: -21
@@ -441,6 +446,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &1115770266 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 609626799828088031, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
+  m_PrefabInstance: {fileID: 624210821}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1167364906
 GameObject:
   m_ObjectHideFlags: 0
