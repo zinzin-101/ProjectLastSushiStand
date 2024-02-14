@@ -112,11 +112,11 @@ MonoBehaviour:
   walkSpeed: 6
   sprintSpeed: 10
   crouchSpeed: 2.5
-  airSpeed: 0.1
-  defaultGravity: -14
+  airSpeed: 0.2
+  defaultGravity: -21
   jumpHeight: 4
   crouchHeight: 1.25
-  defaultJumpCharges: 1
+  defaultJumpCharges: 2
   groundCheck: {fileID: 8062655998918511432}
   groundLayer:
     serializedVersion: 2
@@ -127,14 +127,18 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
-  wallrunGravity: 0.5
+  defaultWallrunGravity: 0
+  wallHangGravity: -5
   wallrunSpeed: 15
   wallJumpBoost: 5
   wallrunTimer: 4
+  wallJumpBoostWindow: 0.4
+  wallJumpMaintainSpeedWindow: 0.25
   playerCamera: {fileID: 609626799828088031}
   specialFov: 110
   cameraTransitionTime: 5
   wallrunCamTiltAmount: 15
+  fovLimit: 120
 --- !u!1 &6581444815636151019
 GameObject:
   m_ObjectHideFlags: 0
