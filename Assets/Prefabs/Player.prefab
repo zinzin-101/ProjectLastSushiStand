@@ -202,10 +202,10 @@ MonoBehaviour:
     m_Bits: 128
   defaultWallrunGravity: 0
   wallHangGravity: -5
-  wallrunSpeed: 15
-  wallJumpBoost: 5
+  wallrunSpeed: 12
+  wallJumpBoost: 2
   wallrunTimer: 4
-  wallJumpBoostWindow: 0.4
+  wallJumpBoostWindow: 0.2
   wallJumpMaintainSpeedWindow: 0.25
   playerCamera: {fileID: 609626799828088031}
   specialFov: 110

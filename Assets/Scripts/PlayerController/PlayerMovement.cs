@@ -280,6 +280,9 @@ public class PlayerMovement : MonoBehaviour
             lurchTimeLeft -= Time.deltaTime;
         }
 
+        movement.x += input.x * airSpeed * 0.5f;
+        movement.z += input.z * airSpeed * 0.5f;
+
         movement = Vector3.ClampMagnitude(movement, speed);
     }
 
@@ -322,7 +325,7 @@ public class PlayerMovement : MonoBehaviour
         if ((forwardDirection.z - 45f) < input.z && input.z < (forwardDirection.z + 45f) && (Mathf.Abs(input.z) > 0.5f || Mathf.Abs(input.x) > 0.5f))
         {
             wallrunGravity = defaultWallrunGravity;
-            //movement += forwardDirection;
+            movement += forwardDirection;
             movement = Vector3.MoveTowards(movement, forwardDirection.normalized * speed, wallrunSpeed * Time.deltaTime);
 
             if (wallrunTimerLeft <= (wallrunTimer * 0.25f))
@@ -413,10 +416,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void EnterWallRun()
     {
-        if (-0.5f <= controller.velocity.y && controller.velocity.y <= 0.5f)
-        {
-            return;
-        }
+        //if (-0.5f <= controller.velocity.y && controller.velocity.y <= 0.5f)
+        //{
+        //    return;
+        //}
 
         if (isCrouching)
         {
@@ -519,7 +522,7 @@ public class PlayerMovement : MonoBehaviour
         {
             float wallAngle = Vector3.Angle(wallNormal, lastWallNormal);
 
-            if (wallAngle > 15f)
+            if (wallAngle > 1f)
             {
                 EnterWallRun();
                 return;
