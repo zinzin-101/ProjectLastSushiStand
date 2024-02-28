@@ -258,6 +258,7 @@ GameObject:
   - component: {fileID: 2285650501303499628}
   - component: {fileID: 922377313141978719}
   - component: {fileID: 6902097824973325801}
+  - component: {fileID: 5342155329897264930}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -448,3 +449,16 @@ MonoBehaviour:
     m_Bits: 4294967295
   spread: {x: 0.06, y: 0.06, z: 0.06}
   bulletTrail: {fileID: 2922578386348580161, guid: dc139455dba739843a0f7280c6e48f14, type: 3}
+--- !u!114 &5342155329897264930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7595124373006589894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abff7f1b9c93464b860f85f3acb6060, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 3

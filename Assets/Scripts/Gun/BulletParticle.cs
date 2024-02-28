@@ -15,7 +15,6 @@ public class BulletParticle : MonoBehaviour
         if(collision.tag == "Enemy")
         {
             Destroy(gameObject);
-            Destroy(collision.gameObject);
         }
         //Destroy(collision.gameObject);
         //Destroy(gameObject);
