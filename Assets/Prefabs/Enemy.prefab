@@ -254,10 +254,10 @@ GameObject:
   - component: {fileID: 5409119852870076736}
   - component: {fileID: 7116250177823415746}
   - component: {fileID: 1064299116454424953}
-  - component: {fileID: 4491588131774254622}
-  - component: {fileID: 1734530071348391786}
-  - component: {fileID: 7397570464739750609}
   - component: {fileID: 5615072599985903471}
+  - component: {fileID: 2285650501303499628}
+  - component: {fileID: 922377313141978719}
+  - component: {fileID: 6902097824973325801}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -311,7 +311,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8c1fe4212879fef43b429db146006fdb, type: 2}
+  - {fileID: 2100000, guid: 543b585f19037b742ace8308fe189253, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -378,55 +378,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &4491588131774254622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7595124373006589894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7a7ebd65c5c06d4996762ebc5f26ec5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 1064299116454424953}
-  pathUpdateDelay: 0.2
---- !u!114 &1734530071348391786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7595124373006589894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88ffa4b4d0cff9f40bec44c2ab930a9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  useCover: 1
-  enemyDirection: {x: 0, y: 0, z: 0}
-  cover123: 0
---- !u!114 &7397570464739750609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7595124373006589894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8e5c82928b9e5a4b9e567f5e71ab006, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shootPoint: {fileID: 8038848674784258969}
-  gunPoint: {fileID: 264286526706109191}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  spread: {x: 0.06, y: 0.06, z: 0.06}
-  bulletTrail: {fileID: 9045934087127464284, guid: 7accdeb1493b4ed4ba564c4f71c1ea86, type: 3}
 --- !u!65 &5615072599985903471
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -448,3 +399,52 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2285650501303499628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7595124373006589894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd32b1cb805b7f3478d4bab85ada85fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  useCover: 0
+  enemyDirection: {x: 0, y: 0, z: 0}
+  cover123: 0
+--- !u!114 &922377313141978719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7595124373006589894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d35455398b5b572489e365366fb4894d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 1064299116454424953}
+  pathUpdateDelay: 0.2
+--- !u!114 &6902097824973325801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7595124373006589894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c9e5a80aa11241b79df02f796b3bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootPoint: {fileID: 8038848674784258969}
+  gunPoint: {fileID: 264286526706109191}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  spread: {x: 0.06, y: 0.06, z: 0.06}
+  bulletTrail: {fileID: 0}

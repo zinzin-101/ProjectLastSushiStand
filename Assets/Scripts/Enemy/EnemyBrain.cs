@@ -9,7 +9,7 @@ namespace Enemy
 {
     public class EnemyBrain : MonoBehaviour
     {
-        [SerializeField] private Transform player;
+        [SerializeField] private GameObject player;
         private EnemyRef enemyRef;
         private float shootingDistance;
         private float pathUpdataDeadline;
@@ -37,7 +37,7 @@ namespace Enemy
             enemyShooter = GetComponent<EnemyShooter>();
             cover = FindObjectOfType<Cover>();
             coverList = FindAnyObjectByType<ListCover>();
-
+            player = GameObject.FindWithTag("Player");
         }
 
         private void Start()
@@ -54,7 +54,7 @@ namespace Enemy
                     SelectCover();
                 }
                 
-                bool inRange = Vector3.Distance(transform.position, player.position) <= shootingDistance;
+                bool inRange = Vector3.Distance(transform.position, player.transform.position) <= shootingDistance;
                 if (inRange)
                 {
 
@@ -83,7 +83,7 @@ namespace Enemy
 
         private void LookAtTarget()
         {
-            Vector3 lookPos = player.position - transform.position;
+            Vector3 lookPos = player.transform.position - transform.position;
             lookPos.y = 0f;
             Quaternion rotation = Quaternion.LookRotation(lookPos);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 0.2f);
@@ -96,7 +96,7 @@ namespace Enemy
             {
                     pathUpdataDeadline = Time.time + enemyRef.pathUpdateDelay;
                     enemyRef.agent.stoppingDistance = 8;
-                    enemyRef.agent.SetDestination(player.position);
+                    enemyRef.agent.SetDestination(player.transform.position);
                 
                 Debug.Log("Path Updata");
                 
@@ -107,7 +107,7 @@ namespace Enemy
         {
             if (coverDistance <= shootingDistance)
             {
-                Debug.DrawRay(player.position, -enemyDirection * 10f, Color.green);
+                Debug.DrawRay(player.transform.position, -enemyDirection * 10f, Color.green);
                 
                 Debug.Log(targetCover.name);
                 enemyRef.agent.SetDestination(targetCover.position);
@@ -124,19 +124,19 @@ namespace Enemy
 
         private void SelectCover()
         {
-            ThisCover = coverList.UpdataNearestCover(player.position);
+            ThisCover = coverList.UpdataNearestCover(player.transform.position);
             coverPos = ThisCover.transform;
             cover = ThisCover;
             Debug.Log(coverPos.name);
             
-            enemyDirection = player.position - coverPos.position;
+            enemyDirection = player.transform.position - coverPos.position;
             enemyDirection.Normalize();
             coverMask = (enemyDirection * -1) + coverPos.position;
 
             enemyPosition = transform.position;
             targetCover = cover.UpdataNearestCover(coverMask);
             Debug.Log("enemybrain" + targetCover.name);
-            coverDistance = Vector3.Distance(targetCover.position, player.position);
+            coverDistance = Vector3.Distance(targetCover.position, player.transform.position);
         }
 
         private void OnDrawGizmos()
