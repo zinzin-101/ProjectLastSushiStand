@@ -10,8 +10,13 @@ public class BulletParticle : MonoBehaviour
     {
         Destroy(gameObject, duration);
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerExit(Collider collision)
     {
+        if(collision.tag == "Enemy")
+        {
+            Destroy(gameObject);
+            Destroy(collision.gameObject);
+        }
         //Destroy(collision.gameObject);
         //Destroy(gameObject);
     }

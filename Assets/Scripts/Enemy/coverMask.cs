@@ -17,7 +17,7 @@ namespace Enemy {
 
         private void OnTriggerEnter(Collider Collider)
         {           
-            if((enemy == null) && (Collider.tag != "Player"))
+            if((enemy == null) && (Collider.tag == "Enemy"))
             {
                 occupied = true;
                 enemy = Collider.gameObject;
@@ -30,7 +30,7 @@ namespace Enemy {
         private void OnTriggerExit(Collider collision)
         {
             
-            if((collision.gameObject == enemy) && (collision.tag != "Player"))
+            if((collision.gameObject == enemy) && (collision.tag != "Enemy"))
             {
                 occupied = false;
                 enemy = null;   
