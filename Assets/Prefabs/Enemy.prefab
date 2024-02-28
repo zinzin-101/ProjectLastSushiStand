@@ -447,4 +447,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   spread: {x: 0.06, y: 0.06, z: 0.06}
-  bulletTrail: {fileID: 0}
+  bulletTrail: {fileID: 2922578386348580161, guid: dc139455dba739843a0f7280c6e48f14, type: 3}
