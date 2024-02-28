@@ -319,7 +319,7 @@ public class PlayerMovement : MonoBehaviour
             speed = wallrunSpeed;
         }
 
-        if ((forwardDirection.z - 45f) < input.z && input.z < (forwardDirection.z + 45f) && Mathf.Abs(input.z) > 0.5f)
+        if ((forwardDirection.z - 45f) < input.z && input.z < (forwardDirection.z + 45f) && (Mathf.Abs(input.z) > 0.5f || Mathf.Abs(input.x) > 0.5f))
         {
             wallrunGravity = defaultWallrunGravity;
             //movement += forwardDirection;
@@ -330,7 +330,7 @@ public class PlayerMovement : MonoBehaviour
                 wallrunGravity = wallHangGravity * 0.5f;
             }
         }
-        else if (input.z < (forwardDirection.z - 45f) && (forwardDirection.z + 45f) < input.z || Mathf.Abs(input.z) < 0.5f)
+        else if (input.z < (forwardDirection.z - 45f) && (forwardDirection.z + 45f) < input.z || (Mathf.Abs(input.z) < 0.5f && Mathf.Abs(input.x) < 0.5f))
         {
             wallrunGravity = wallHangGravity;
             movement.x = Mathf.MoveTowards(movement.x, 0f, 2f * wallrunSpeed * Time.deltaTime);   
