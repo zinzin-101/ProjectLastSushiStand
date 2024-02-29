@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
-using static UnityEditor.Experimental.GraphView.Port;
+//using static UnityEditor.Experimental.GraphView.Port;
 
 public class GunParticle : MonoBehaviour
 {
@@ -15,12 +15,15 @@ public class GunParticle : MonoBehaviour
     //public float CurrentCooldown;
     [SerializeField] private float bulletSpeed = 50f;
     [SerializeField] private bool IneedMoreBullet = true;
-    [SerializeField] private int ammo = 6;
+    [SerializeField] private int setAmmo = 6;
+
+    private int ammo;
 
     private void Start()
     {
         //CurrentCooldown = Cooldown;
         animator = gameObject.GetComponent<Animator>();
+        ammo = setAmmo;
     }
     private void Update()
     {
@@ -53,7 +56,7 @@ public class GunParticle : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             Debug.Log("Reloaded");
-            ammo = 6;
+            ammo = setAmmo;
             IneedMoreBullet = true;
         }
     }
