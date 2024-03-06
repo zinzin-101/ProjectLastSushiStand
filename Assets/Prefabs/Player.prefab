@@ -50,7 +50,7 @@ MonoBehaviour:
   animator: {fileID: 6549687928083447851}
   bulletSpeed: 50
   IneedMoreBullet: 1
-  ammo: 6
+  setAmmo: 6
 --- !u!95 &6549687928083447851
 Animator:
   serializedVersion: 5
@@ -185,8 +185,8 @@ MonoBehaviour:
   walkSpeed: 6
   sprintSpeed: 10
   crouchSpeed: 2.5
-  airSpeed: 0.2
-  defaultGravity: -21
+  airSpeed: 0.1
+  defaultGravity: -12
   jumpHeight: 4
   crouchHeight: 1.25
   defaultJumpCharges: 2
@@ -205,8 +205,8 @@ MonoBehaviour:
   wallrunSpeed: 12
   wallJumpBoost: 2
   wallrunTimer: 4
-  wallJumpBoostWindow: 0.2
-  wallJumpMaintainSpeedWindow: 0.25
+  wallJumpBoostWindow: 0.1
+  wallJumpMaintainSpeedWindow: 0.1
   playerCamera: {fileID: 609626799828088031}
   specialFov: 110
   cameraTransitionTime: 5

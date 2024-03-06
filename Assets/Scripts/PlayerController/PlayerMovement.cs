@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static UnityEngine.UI.Image;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
@@ -29,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     private float defaultHeight;
     private float defaultScale, crouchScale;
     private float speed;
+    private float prevSpeed;
 
     [Header("Ground")]
     [SerializeField] Transform groundCheck;
@@ -67,8 +70,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float wallJumpBoostWindow = 0.4f;
     [SerializeField] float wallJumpMaintainSpeedWindow = 0.25f;
     private float wallrunTimerLeft;
-    private bool onRightWall, onLeftWall;
-    private RaycastHit leftWallHit, rightWallhit;
+    private bool onRightWall, onLeftWall, onBackWall;
+    private RaycastHit leftWallHit, rightWallhit, backWallhit;
     private Vector3 wallNormal;
     private Vector3 lastWallNormal;
     private bool hasWallrun = false;
@@ -148,6 +151,13 @@ public class PlayerMovement : MonoBehaviour
             WallRunningMovement();     
         }
 
+        //if (Mathf.Abs(controller.velocity.magnitude - prevSpeed) > 5f && controller.velocity.magnitude < prevSpeed)
+        //{
+        //    movement = new Vector3(0f, movement.y, 0f);
+        //    controller.Move(movement);
+        //}
+        prevSpeed = controller.velocity.magnitude;
+
         controller.Move(movement * Time.deltaTime);
 
         print(controller.velocity.magnitude);
@@ -155,11 +165,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == wallLayer)
-        {
-            movement = Vector3.zero;
-            speed = 0f;
-        }
+        //print("triggered");
+        //speed *= controller.velocity.magnitude / speed;
+
+        //if (collision.gameObject.layer != groundLayer)
+        //{
+        //    //movement = Vector3.zero;
+        //    //controller.Move(new Vector3(0f, movement.y, 0f));
+        //}
     }
 
     private void CameraEffect()
@@ -170,6 +183,7 @@ public class PlayerMovement : MonoBehaviour
         {
             fov = fovLimit;
         }
+
 
         playerCamera.fieldOfView = Mathf.MoveTowards(playerCamera.fieldOfView, fov, cameraTransitionTime * Time.deltaTime);
 
@@ -283,6 +297,11 @@ public class PlayerMovement : MonoBehaviour
         movement.x += input.x * airSpeed * 0.5f;
         movement.z += input.z * airSpeed * 0.5f;
 
+        if (speed > 15f)
+        {
+            speed = Mathf.MoveTowards(speed, 15f, 5f);
+        }
+
         movement = Vector3.ClampMagnitude(movement, speed);
     }
 
@@ -325,8 +344,17 @@ public class PlayerMovement : MonoBehaviour
         if ((forwardDirection.z - 45f) < input.z && input.z < (forwardDirection.z + 45f) && (Mathf.Abs(input.z) > 0.5f || Mathf.Abs(input.x) > 0.5f))
         {
             wallrunGravity = defaultWallrunGravity;
-            movement += forwardDirection;
-            movement = Vector3.MoveTowards(movement, forwardDirection.normalized * speed, wallrunSpeed * Time.deltaTime);
+            
+            if (onBackWall)
+            {
+                movement = forwardDirection;
+                movement = Vector3.MoveTowards(movement, forwardDirection.normalized * speed, wallrunSpeed * Time.deltaTime);
+            }
+            else
+            {
+                movement += forwardDirection;
+                movement = Vector3.MoveTowards(movement, forwardDirection.normalized * speed, wallrunSpeed * Time.deltaTime);
+            }
 
             if (wallrunTimerLeft <= (wallrunTimer * 0.25f))
             {
@@ -348,13 +376,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
+        jumpCharges--;
         if (!grounded && !isWallRunning)
         {
             jumpCharges--;
         }
-        else if (isWallRunning)
+
+        if (isWallRunning)
         {
             ExitWallRun();
+
+            movement += wallNormal * (speed / 5f);
 
             if (wallrunTimer - wallrunTimerLeft <= wallJumpBoostWindow)
             {
@@ -364,7 +396,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 IncreaseSpeed(wallJumpBoost);
             }
-            movement += wallNormal * 2f;
         }
 
         YVelocity.y = Mathf.Sqrt(jumpHeight * -2f * defaultGravity);
@@ -443,7 +474,7 @@ public class PlayerMovement : MonoBehaviour
             forwardDirection = -forwardDirection;
         }
 
-        movement += -wallNormal.normalized * 2f;
+        //movement += -wallNormal.normalized * 2f;
 
         float angleChange = Vector3.Angle(forwardDirection, currentMovingDirection);
         if (angleChange > 80f)
@@ -478,6 +509,7 @@ public class PlayerMovement : MonoBehaviour
     private void CheckGround()
     {
         grounded = Physics.CheckSphere(groundCheck.position, 0.2f, groundLayer);
+        //grounded = Physics.Raycast(groundCheck.position, Vector3.down, 0.5f, groundLayer);
 
         if (grounded)
         {
@@ -490,13 +522,14 @@ public class PlayerMovement : MonoBehaviour
     {
         onLeftWall = Physics.Raycast(transform.position, -transform.right, out leftWallHit, 0.7f, wallLayer);
         onRightWall = Physics.Raycast(transform.position, transform.right, out rightWallhit, 0.7f, wallLayer);
+        onBackWall = Physics.Raycast(transform.position, -transform.forward, out backWallhit, 0.7f, wallLayer);
 
-        if ((onLeftWall || onRightWall) && !isWallRunning)
+        if ((onLeftWall || onRightWall || onBackWall) && !isWallRunning)
         {
             CheckLastWallrun();
         }
 
-        if (!(onRightWall || onLeftWall) && isWallRunning)
+        if (!(onRightWall || onLeftWall || onBackWall) && isWallRunning)
         {
             ExitWallRun();
         }
@@ -511,6 +544,10 @@ public class PlayerMovement : MonoBehaviour
         else if (onRightWall)
         {
             wallNormal = rightWallhit.normal;
+        }
+        else if (onBackWall)
+        {
+            wallNormal = backWallhit.normal;
         }
 
         //if ((lastWallRight && onLeftWall) || (lastWallLeft && onRightWall))

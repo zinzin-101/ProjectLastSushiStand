@@ -60,7 +60,7 @@ namespace Enemy
             float x = Random.Range(-2.0f, 2.0f);
             float z = Random.Range(-2.0f, 2.0f);
             targetPos = new Vector3(center.position.x + x, center.position.y, center.position.z + z);
-            Debug.Log(targetPos);
+            //Debug.Log(targetPos);
         }
 
         private void Move()
