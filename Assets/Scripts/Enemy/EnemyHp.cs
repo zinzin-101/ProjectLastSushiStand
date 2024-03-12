@@ -21,12 +21,17 @@ namespace Enemy
             }
         }
 
-        private void OnTriggerEnter(Collider collision)
+        //private void OnTriggerEnter(Collider collision)
+        //{
+        //    if (collision.tag == "Bullet")
+        //    {
+        //        HP--;
+        //    }
+        //}
+
+        public void TakeDamage(int damage)
         {
-            if (collision.tag == "Bullet")
-            {
-                HP--;
-            }
+            HP -= damage;
         }
     }
 }

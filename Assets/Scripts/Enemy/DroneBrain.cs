@@ -32,7 +32,7 @@ namespace Enemy
 
             if (RandomposDelay == 1)
             {
-                Debug.Log("RandomPos");
+                //Debug.Log("RandomPos");
                 RandomPos();
                 RandomposDelay = 0;
             }
