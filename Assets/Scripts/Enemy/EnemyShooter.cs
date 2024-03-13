@@ -23,6 +23,8 @@ namespace Enemy
         [SerializeField] private float reloadtime = 2;
         private float reloadTime = 0;
 
+        [SerializeField] private PlayerStatus PlayerHp;
+
         public void Awake()
         {
 

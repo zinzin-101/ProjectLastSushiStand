@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Enemy {
     public class coverMask : MonoBehaviour
     {
+
         public bool occupied = false;
         private GameObject enemy;
         private EnemyBrain cover;

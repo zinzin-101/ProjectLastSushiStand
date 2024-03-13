@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace Enemy
 {
-
+    
     public enum OffMeshLinkMoveMethod
     {
         Teleport,
@@ -16,6 +16,7 @@ namespace Enemy
     [RequireComponent(typeof(NavMeshAgent))]
     public class AgentLinkMover : MonoBehaviour
     {
+        
         public OffMeshLinkMoveMethod m_Method;
         [SerializeField] private AnimationCurve m_Curve;
 
