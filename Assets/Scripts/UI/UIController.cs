@@ -17,14 +17,15 @@ public class UIController : MonoBehaviour
     {
         // Assuming GunParticle is a component on the same GameObject as UIController
         gunParticle = GetComponent<GunParticle>();
-
+        /*
         // Check if gunParticle is null to avoid potential issues
         if (gunParticle == null)
         {
             Debug.LogError("GunParticle script not found on the same GameObject as UIController.");
         }
+        */
     }
-
+    
     void Update()
     {
         if (gunParticle != null)
@@ -32,10 +33,13 @@ public class UIController : MonoBehaviour
             currentAmmo = gunParticle.getAmmo();
             AmmoText.text = "Ammo: " + currentAmmo;
         }
+        /*
         else
         {
             // Handle the case where gunParticle is not initialized or found
             Debug.LogError("GunParticle script is not initialized.");
         }
+        */
     }
+    
 }

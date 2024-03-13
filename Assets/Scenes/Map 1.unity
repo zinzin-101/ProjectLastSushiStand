@@ -74935,6 +74935,10 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 282443594294763881, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 282443594294763881, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
       propertyPath: bulletSpeed
       value: 100
       objectReference: {fileID: 0}
@@ -75037,6 +75041,10 @@ PrefabInstance:
     - target: {fileID: 4094051134191980531, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
       propertyPath: wallJumpBoost
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094051134191980531, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
+      propertyPath: defaultGravity
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 4094051134191980531, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
       propertyPath: defaultJumpCharges
