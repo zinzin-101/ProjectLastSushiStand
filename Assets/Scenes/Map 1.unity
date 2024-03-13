@@ -74843,6 +74843,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4094051134191980531, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
+      propertyPath: airSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094051134191980531, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
       propertyPath: wallrunSpeed
       value: 12
       objectReference: {fileID: 0}

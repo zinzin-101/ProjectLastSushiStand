@@ -215,7 +215,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  lurchTimer: 0.3
+  lurchTimer: 0.1
   slideSpeedUp: 5
   slideSpeedDown: 10
   wallLayer:
@@ -223,9 +223,9 @@ MonoBehaviour:
     m_Bits: 128
   defaultWallrunGravity: 0
   wallHangGravity: -5
-  wallrunSpeed: 12
+  wallrunSpeed: 10
   wallJumpBoost: 2
-  wallrunTimer: 4
+  wallrunTimer: 2.5
   wallJumpBoostWindow: 0.1
   wallJumpMaintainSpeedWindow: 0.1
   playerCamera: {fileID: 609626799828088031}
@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4da451f6070a64780dd0575cbb778d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxPlayerHealth: 10
 --- !u!1 &6581444815636151019
 GameObject:
   m_ObjectHideFlags: 0
