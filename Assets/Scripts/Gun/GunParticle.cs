@@ -25,6 +25,9 @@ public class GunParticle : MonoBehaviour
         animator = gameObject.GetComponent<Animator>();
         ammo = setAmmo;
     }
+
+    
+
     private void Update()
     {
         if (IneedMoreBullet)
@@ -59,5 +62,11 @@ public class GunParticle : MonoBehaviour
             ammo = setAmmo;
             IneedMoreBullet = true;
         }
+
+
+    }
+    public int getAmmo()
+    {
+        return ammo;
     }
 }
