@@ -8,22 +8,25 @@ namespace Enemy
     public class DroneBrain : MonoBehaviour
     {
         [SerializeField] private GameObject player;
-        public Transform shootPoint;
+        [SerializeField] private Transform shootPoint;
         private EnemyShooter shooter;
         [SerializeField] private Transform center;
-        private int RandomposDelay = 1;
-        private float speed = 0.01f;
+        [SerializeField] private int RandomposDelay = 1;
         private Vector3 targetPos;
-        private int shootingDistance = 5;
+        [SerializeField] private int shootingDistance = 8;
+        private EnemyDirection direction;
+        [SerializeField] private float speed = 0.1f;
+        
         private void Awake()
         {
             shooter = GetComponent<EnemyShooter>();
             player = GameObject.FindWithTag("Player");
+            direction = GetComponentInChildren<EnemyDirection>();
         }
 
         private void Update()
         {
-            LookAtTarget();
+            direction.LookAtTarget();
             if (Vector3.Distance(transform.position, player.transform.position) <= shootingDistance)
             {
                 shooter.Shoot();
@@ -47,13 +50,6 @@ namespace Enemy
             }
         }
 
-        private void LookAtTarget()
-        {
-            Vector3 lookPos = player.transform.position - transform.position;
-            Quaternion rotation = Quaternion.LookRotation(lookPos);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 0.2f);
-            Debug.DrawLine(shootPoint.position, player.transform.position, Color.blue, 0f);
-        }
 
         private void RandomPos()
         {

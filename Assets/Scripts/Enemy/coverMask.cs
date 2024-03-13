@@ -22,7 +22,7 @@ namespace Enemy {
                 occupied = true;
                 enemy = Collider.gameObject;
                 cover = Collider.GetComponent<EnemyBrain>();
-                cover.cover123 = true;
+                cover.selectCover = true;
             }
             
         }
@@ -34,7 +34,7 @@ namespace Enemy {
             {
                 occupied = false;
                 enemy = null;   
-                cover.cover123 = false;
+                cover.selectCover = false;
                 cover = null;
             }
         }
