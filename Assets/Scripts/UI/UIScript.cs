@@ -23,6 +23,6 @@ public class UIScript : MonoBehaviour
                 break;
         }
 
-        healthText.text = "Health: " + playerStatus.PlayerHealth;
+        healthText.text = "Health: " + playerStatus.playerHealth;
     }
 }

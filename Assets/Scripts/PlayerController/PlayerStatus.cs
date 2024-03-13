@@ -1,36 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerStatus : MonoBehaviour
 {
     [SerializeField] int maxPlayerHealth = 10;
-    public int MaxPlayerHealth => maxPlayerHealth;
+    public int playerHealth;
 
-    private int playerHealth;
-    public int PlayerHealth => playerHealth;
-
-    private void Start()
+    void Start()
     {
         playerHealth = maxPlayerHealth;
     }
 
-    private void Update()
-    {
-        if (playerHealth <= 0)
-        {
-            GameManager.Instance.ReloadCurrentScene();
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        //detect enemy bullet collision then remove health
-        //or remove health from enemy bullet script
-    }
-
+    // Method to apply damage to the player
     public void TakeDamage(int damage)
     {
         playerHealth -= damage;
+        playerHealth = Mathf.Clamp(playerHealth, 0, maxPlayerHealth); // Ensure health stays within range
+    }
+
+    // Method to restore player health
+    public void RestoreHealth(int amount)
+    {
+        playerHealth += amount;
+        playerHealth = Mathf.Clamp(playerHealth, 0, maxPlayerHealth); // Ensure health stays within range
     }
 }
