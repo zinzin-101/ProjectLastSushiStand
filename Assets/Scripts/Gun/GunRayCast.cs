@@ -11,6 +11,9 @@ public class GunRayCast : MonoBehaviour
     [SerializeField] private Camera fpsCam;
     [SerializeField] private int maxAmmo = 6;
     [SerializeField] private float reloadDelay = 1.5f;
+    [SerializeField] private float firerate = 0.2f;
+    private float firingDelay;
+    private bool canFire;
     public int MaxAmmo => maxAmmo;
     private int ammoCount;
     public int AmmoCount => ammoCount;
@@ -26,12 +29,29 @@ public class GunRayCast : MonoBehaviour
         ammoCount = maxAmmo;
         canShoot = true;
         isReloading = false;
+        canFire = true;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (!canFire)
         {
+            firingDelay -= Time.deltaTime;
+
+            if (firingDelay <= 0f)
+            {
+                canFire = true;
+            }
+        }
+        else
+        {
+            firingDelay = firerate;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0) && canFire)
+        {
+            canFire = false;
+
             if (canShoot)
             {
                 Fire();
