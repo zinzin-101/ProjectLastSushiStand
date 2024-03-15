@@ -104,8 +104,9 @@ namespace Enemy
                     }
                 }
             }
-            
-            
+
+            UpdatPath();
+
         }
         
 
@@ -115,13 +116,22 @@ namespace Enemy
             
             if(Time.time >= pathUpdataDeadline)
             {
+                if (isPlayerNear())
+                {
                     pathUpdataDeadline = Time.time + enemyRef.pathUpdateDelay;
                     enemyRef.agent.stoppingDistance = 8;
                     enemyRef.agent.SetDestination(player.transform.position);
+                }
+                else
+                { 
+                    enemyRef.agent.stoppingDistance = 0;
+                    enemyRef.agent.SetDestination(center.position);
+                }
                 
                 Debug.Log("Path Updata");
-                
+                Debug.Log(enemyRef.agent.destination);
             }
+            
         }
 
         private void GoToCover()
@@ -174,7 +184,7 @@ namespace Enemy
                 return true;
             }
 
-            enemyRef.agent.SetDestination(center.position);
+            
             seePlayer = false;
             return false;
             

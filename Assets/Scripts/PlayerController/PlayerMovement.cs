@@ -150,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(movement * Time.deltaTime);
 
-        print(controller.velocity.magnitude);
+        //print(controller.velocity.magnitude);
     }
 
     private void OnCollisionEnter(Collision collision)
