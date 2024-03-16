@@ -69,6 +69,7 @@ MonoBehaviour:
   fpsCam: {fileID: 609626799828088031}
   maxAmmo: 6
   reloadDelay: 1.5
+  firerate: 0.2
   gunPos: {fileID: 3715118102785423093}
   bulletTrail: {fileID: 2922578386348580161, guid: dc139455dba739843a0f7280c6e48f14, type: 3}
 --- !u!95 &6549687928083447851
@@ -246,6 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPlayerHealth: 10
+  playerHealth: 0
 --- !u!1 &6581444815636151019
 GameObject:
   m_ObjectHideFlags: 0

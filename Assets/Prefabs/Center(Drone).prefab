@@ -127,6 +127,9 @@ MonoBehaviour:
   player: {fileID: 0}
   shootPoint: {fileID: 6291617255788647844}
   center: {fileID: 5648048921459235523}
+  RandomposDelay: 1
+  shootingDistance: 8
+  speed: 0.1
 --- !u!114 &9180209455093474175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,6 +149,9 @@ MonoBehaviour:
     m_Bits: 4294967295
   spread: {x: 0.06, y: 0.06, z: 0.06}
   bulletTrail: {fileID: 2922578386348580161, guid: dc139455dba739843a0f7280c6e48f14, type: 3}
+  bullet: 1
+  reloadtime: 2
+  PlayerHp: {fileID: 0}
 --- !u!114 &6772484947324515183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,6 +311,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5029755142206041881}
+  - component: {fileID: 2680493400812158851}
   m_Layer: 0
   m_Name: GunPoint
   m_TagString: Enemy
@@ -327,3 +334,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6291617255788647844}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2680493400812158851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6922090769977931203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef57e6bf8efe4d04ebcdd86de5594197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}

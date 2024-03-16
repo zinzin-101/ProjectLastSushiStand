@@ -7,7 +7,7 @@ namespace Enemy
 {
     public class DroneBrain : MonoBehaviour
     {
-        [SerializeField] private GameObject player;
+        [SerializeField] private PlayerStatus player;
         [SerializeField] private Transform shootPoint;
         private EnemyShooter shooter;
         [SerializeField] private Transform center;
@@ -20,7 +20,7 @@ namespace Enemy
         private void Awake()
         {
             shooter = GetComponent<EnemyShooter>();
-            player = GameObject.FindWithTag("Player");
+            player = GameObject.FindFirstObjectByType<PlayerStatus>();
             direction = GetComponentInChildren<EnemyDirection>();
         }
 

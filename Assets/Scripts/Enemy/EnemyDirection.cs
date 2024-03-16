@@ -11,7 +11,7 @@ namespace Enemy
 
         private void Awake()
         {
-            //player = GameObject.FindWithTag("Player");
+            player = GameObject.FindWithTag("Player");
         }
 
         public void LookAtTarget()
