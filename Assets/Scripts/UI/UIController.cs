@@ -7,39 +7,30 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    private GunParticle gunParticle; // Corrected variable name to follow C# conventions
-    private int currentAmmo;
 
-    [SerializeField] private TextMeshProUGUI AmmoText;
+    [SerializeField] GameObject PausePanel;
+    [SerializeField] GameObject crosshair;
+    public void Pause()
+    {
+        Time.timeScale = 0.0f;
+        PausePanel.SetActive(true);
+        crosshair.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
 
-    // Use Start() to ensure that the initialization happens before Update()
-    void Start()
+    public void Resume()
     {
-        // Assuming GunParticle is a component on the same GameObject as UIController
-        gunParticle = GetComponent<GunParticle>();
-        /*
-        // Check if gunParticle is null to avoid potential issues
-        if (gunParticle == null)
-        {
-            Debug.LogError("GunParticle script not found on the same GameObject as UIController.");
-        }
-        */
+        Time.timeScale = 1.0f;
+        PausePanel.SetActive(false);
+        crosshair.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
-    
-    void Update()
+
+    public void GotoMainMenu()
     {
-        if (gunParticle != null)
-        {
-            currentAmmo = gunParticle.getAmmo();
-            AmmoText.text = "Ammo: " + currentAmmo;
-        }
-        /*
-        else
-        {
-            // Handle the case where gunParticle is not initialized or found
-            Debug.LogError("GunParticle script is not initialized.");
-        }
-        */
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene("Main Menu");
     }
-    
 }

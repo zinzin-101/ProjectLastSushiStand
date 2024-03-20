@@ -11,8 +11,13 @@ public class UIScript : MonoBehaviour
     [SerializeField] GunRayCast gunScript;
     [SerializeField] TMP_Text ammoText;
 
+    [SerializeField] UIController UIcontroller;
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            UIcontroller.Pause();
+        }
         switch (gunScript.IsReloading)
         {
             case true:
