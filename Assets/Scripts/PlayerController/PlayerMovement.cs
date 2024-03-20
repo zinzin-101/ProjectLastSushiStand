@@ -362,37 +362,6 @@ public class PlayerMovement : MonoBehaviour
             speed = wallrunSpeed;
         }
 
-        //if ((forwardDirection.z - 45f) < input.z && input.z < (forwardDirection.z + 45f) && (Mathf.Abs(input.z) > 0.5f || Mathf.Abs(input.x) > 0.5f))
-        //{
-        //    wallrunGravity = defaultWallrunGravity;
-
-        //    //if (onBackWall)
-        //    //{
-        //    //    movement = forwardDirection;
-        //    //    movement = Vector3.MoveTowards(movement, forwardDirection.normalized * speed, wallrunSpeed * Time.deltaTime);
-        //    //}
-        //    //else
-        //    //{
-        //    //    movement += forwardDirection;
-        //    //    movement = Vector3.MoveTowards(movement, forwardDirection.normalized * speed, wallrunSpeed * Time.deltaTime);
-        //    //}
-
-        //    movement += forwardDirection;
-        //    movement = Vector3.MoveTowards(movement, forwardDirection.normalized * speed, wallrunSpeed * Time.deltaTime);
-
-        //    if (wallrunTimerLeft <= (wallrunTimer * 0.25f))
-        //    {
-        //        wallrunGravity = wallHangGravity * 0.5f;
-        //    }
-        //}
-        //else if (input.z < (forwardDirection.z - 45f) && (forwardDirection.z + 45f) < input.z || (Mathf.Abs(input.z) < 0.5f && Mathf.Abs(input.x) < 0.5f))
-        //{
-        //    wallrunGravity = wallHangGravity;
-        //    movement.x = Mathf.MoveTowards(movement.x, 0f, 2f * wallrunSpeed * Time.deltaTime);   
-        //    movement.z = Mathf.MoveTowards(movement.z, 0f, 2f * wallrunSpeed * Time.deltaTime);
-        //    //ExitWallRun();
-        //}
-
         float angle = Vector3.Angle(input, forwardDirection);
         if (angle < 45f && ((Mathf.Abs(input.z) > 0.5f || Mathf.Abs(input.x) > 0.5f)))
         {
@@ -409,6 +378,7 @@ public class PlayerMovement : MonoBehaviour
         {
             wallrunGravity = defaultWallrunGravity;
             movement = Vector3.MoveTowards(movement, new Vector3(0f, movement.y, 0f), wallrunSpeed * Time.deltaTime);
+            wallrunTimerLeft-= Time.deltaTime;
 
             if (wallrunTimerLeft <= (wallrunTimer * 0.25f))
             {
