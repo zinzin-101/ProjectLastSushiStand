@@ -77,7 +77,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float wallJumpMaintainSpeedWindow = 0.25f;
     private float wallrunTimerLeft;
     private bool onRightWall, onLeftWall, onBackWall;
-    private RaycastHit leftWallHit, rightWallhit, backWallhit;
+    private bool onWall;
+    private RaycastHit leftWallHit, rightWallhit;//, backWallhit;
+    private RaycastHit wallHit;
     private Vector3 wallNormal;
     private Vector3 lastWallNormal;
     private LastWall lastWall;
@@ -602,27 +604,45 @@ public class PlayerMovement : MonoBehaviour
     {
         onLeftWall = Physics.Raycast(transform.position, -transform.right, out leftWallHit, 0.8f, wallLayer);
         onRightWall = Physics.Raycast(transform.position, transform.right, out rightWallhit, 0.8f, wallLayer);
-        onBackWall = Physics.Raycast(transform.position, -transform.forward, out backWallhit, 0.8f, wallLayer);
+        //onBackWall = Physics.Raycast(transform.position, -transform.forward, out backWallhit, 0.8f, wallLayer);
+        //onWall = Physics.SphereCast(transform.position, 0.1f, -transform.forward, out wallHit, wallLayer);
 
-        if ((onLeftWall || onRightWall || onBackWall) && !isWallRunning)
+        float number_of_rays = 10f;
+        float totalAngle = 360f;
+
+        float delta = totalAngle / number_of_rays;
+
+        for (int i = 0; i < number_of_rays; i++)
+        {
+            Vector3 dir = Quaternion.Euler(0, i * delta, 0) * -transform.forward;
+            //Debug.DrawRay(pos, dir * magnitude, Color.green);
+            onWall = Physics.Raycast(transform.position, dir, out wallHit, 0.8f, wallLayer);
+
+            if (onWall)
+            {
+                break;
+            }
+        }
+
+        if (onWall && !isWallRunning)
         {
             CheckLastWallrun();
         }
 
-        if (!(onRightWall || onLeftWall || onBackWall) && isWallRunning)
+        if (!onWall && isWallRunning)
         {
-            if (onRightWall)
-            {
-                lastWall = LastWall.RIGHT;
-            }
-            else if (onLeftWall)
-            {
-                lastWall = LastWall.LEFT;
-            }
-            else if (onBackWall)
-            {
-                lastWall = LastWall.BACK;
-            }
+            //if (onRightWall)
+            //{
+            //    lastWall = LastWall.RIGHT;
+            //}
+            //else if (onLeftWall)
+            //{
+            //    lastWall = LastWall.LEFT;
+            //}
+            //else if (onBackWall)
+            //{
+            //    lastWall = LastWall.BACK;
+            //}
 
             ExitWallRun();
         }
@@ -630,18 +650,20 @@ public class PlayerMovement : MonoBehaviour
     
     private void CheckLastWallrun()
     {
-        if (onLeftWall)
-        {
-            wallNormal = leftWallHit.normal;
-        }
-        else if (onRightWall)
-        {
-            wallNormal = rightWallhit.normal;
-        }
-        else if (onBackWall)
-        {
-            wallNormal = lastWallNormal;
-        }
+        //if (onLeftWall)
+        //{
+        //    wallNormal = leftWallHit.normal;
+        //}
+        //else if (onRightWall)
+        //{
+        //    wallNormal = rightWallhit.normal;
+        //}
+        //else if (onBackWall)
+        //{
+        //    wallNormal = lastWallNormal;
+        //}
+
+        wallNormal = wallHit.normal;
 
         //if ((lastWallRight && onLeftWall) || (lastWallLeft && onRightWall))
         //{
@@ -652,7 +674,7 @@ public class PlayerMovement : MonoBehaviour
         {
             float wallAngle = Vector3.Angle(wallNormal, lastWallNormal);
 
-            if (wallAngle > 1f || ((onBackWall && lastWall == LastWall.BACK) || (wallNormal != lastWallNormal)))
+            if (wallAngle > 1f)
             {
                 EnterWallRun();
                 return;
