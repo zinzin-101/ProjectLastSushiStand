@@ -100,6 +100,10 @@ public class PlayerMovement : MonoBehaviour
     private float fovDifference;
     private float fovSpeedScaler;
 
+    [Header("Movement switch")]
+    [SerializeField] bool allowDoubleJump = true;
+    [SerializeField] bool allowWallrun = true;
+
 
     private void Start()
     {
@@ -124,7 +128,12 @@ public class PlayerMovement : MonoBehaviour
     {
         GetInput();
         ApplyGravity();
-        CheckWallHit();
+
+        if (allowWallrun)
+        {
+            CheckWallHit();
+        }
+
         CheckGround();
 
         CameraEffect();
@@ -231,7 +240,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(jumpKey) && jumpCharges > 0)
         {
-            Jump();
+            if (isWallRunning || grounded || allowDoubleJump)
+            {
+                Jump();
+            }
         }
 
         if (Input.GetKeyDown(crouchKey))
@@ -301,8 +313,8 @@ public class PlayerMovement : MonoBehaviour
             lurchTimeLeft -= Time.deltaTime;
         }
 
-        movement.x += input.x * airSpeed * 0.1f;
-        movement.z += input.z * airSpeed * 0.1f;
+        movement.x += input.x * airSpeed * 0.25f;
+        movement.z += input.z * airSpeed * 0.25f;
 
         if (speed > 15f)
         {
@@ -670,5 +682,15 @@ public class PlayerMovement : MonoBehaviour
 
         YVelocity.y += gravity * Time.deltaTime;
         controller.Move(YVelocity * Time.deltaTime);
+    }
+
+    public void SetAllowWallRun(bool input)
+    {
+        allowWallrun = input;
+    }
+
+    public void SetAllowDoubleJump(bool input)
+    {
+        allowDoubleJump = input;
     }
 }
