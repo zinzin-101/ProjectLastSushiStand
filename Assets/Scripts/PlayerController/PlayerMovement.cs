@@ -6,12 +6,12 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using static UnityEngine.UI.Image;
 
-public enum LastWall
-{
-    LEFT,
-    RIGHT,
-    BACK
-}
+//public enum LastWall
+//{
+//    LEFT,
+//    RIGHT,
+//    BACK
+//}
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
@@ -82,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
     private RaycastHit wallHit;
     private Vector3 wallNormal;
     private Vector3 lastWallNormal;
-    private LastWall lastWall;
+    //private LastWall lastWall;
     private bool hasWallrun = false;
     //private bool lastWallRight;
     //private bool lastWallLeft;
@@ -105,7 +105,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement switch")]
     [SerializeField] bool allowDoubleJump = true;
     [SerializeField] bool allowWallrun = true;
-
 
     private void Start()
     {
@@ -181,15 +180,23 @@ public class PlayerMovement : MonoBehaviour
         //print(controller.velocity.magnitude);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void OnControllerColliderHit(ControllerColliderHit hit)
     {
         //print("triggered");
         //speed *= controller.velocity.magnitude / speed;
 
-        //if (collision.gameObject.layer != groundLayer)
+        //if (hit.gameObject.layer != groundLayer && !isWallRunning)
         //{
-        //    //movement = Vector3.zero;
-        //    //controller.Move(new Vector3(0f, movement.y, 0f));
+        //    if ((controller.collisionFlags & CollisionFlags.Sides) != 0)
+        //    {
+        //        movement = new Vector3(0f, movement.y, 0f);
+        //        controller.Move(movement);
+        //    }
+        //    else if (controller.collisionFlags == CollisionFlags.Above)
+        //    {
+        //        movement = new Vector3(movement.x, 0f, movement.z);
+        //        controller.Move(movement);
+        //    }
         //}
     }
 
