@@ -224,14 +224,17 @@ public class PlayerMovement : MonoBehaviour
                 tiltScale += 0.5f;
             }
 
-            if (onRightWall)
+            if (isWallRunning)
             {
-                camTilt = Mathf.Lerp(camTilt, wallrunCamTiltAmount * tiltScale, cameraTransitionTime * Time.deltaTime);
-            }
+                if (onRightWall)
+                {
+                    camTilt = Mathf.Lerp(camTilt, wallrunCamTiltAmount * tiltScale, cameraTransitionTime * Time.deltaTime);
+                }
 
-            if (onLeftWall)
-            {
-                camTilt = Mathf.Lerp(camTilt, -wallrunCamTiltAmount * tiltScale, cameraTransitionTime * Time.deltaTime);
+                if (onLeftWall)
+                {
+                    camTilt = Mathf.Lerp(camTilt, -wallrunCamTiltAmount * tiltScale, cameraTransitionTime * Time.deltaTime);
+                }
             }
         }
         else
@@ -516,7 +519,7 @@ public class PlayerMovement : MonoBehaviour
             IncreaseSpeed(wallJumpBoost / 2f);
             movement += wallNormal;
             return;
-        }
+        }      
 
         Vector3 currentMovingDirection = new Vector3(controller.velocity.x, 0f, controller.velocity.z);
 
@@ -627,6 +630,11 @@ public class PlayerMovement : MonoBehaviour
     
     private void CheckLastWallrun()
     {
+        if (grounded)
+        {
+            return;
+        }
+
         //if (onLeftWall)
         //{
         //    wallNormal = leftWallHit.normal;

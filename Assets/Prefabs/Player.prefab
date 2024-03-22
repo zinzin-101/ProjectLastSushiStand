@@ -283,6 +283,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 897059373631826920}
+  - {fileID: 5564148044560301146}
   m_Father: {fileID: 2304703377434062977}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &609626799828088031
@@ -404,6 +405,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 2870317282980862594}
+--- !u!1 &6989384901775603859
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5564148044560301146}
+  - component: {fileID: 7065285399220484165}
+  m_Layer: 0
+  m_Name: GunHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5564148044560301146
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6989384901775603859}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.41021258, y: -0.49937582, z: 0.59852797, w: 0.4734066}
+  m_LocalPosition: {x: 0.47100067, y: -0.17100024, z: 0.69499993}
+  m_LocalScale: {x: 0.10000002, y: 0.1, z: 0.10000002}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2870317282980862594}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7065285399220484165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6989384901775603859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b09265a5f680e4fb1ae286b9a42177, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunModel: {fileID: 0}
 --- !u!1 &8046150927878438813
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,6 +624,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 833c1e8d5097c9b4f8d79865af0a9475, type: 3}
       propertyPath: m_Name
       value: Gun_texture
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 833c1e8d5097c9b4f8d79865af0a9475, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 833c1e8d5097c9b4f8d79865af0a9475, type: 3}
       propertyPath: m_TagString
