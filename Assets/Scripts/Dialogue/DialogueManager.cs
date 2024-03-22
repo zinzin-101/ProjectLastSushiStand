@@ -14,7 +14,6 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] Image dialoguePanel;
     [SerializeField] GameObject dialogueObject;
-    [SerializeField] GameObject dialogueButton;
     //[SerializeField] float dialogueDelay = 3f;
 
     private TMP_Text dialogueText;
