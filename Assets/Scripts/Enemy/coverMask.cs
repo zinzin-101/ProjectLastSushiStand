@@ -5,7 +5,6 @@ using UnityEngine;
 namespace Enemy {
     public class coverMask : MonoBehaviour
     {
-
         public bool occupied = false;
         private GameObject enemy;
         private EnemyBrain cover;
@@ -18,12 +17,12 @@ namespace Enemy {
 
         private void OnTriggerEnter(Collider Collider)
         {           
-            if((enemy == null) && (Collider.tag == "Enemy"))
+            if((enemy == null) && (Collider.tag != "Player"))
             {
                 occupied = true;
                 enemy = Collider.gameObject;
                 cover = Collider.GetComponent<EnemyBrain>();
-                cover.selectCover = true;
+                cover.cover123 = true;
             }
             
         }
@@ -31,11 +30,11 @@ namespace Enemy {
         private void OnTriggerExit(Collider collision)
         {
             
-            if((collision.gameObject == enemy) && (collision.tag != "Enemy"))
+            if((collision.gameObject == enemy) && (collision.tag != "Player"))
             {
                 occupied = false;
                 enemy = null;   
-                cover.selectCover = false;
+                cover.cover123 = false;
                 cover = null;
             }
         }

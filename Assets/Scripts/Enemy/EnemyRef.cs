@@ -9,7 +9,6 @@ namespace Enemy
     {
         public NavMeshAgent agent;
         public float pathUpdateDelay = 0.2f;
-        [SerializeField] private AnimationCurve m_Curve = new AnimationCurve();
         private void Awake()
         {
             NavMeshAgent agent = GetComponent<NavMeshAgent>();

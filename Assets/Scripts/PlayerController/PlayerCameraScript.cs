@@ -15,7 +15,6 @@ public class PlayerCameraScript : MonoBehaviour
 
     private void Start()
     {
-
         playerMovement = GetComponentInParent<PlayerMovement>();
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -24,21 +23,17 @@ public class PlayerCameraScript : MonoBehaviour
 
     private void Update()
     {
-        if(Time.timeScale != 0.0f)
-        {
-            float mouseX = Input.GetAxisRaw("Mouse X") * Time.fixedDeltaTime * sensitivity;
-            float mouseY = Input.GetAxisRaw("Mouse Y") * Time.fixedDeltaTime * sensitivity;
+        float mouseX = Input.GetAxisRaw("Mouse X") * Time.fixedDeltaTime * sensitivity;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.fixedDeltaTime * sensitivity;
 
-            rotationY += mouseX;
-            rotationX -= mouseY;
+        rotationY += mouseX;
+        rotationX -= mouseY;
 
-            rotationX = Mathf.Clamp(rotationX, -90f, 90f);
+        rotationX = Mathf.Clamp(rotationX, -90f, 90f);
 
-            //rotate the camera and rotate the player object towards the camera
-            transform.rotation = Quaternion.Euler(rotationX, rotationY, playerMovement.CamTilt);
+        //rotate the camera and rotate the player object towards the camera
+        transform.rotation = Quaternion.Euler(rotationX, rotationY, playerMovement.CamTilt);
 
-            orientation.rotation = Quaternion.Euler(0, rotationY, 0);
-        }
-        
+        orientation.rotation = Quaternion.Euler(0, rotationY, 0);
     }
 }

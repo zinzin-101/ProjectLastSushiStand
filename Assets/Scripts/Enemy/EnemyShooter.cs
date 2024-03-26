@@ -11,23 +11,20 @@ namespace Enemy
     public class EnemyShooter : MonoBehaviour
     {
         [Header("General")]
-        [SerializeField ]private Transform shootPoint;
-        [SerializeField] private Transform gunPoint;
-        [SerializeField] private LayerMask layerMask;
+        public Transform shootPoint;
+        public Transform gunPoint;
+        public LayerMask layerMask;
 
         [Header("Gun")]
-        [SerializeField] private Vector3 spread = new Vector3(0.06f, 0.06f, 0.06f);
-        [SerializeField] private TrailRenderer bulletTrail;
-      
-        [SerializeField] private int bullet = 1;
-        [SerializeField] private float reloadtime = 2;
-        private float reloadTime = 0;
-
-        [SerializeField] private PlayerStatus PlayerHp;
+        public Vector3 spread = new Vector3(0.06f, 0.06f, 0.06f);
+        public TrailRenderer bulletTrail;
+        private EnemyRef enemyRef;
+        private int bullet = 1;
+        private float reloadtime = 0;
 
         public void Awake()
         {
-
+            enemyRef = GetComponent<EnemyRef>();
         }
 
         public void Shoot()
@@ -45,15 +42,15 @@ namespace Enemy
                     TrailRenderer trail = Instantiate(bulletTrail, gunPoint.position, Quaternion.identity);
                     StartCoroutine(SpawnTrail(trail, hit));
                     bullet--;
-                    reloadTime = reloadtime;
+                    reloadtime = 2;
                 }
             }
             else
             {
                 
-                if(reloadTime > 0)
+                if(reloadtime > 0)
                 {
-                    reloadTime -= Time.deltaTime;
+                    reloadtime -= Time.deltaTime;
                 }
                 else
                 {
@@ -66,7 +63,7 @@ namespace Enemy
 
         private Vector3 GetDirection()
         {
-            Vector3 direction = gunPoint.transform.forward;
+            Vector3 direction = transform.forward;
             direction += new Vector3(
                 Random.Range(-spread.x, spread.x),
                 Random.Range(-spread.y, spread.y),

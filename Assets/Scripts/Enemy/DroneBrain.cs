@@ -7,27 +7,23 @@ namespace Enemy
 {
     public class DroneBrain : MonoBehaviour
     {
-        [SerializeField] private PlayerStatus player;
-        [SerializeField] private Transform shootPoint;
+        [SerializeField] private Transform player;
+        public Transform shootPoint;
         private EnemyShooter shooter;
         [SerializeField] private Transform center;
-        [SerializeField] private int RandomposDelay = 1;
+        private int RandomposDelay = 1;
+        private float speed = 0.01f;
         private Vector3 targetPos;
-        [SerializeField] private int shootingDistance = 8;
-        private EnemyDirection direction;
-        [SerializeField] private float speed = 0.1f;
-        
+        private int shootingDistance = 5;
         private void Awake()
         {
             shooter = GetComponent<EnemyShooter>();
-            player = GameObject.FindFirstObjectByType<PlayerStatus>();
-            direction = GetComponentInChildren<EnemyDirection>();
         }
 
         private void Update()
         {
-            direction.LookAtTarget();
-            if (Vector3.Distance(transform.position, player.transform.position) <= shootingDistance)
+            LookAtTarget();
+            if (Vector3.Distance(transform.position, player.position) <= shootingDistance)
             {
                 shooter.Shoot();
             }
@@ -35,7 +31,7 @@ namespace Enemy
 
             if (RandomposDelay == 1)
             {
-                //Debug.Log("RandomPos");
+                Debug.Log("RandomPos");
                 RandomPos();
                 RandomposDelay = 0;
             }
@@ -50,13 +46,20 @@ namespace Enemy
             }
         }
 
+        private void LookAtTarget()
+        {
+            Vector3 lookPos = player.position - transform.position;
+            Quaternion rotation = Quaternion.LookRotation(lookPos);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 0.2f);
+            Debug.DrawLine(shootPoint.position, player.position, Color.blue, 0f);
+        }
 
         private void RandomPos()
         {
             float x = Random.Range(-2.0f, 2.0f);
             float z = Random.Range(-2.0f, 2.0f);
             targetPos = new Vector3(center.position.x + x, center.position.y, center.position.z + z);
-            //Debug.Log(targetPos);
+            Debug.Log(targetPos);
         }
 
         private void Move()

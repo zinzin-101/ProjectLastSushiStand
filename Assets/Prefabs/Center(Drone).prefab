@@ -12,12 +12,11 @@ GameObject:
   - component: {fileID: 3842827342064402720}
   - component: {fileID: 6190670040255053750}
   - component: {fileID: 681310057838137004}
-  - component: {fileID: 4580615916344671762}
-  - component: {fileID: 9180209455093474175}
-  - component: {fileID: 6772484947324515183}
+  - component: {fileID: 6037707662439172449}
+  - component: {fileID: 1726745971123104947}
   m_Layer: 0
   m_Name: Drone
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,7 +111,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4580615916344671762
+--- !u!114 &6037707662439172449
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,16 +120,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 787770117844138408}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 527c4a672f25acf4eb6b62b0a62e5e45, type: 3}
+  m_Script: {fileID: 11500000, guid: 149e2df367353444693d3f99ce05658b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   shootPoint: {fileID: 6291617255788647844}
   center: {fileID: 5648048921459235523}
-  RandomposDelay: 1
-  shootingDistance: 8
-  speed: 0.1
---- !u!114 &9180209455093474175
+--- !u!114 &1726745971123104947
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,7 +135,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 787770117844138408}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8c9e5a80aa11241b79df02f796b3bb, type: 3}
+  m_Script: {fileID: 11500000, guid: d8e5c82928b9e5a4b9e567f5e71ab006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 6291617255788647844}
@@ -148,23 +144,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   spread: {x: 0.06, y: 0.06, z: 0.06}
-  bulletTrail: {fileID: 2922578386348580161, guid: dc139455dba739843a0f7280c6e48f14, type: 3}
-  bullet: 1
-  reloadtime: 2
-  PlayerHp: {fileID: 0}
---- !u!114 &6772484947324515183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 787770117844138408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1abff7f1b9c93464b860f85f3acb6060, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HP: 3
+  bulletTrail: {fileID: 9045934087127464284, guid: 7accdeb1493b4ed4ba564c4f71c1ea86, type: 3}
 --- !u!1 &3205569867919365692
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,7 +156,7 @@ GameObject:
   - component: {fileID: 5648048921459235523}
   m_Layer: 0
   m_Name: Center(Drone)
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -211,7 +191,7 @@ GameObject:
   - component: {fileID: 2496953954985966662}
   m_Layer: 0
   m_Name: Eye
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -259,7 +239,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 543b585f19037b742ace8308fe189253, type: 2}
+  - {fileID: 2100000, guid: 2e7b6a1596a89064f9d0654470c58c66, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -311,10 +291,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5029755142206041881}
-  - component: {fileID: 2680493400812158851}
   m_Layer: 0
   m_Name: GunPoint
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -334,16 +313,3 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6291617255788647844}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2680493400812158851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6922090769977931203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef57e6bf8efe4d04ebcdd86de5594197, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
