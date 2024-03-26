@@ -4,7 +4,8 @@ using UnityEngine.Rendering.PostProcessing;
 public class PlayerStatus : MonoBehaviour
 {
     [SerializeField] int maxPlayerHealth = 10;
-    public int playerHealth;
+    private int playerHealth;
+    public int PlayerHealth => playerHealth;
 
     void Start()
     {

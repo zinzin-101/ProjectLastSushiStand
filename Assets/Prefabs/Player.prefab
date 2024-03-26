@@ -189,7 +189,7 @@ MonoBehaviour:
   sprintSpeed: 10
   crouchSpeed: 2.5
   airSpeed: 0.2
-  defaultGravity: -12
+  defaultGravity: -21
   jumpHeight: 4
   crouchHeight: 1.25
   defaultJumpCharges: 2
@@ -230,7 +230,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPlayerHealth: 10
-  playerHealth: 0
 --- !u!1 &6581444815636151019
 GameObject:
   m_ObjectHideFlags: 0
