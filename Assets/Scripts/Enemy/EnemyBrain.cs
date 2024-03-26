@@ -128,8 +128,8 @@ namespace Enemy
                     enemyRef.agent.SetDestination(center.position);
                 }
                 
-                Debug.Log("Path Updata");
-                Debug.Log(enemyRef.agent.destination);
+                //Debug.Log("Path Updata");
+                //Debug.Log(enemyRef.agent.destination);
             }
             
         }

@@ -16,7 +16,16 @@ public class UIScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            UIcontroller.Pause();
+            switch (GameManager.Instance.IsPaused)
+            {
+                case true:
+                    UIcontroller.Resume();
+                    break;
+
+                case false:
+                    UIcontroller.Pause();
+                    break;
+            }
         }
         switch (gunScript.IsReloading)
         {

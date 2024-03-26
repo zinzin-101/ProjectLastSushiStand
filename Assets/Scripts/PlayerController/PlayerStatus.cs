@@ -7,9 +7,27 @@ public class PlayerStatus : MonoBehaviour
     private int playerHealth;
     public int PlayerHealth => playerHealth;
 
+    private bool isPlayerAlive;
+    public bool IsPlayerAlive => isPlayerAlive;
+
     void Start()
     {
+        isPlayerAlive = true;
+
         playerHealth = maxPlayerHealth;
+    }
+
+    private void Update()
+    {
+        if (!isPlayerAlive)
+        {
+            return;
+        }
+
+        if (playerHealth <= 0)
+        {
+            isPlayerAlive = false;
+        }
     }
 
     // Method to apply damage to the player

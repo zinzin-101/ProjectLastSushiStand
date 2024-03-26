@@ -104,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
         //lastWallRight = false;
         //lastWallLeft = false;
 
-        playerCamera = GetComponentInChildren<Camera>();
+        //playerCamera = GetComponentInChildren<Camera>();
 
         normalFov = playerCamera.fieldOfView;
         fovDifference = Mathf.Max(specialFov, normalFov) - Mathf.Min(specialFov, normalFov);
@@ -315,10 +315,10 @@ public class PlayerMovement : MonoBehaviour
         movement.x += input.x * airSpeed * 0.25f;
         movement.z += input.z * airSpeed * 0.25f;
 
-        if (speed > 15f)
-        {
-            speed = Mathf.MoveTowards(speed, 15f, 5f);
-        }
+        //if (speed > 15f)
+        //{
+        //    speed = Mathf.MoveTowards(speed, 15f, 5f);
+        //}
 
         movement = Vector3.ClampMagnitude(movement, speed);
     }

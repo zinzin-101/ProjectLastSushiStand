@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
     public static GameManager Instance => instance;
 
+    private bool isPaused;
+    public bool IsPaused => isPaused;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -20,8 +23,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        isPaused = false;
+    }
+
     public void ReloadCurrentScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void SetGamePause(bool state)
+    {
+        isPaused = state;
     }
 }

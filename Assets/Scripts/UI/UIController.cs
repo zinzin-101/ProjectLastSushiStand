@@ -10,6 +10,7 @@ public class UIController : MonoBehaviour
 
     [SerializeField] GameObject PausePanel;
     [SerializeField] GameObject crosshair;
+
     public void Pause()
     {
         Time.timeScale = 0.0f;
@@ -17,6 +18,8 @@ public class UIController : MonoBehaviour
         crosshair.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        GameManager.Instance.SetGamePause(true);
     }
 
     public void Resume()
@@ -26,6 +29,8 @@ public class UIController : MonoBehaviour
         crosshair.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        GameManager.Instance.SetGamePause(false);
     }
 
     public void GotoMainMenu()

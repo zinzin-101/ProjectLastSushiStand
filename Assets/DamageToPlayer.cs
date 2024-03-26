@@ -11,9 +11,9 @@ public class DamageToPlayer : MonoBehaviour
     {
         PlayerHp = FindAnyObjectByType<PlayerStatus>();
     }
-    private void OnTriggerEnter(Collider Collider)
+    private void OnTriggerEnter(Collider col)
     {
-        if ((Collider.tag == "Player"))
+        if (col.CompareTag("Player"))
         {
             PlayerHp.TakeDamage(5);
         }

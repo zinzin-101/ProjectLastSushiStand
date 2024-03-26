@@ -8,6 +8,7 @@ public class PlayerCameraScript : MonoBehaviour
 
     [SerializeField] float sensitivity;
 
+    private Transform camTransform;
     [SerializeField] Transform orientation;
 
     private float rotationX;
@@ -15,7 +16,7 @@ public class PlayerCameraScript : MonoBehaviour
 
     private void Start()
     {
-        playerMovement = GetComponentInParent<PlayerMovement>();
+        //playerMovement = GetComponentInParent<PlayerMovement>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -23,6 +24,11 @@ public class PlayerCameraScript : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.IsPaused)
+        {
+            return;
+        }
+
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.fixedDeltaTime * sensitivity;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.fixedDeltaTime * sensitivity;
 
