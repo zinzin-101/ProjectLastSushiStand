@@ -9,35 +9,43 @@ namespace Enemy
 {
     public class EnemyBrain : MonoBehaviour
     {
-        [SerializeField] private Transform player;
+        [SerializeField] private GameObject player;
         private EnemyRef enemyRef;
-        private float shootingDistance;
+        [SerializeField] private float shootingDistance = 8;
+        [SerializeField] private float followDistance = 0;
+        [SerializeField] private float viewDistance = 0;
+        private bool seePlayer;
         private float pathUpdataDeadline;
         private EnemyShooter enemyShooter;
         private Cover cover;
         private Transform targetCover;
-        private float coverDistance;
+        [SerializeField] private float coverDistance;
         [SerializeField] private bool useCover = false;
         private float onCover;
         private Transform coverPos;
         [HideInInspector] public Vector3 enemyDirection;
         private Vector3 coverMask;
+        private EnemyDirection direction;
 
         private ListCover coverList;
         private Cover ThisCover;
+        private bool inRange;
 
         private Vector3 enemyPosition;
-        public bool cover123;
-
+        [HideInInspector] public bool selectCover;
+        [SerializeField] private Transform center;
+        [SerializeField] private float maxFollowTime;
+        private float followTime;
 
 
         private void Awake()
         {
             enemyRef = GetComponent<EnemyRef>();
-            enemyShooter = GetComponent<EnemyShooter>();
+            enemyShooter = GetComponentInChildren<EnemyShooter>();
             cover = FindObjectOfType<Cover>();
             coverList = FindAnyObjectByType<ListCover>();
-
+            //player = GameObject.FindWithTag("Player");
+            direction = GetComponentInChildren<EnemyDirection>();
         }
 
         private void Start()
@@ -47,67 +55,90 @@ namespace Enemy
 
         private void FixedUpdate()
         {
-            if (player != null)
+            if (isPlayerNear() || seePlayer)
             {
-                if(cover123 == false)
-                {
-                    SelectCover();
-                }
-                
-                bool inRange = Vector3.Distance(transform.position, player.position) <= shootingDistance;
+                inRange = Vector3.Distance(transform.position, player.transform.position) <= followDistance;
                 if (inRange)
                 {
+                    followTime = maxFollowTime;
+                }
 
-                    if ((coverDistance <= shootingDistance) && (useCover == true))
+                followTime -= Time.deltaTime;
+                if (player != null && cover != null && coverList != null)
+                {
+                    if (selectCover == false)
                     {
-                        enemyRef.agent.stoppingDistance = 0;
-                        GoToCover();
-                       
+                        SelectCover();
+                    }
+
+                    inRange = Vector3.Distance(transform.position, player.transform.position) <= shootingDistance;
+                    //Debug.Log("Distance" + Vector3.Distance(transform.position, player.transform.position));
+                    if (inRange)
+                    {
+
+                        if ((coverDistance <= shootingDistance) && (useCover == true))
+                        {
+                            enemyRef.agent.stoppingDistance = 0;
+                            GoToCover();
+                        }
+                        else
+                        {
+                            direction.LookAtTarget();
+                            enemyShooter.Shoot();
+                        }
+
                     }
                     else
                     {
-                        LookAtTarget();
-                        enemyShooter.Shoot();
+                        selectCover = false;
+                        UpdatPath();
                     }
-
                 }
                 else
                 {
-                    cover123 = false;
                     UpdatPath();
+                    direction.LookAtTarget();
+                    if (inRange = Vector3.Distance(transform.position, player.transform.position) <= shootingDistance)
+                    {
+                        enemyShooter.Shoot();
+                    }
                 }
             }
-            
+
+            UpdatPath();
+
         }
         
 
-        private void LookAtTarget()
-        {
-            Vector3 lookPos = player.position - transform.position;
-            lookPos.y = 0f;
-            Quaternion rotation = Quaternion.LookRotation(lookPos);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 0.2f);
-        }
 
         private void UpdatPath()
         {
             
             if(Time.time >= pathUpdataDeadline)
             {
+                if (isPlayerNear())
+                {
                     pathUpdataDeadline = Time.time + enemyRef.pathUpdateDelay;
                     enemyRef.agent.stoppingDistance = 8;
-                    enemyRef.agent.SetDestination(player.position);
+                    enemyRef.agent.SetDestination(player.transform.position);
+                }
+                else
+                { 
+                    enemyRef.agent.stoppingDistance = 0;
+                    enemyRef.agent.SetDestination(center.position);
+                }
                 
                 Debug.Log("Path Updata");
-                
+                Debug.Log(enemyRef.agent.destination);
             }
+            
         }
 
         private void GoToCover()
         {
             if (coverDistance <= shootingDistance)
             {
-                Debug.DrawRay(player.position, -enemyDirection * 10f, Color.green);
+                Debug.DrawRay(player.transform.position, -enemyDirection * 10f, Color.green);
                 
                 Debug.Log(targetCover.name);
                 enemyRef.agent.SetDestination(targetCover.position);
@@ -116,7 +147,7 @@ namespace Enemy
                 {
                     
                     enemyRef.agent.SetDestination(targetCover.position);
-                    LookAtTarget();
+                    direction.LookAtTarget();
                     enemyShooter.Shoot();
                 }
             }
@@ -124,19 +155,40 @@ namespace Enemy
 
         private void SelectCover()
         {
-            ThisCover = coverList.UpdataNearestCover(player.position);
+            ThisCover = coverList.UpdataNearestCover(player.transform.position);
             coverPos = ThisCover.transform;
             cover = ThisCover;
             Debug.Log(coverPos.name);
             
-            enemyDirection = player.position - coverPos.position;
+            enemyDirection = player.transform.position - coverPos.position;
             enemyDirection.Normalize();
             coverMask = (enemyDirection * -1) + coverPos.position;
 
             enemyPosition = transform.position;
             targetCover = cover.UpdataNearestCover(coverMask);
             Debug.Log("enemybrain" + targetCover.name);
-            coverDistance = Vector3.Distance(targetCover.position, player.position);
+            coverDistance = Vector3.Distance(targetCover.position, player.transform.position);
+        }
+
+        private bool isPlayerNear()
+        {
+            if (Vector3.Distance(transform.position, player.transform.position) <= viewDistance)
+            { 
+                followTime = maxFollowTime;
+                seePlayer = true;
+                return true;
+    
+            }
+            if (followTime > 0)
+            {
+                return true;
+            }
+
+            
+            seePlayer = false;
+            return false;
+            
+
         }
 
         private void OnDrawGizmos()
