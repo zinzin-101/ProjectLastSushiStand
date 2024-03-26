@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3715118102785423093}
-  - component: {fileID: 282443594294763881}
   - component: {fileID: 5528603871075701797}
   - component: {fileID: 6549687928083447851}
   m_Layer: 0
@@ -34,24 +33,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2304703377434062977}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &282443594294763881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1244790675695602594}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 676e57e61724d7c4aa09aa1908f91e9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletSpawnPoint: {fileID: 897059373631826920}
-  bulletPrefab: {fileID: 3997567885501567405, guid: f49c9b620c003474982a4be5842e6597, type: 3}
-  animator: {fileID: 6549687928083447851}
-  bulletSpeed: 50
-  IneedMoreBullet: 1
-  setAmmo: 6
 --- !u!114 &5528603871075701797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -450,6 +431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunModel: {fileID: 0}
+  smoothingSpeed: 10
 --- !u!1 &8046150927878438813
 GameObject:
   m_ObjectHideFlags: 0
