@@ -1,17 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
-using static UnityEngine.UI.Image;
-
-//public enum LastWall
-//{
-//    LEFT,
-//    RIGHT,
-//    BACK
-//}
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
