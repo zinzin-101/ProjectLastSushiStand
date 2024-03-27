@@ -38,4 +38,10 @@ public class UIController : MonoBehaviour
         Time.timeScale = 1.0f;
         SceneManager.LoadScene("Main Menu");
     }
+
+    public void Restart()
+    {
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }

@@ -1,7 +1,6 @@
 using Enemy;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GunRayCast : MonoBehaviour
@@ -22,6 +21,9 @@ public class GunRayCast : MonoBehaviour
     public bool IsReloading => isReloading;
 
     [SerializeField] private Transform gunPos;
+
+    [SerializeField] private ParticleSystem ShootingSystem;
+    [SerializeField] private ParticleSystem ImpactParticleSystem;
     [SerializeField] private TrailRenderer bulletTrail;
 
     private void Start()
@@ -74,28 +76,32 @@ public class GunRayCast : MonoBehaviour
             StartCoroutine(Reload());
         }
     }
-    
+
     void Fire()
     {
         RaycastHit hit;
-        
+
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
-
+            // Instantiate bullet trail
             TrailRenderer trail = Instantiate(bulletTrail, gunPos.position, Quaternion.identity);
             StartCoroutine(SpawnTrail(trail, hit));
 
-            //Debug.Log(hit.transform.name);
+            // Instantiate shooting particle system
+            Instantiate(ShootingSystem, gunPos.position, Quaternion.identity).Play();
+            Instantiate(ImpactParticleSystem, hit.point, Quaternion.LookRotation(hit.normal));
+            // Instantiate impact particle system if hit enemy
             if (hit.collider.gameObject.TryGetComponent(out EnemyHp enemyHp))
             {
                 enemyHp.TakeDamage(damage);
             }
+            
         }
     }
 
     IEnumerator Reload()
     {
-        if (!isReloading)
+        if (!isReloading && ammoCount < maxAmmo)
         {
             isReloading = true;
 
@@ -110,7 +116,7 @@ public class GunRayCast : MonoBehaviour
 
     private IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
     {
-        float time = 0f;
+        float time = 0.0f;
         Vector3 startPosition = trail.transform.position;
 
         while (time < 1f)
