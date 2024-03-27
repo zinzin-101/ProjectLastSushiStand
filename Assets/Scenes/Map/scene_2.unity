@@ -1091,10 +1091,18 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1069603735}
+    - target: {fileID: 4323010199491016290, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1069603735}
     - target: {fileID: 5038250623368115796, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1069603735}
+    - target: {fileID: 5658628682069834549, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
+      propertyPath: HP
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8109965990127184921, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
       propertyPath: m_Name
       value: Center(Enemy)
@@ -5118,6 +5126,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4073303276778645856, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
       propertyPath: player
+      value: 
+      objectReference: {fileID: 1069603735}
+    - target: {fileID: 4323010199491016290, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
+      propertyPath: Player
       value: 
       objectReference: {fileID: 1069603735}
     - target: {fileID: 5038250623368115796, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
@@ -21468,10 +21480,18 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1069603735}
+    - target: {fileID: 4323010199491016290, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1069603735}
     - target: {fileID: 5038250623368115796, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1069603735}
+    - target: {fileID: 5658628682069834549, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
+      propertyPath: HP
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8109965990127184921, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
       propertyPath: m_Name
       value: Center(Enemy) (1)
@@ -23399,6 +23419,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1069603735}
+    - target: {fileID: 4323010199491016290, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1069603735}
     - target: {fileID: 5038250623368115796, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
       propertyPath: player
       value: 
@@ -25169,6 +25193,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1069603735}
+    - target: {fileID: 4323010199491016290, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1069603735}
     - target: {fileID: 5038250623368115796, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
       propertyPath: player
       value: 
@@ -25390,6 +25418,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4073303276778645856, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
       propertyPath: player
+      value: 
+      objectReference: {fileID: 1069603735}
+    - target: {fileID: 4323010199491016290, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
+      propertyPath: Player
       value: 
       objectReference: {fileID: 1069603735}
     - target: {fileID: 5038250623368115796, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
@@ -25630,6 +25662,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4073303276778645856, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
       propertyPath: player
+      value: 
+      objectReference: {fileID: 1069603735}
+    - target: {fileID: 4323010199491016290, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
+      propertyPath: Player
       value: 
       objectReference: {fileID: 1069603735}
     - target: {fileID: 5038250623368115796, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
@@ -32603,6 +32639,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4073303276778645856, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
       propertyPath: player
+      value: 
+      objectReference: {fileID: 1069603735}
+    - target: {fileID: 4323010199491016290, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
+      propertyPath: Player
       value: 
       objectReference: {fileID: 1069603735}
     - target: {fileID: 5038250623368115796, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}

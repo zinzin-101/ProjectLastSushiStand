@@ -95,7 +95,11 @@ public class GunRayCast : MonoBehaviour
             {
                 enemyHp.TakeDamage(damage);
             }
-            
+            if (hit.collider.gameObject.TryGetComponent(out HeadEnemy headEnemy)){
+                headEnemy.Headshot(damage);
+            }
+
+
         }
     }
 

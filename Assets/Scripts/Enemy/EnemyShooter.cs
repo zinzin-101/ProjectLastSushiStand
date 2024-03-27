@@ -22,12 +22,14 @@ namespace Enemy
         [SerializeField] private int bullet = 1;
         [SerializeField] private float reloadtime = 2;
         private float reloadTime = 0;
+        private RaycastHit nexthit;
+        private Vector3 directionRaycast;
 
-        [SerializeField] private PlayerStatus PlayerHp;
+        [SerializeField] private GameObject Player;
 
         public void Awake()
         {
-
+            
         }
 
         public void Shoot()
@@ -39,13 +41,17 @@ namespace Enemy
                 
                 if (Physics.Raycast(shootPoint.position, direction, out RaycastHit hit, float.MaxValue, layerMask))
                 {
-                    Debug.Log("Shoot");
-                    Debug.DrawLine(shootPoint.position, shootPoint.position + direction * 10f, Color.red, 1f);
+                    //Debug.Log(hit.collider.gameObject.tag);
+                    if (hit.collider.gameObject.tag == "Player")
+                    {
+                        directionRaycast = direction;
+                        Debug.DrawLine(shootPoint.position, shootPoint.position + direction * 10f, Color.red, 1f);
+                        TrailRenderer trail = Instantiate(bulletTrail, gunPoint.position, Quaternion.identity);
+                        StartCoroutine(SpawnTrail(trail, hit));
+                        bullet--;
+                        reloadTime = reloadtime;
+                    }
                     
-                    TrailRenderer trail = Instantiate(bulletTrail, gunPoint.position, Quaternion.identity);
-                    StartCoroutine(SpawnTrail(trail, hit));
-                    bullet--;
-                    reloadTime = reloadtime;
                 }
             }
             else
@@ -77,18 +83,25 @@ namespace Enemy
 
         private IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
         {
+            
+            nexthit = hit;
             float time = 0f;
             Vector3 startPosition = trail.transform.position;
 
             while(time  < 1f)
             {
-                trail.transform.position = Vector3.Lerp(startPosition, hit.point, time);
+                trail.transform.position = Vector3.Lerp(startPosition, nexthit.point, time);
                 time += Time.deltaTime / trail.time;
+                if(hit.point != Player.transform.position)
+                {
+                    nexthit.point += directionRaycast;
+                }
                 yield return null;
             }
 
-            trail.transform.position = hit.point;
-            Destroy(trail.gameObject, trail.time);  
+            //trail.transform.position = hit.point;
+            Destroy(trail.gameObject, trail.time);
+            
         }
     }
 }

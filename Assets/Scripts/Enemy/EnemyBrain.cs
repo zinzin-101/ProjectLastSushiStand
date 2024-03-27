@@ -50,7 +50,7 @@ namespace Enemy
 
         private void Start()
         {
-            shootingDistance = 8;          
+                    
         }
 
         private void FixedUpdate()
@@ -119,7 +119,7 @@ namespace Enemy
                 if (isPlayerNear())
                 {
                     pathUpdataDeadline = Time.time + enemyRef.pathUpdateDelay;
-                    enemyRef.agent.stoppingDistance = 8;
+                    enemyRef.agent.stoppingDistance = shootingDistance;
                     enemyRef.agent.SetDestination(player.transform.position);
                 }
                 else
