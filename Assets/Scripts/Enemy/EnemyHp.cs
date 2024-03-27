@@ -31,7 +31,7 @@ namespace Enemy
 
         public void TakeDamage(int damage)
         {
-            HP -= damage; ;
+            HP -= damage;
         }
     }
 }

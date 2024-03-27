@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GunRayCast : MonoBehaviour
 {
-    [SerializeField] private int damage = 1;
+    [SerializeField] private int damage = 2;
     [SerializeField] private int range = 100;
     [SerializeField] private Camera fpsCam;
     [SerializeField] private int maxAmmo = 6;

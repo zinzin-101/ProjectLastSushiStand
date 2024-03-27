@@ -8,14 +8,19 @@ public class MainMenuButton : MonoBehaviour
     // Start is called before the first frame update
     public void PlayGame()
     {
-        SceneManager.LoadScene("scene_1");
+        SceneManager.LoadScene("scene_2");
     }
     public void PlayFirstPlay()
     {
-        SceneManager.LoadScene("Map 1");
+        SceneManager.LoadScene("Main Menu");
     }
-    public void PlayPrototype()
+    
+    public void PlayStageOne()
     {
         SceneManager.LoadScene("scene_1");
+    }
+    public void PlayStageTwo()
+    {
+        SceneManager.LoadScene("scene_2");
     }
 }
