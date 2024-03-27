@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 5118971425187579588}
   - component: {fileID: 7986217047452643224}
   - component: {fileID: 6807725781802973067}
+  - component: {fileID: 36659395057231289}
   m_Layer: 0
   m_Name: PlayerV2
   m_TagString: Player
@@ -155,6 +156,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPlayerHealth: 10
+--- !u!114 &36659395057231289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1542349749260659275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 793559c247766364a84ab8dfd1cd71ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeKey: 102
+  meleeObj: {fileID: 0}
+  meleeTransform: {fileID: 0}
+  meleeDelay: 0.5
 --- !u!1 &4156233548468494326
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,6 +362,8 @@ MonoBehaviour:
   reloadDelay: 1.5
   firerate: 0.2
   gunPos: {fileID: 7316805663550396062}
+  ShootingSystem: {fileID: 0}
+  ImpactParticleSystem: {fileID: 0}
   bulletTrail: {fileID: 2922578386348580161, guid: dc139455dba739843a0f7280c6e48f14, type: 3}
 --- !u!95 &928139268252835904
 Animator:

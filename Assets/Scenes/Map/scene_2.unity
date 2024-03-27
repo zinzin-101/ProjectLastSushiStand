@@ -32693,6 +32693,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 36659395057231289, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
+      propertyPath: meleeObj
+      value: 
+      objectReference: {fileID: 7585059412787122018, guid: ad49fb22575edf14bae219d87bb6ac6b, type: 3}
+    - target: {fileID: 36659395057231289, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
+      propertyPath: meleeTransform
+      value: 
+      objectReference: {fileID: 8556644984671015196}
     - target: {fileID: 1542349749260659275, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
       propertyPath: m_Name
       value: Player
@@ -32854,6 +32862,11 @@ PrefabInstance:
       addedObject: {fileID: 1651584311}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1747933afeb8b4345b540bbb51ee8c16, type: 3}
+--- !u!4 &8556644984671015196 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6570771374057516153, guid: 1747933afeb8b4345b540bbb51ee8c16, type: 3}
+  m_PrefabInstance: {fileID: 8556644984671015195}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
