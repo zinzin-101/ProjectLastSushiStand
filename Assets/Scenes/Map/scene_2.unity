@@ -1095,6 +1095,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1069603735}
+    - target: {fileID: 5658628682069834549, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
+      propertyPath: HP
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8109965990127184921, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
       propertyPath: m_Name
       value: Center(Enemy)
@@ -21472,6 +21476,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1069603735}
+    - target: {fileID: 5658628682069834549, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
+      propertyPath: HP
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8109965990127184921, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
       propertyPath: m_Name
       value: Center(Enemy) (1)

@@ -193,12 +193,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b8c9e5a80aa11241b79df02f796b3bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootPoint: {fileID: 702705318459607878}
+  shootPoint: {fileID: 4380904635434054175}
   gunPoint: {fileID: 4380904635434054175}
   layerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  spread: {x: 0.06, y: 0.06, z: 0.06}
+  spread: {x: 0, y: 0, z: 0}
   bulletTrail: {fileID: 2922578386348580161, guid: dc139455dba739843a0f7280c6e48f14, type: 3}
   bullet: 1
   reloadtime: 2
