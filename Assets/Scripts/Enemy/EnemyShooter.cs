@@ -26,11 +26,14 @@ namespace Enemy
         private RaycastHit nexthit;
         private Vector3 directionRaycast;
 
-        [SerializeField] private GameObject Player;
+        [SerializeField] private GameObject player;
 
         public void Awake()
         {
             bullet = MaxBullet;
+
+            PlayerMovement playerScript = FindFirstObjectByType<PlayerMovement>();
+            player = playerScript.gameObject;
         }
 
         public void Shoot()
@@ -93,7 +96,7 @@ namespace Enemy
             {
                 trail.transform.position = Vector3.Lerp(startPosition, nexthit.point, time);
                 time += Time.deltaTime / trail.time;
-                if(hit.point != Player.transform.position)
+                if(hit.point != player.transform.position)
                 {
                     nexthit.point += directionRaycast;
                 }

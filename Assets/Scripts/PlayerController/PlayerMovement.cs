@@ -172,19 +172,20 @@ public class PlayerMovement : MonoBehaviour
         //print("triggered");
         //speed *= controller.velocity.magnitude / speed;
 
-        //if (hit.gameObject.layer != groundLayer && !isWallRunning)
-        //{
-        //    if ((controller.collisionFlags & CollisionFlags.Sides) != 0)
-        //    {
-        //        movement = new Vector3(0f, movement.y, 0f);
-        //        controller.Move(movement);
-        //    }
-        //    else if (controller.collisionFlags == CollisionFlags.Above)
-        //    {
-        //        movement = new Vector3(movement.x, 0f, movement.z);
-        //        controller.Move(movement);
-        //    }
-        //}
+        if (hit.gameObject.layer != groundLayer && !isWallRunning)
+        {
+            //float angle = Vector3.Angle(controller.velocity, hit.normal);
+
+            if (speed > crouchSpeed)
+            {
+                speed -= speed * Time.deltaTime;
+            }
+        }
+
+        if (hit.controller.collisionFlags == CollisionFlags.Above)
+        {
+            YVelocity.y = 0f;
+        }
     }
 
     private void CameraEffect()
@@ -330,7 +331,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        if (controller.velocity.y < -1f)
+        if (controller.velocity.y < -0.75f)
         {
             speed += slideSpeedDown * (-controller.velocity.y / 4f) * Time.deltaTime;
         }
