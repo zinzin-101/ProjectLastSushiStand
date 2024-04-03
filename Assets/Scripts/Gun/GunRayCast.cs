@@ -43,6 +43,7 @@ public class GunRayCast : MonoBehaviour
             if (firingDelay <= 0f)
             {
                 canFire = true;
+                //canShoot = true;
             }
         }
         else
@@ -50,14 +51,17 @@ public class GunRayCast : MonoBehaviour
             firingDelay = firerate;
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && canFire)
+        
+
+        if (Input.GetKey(KeyCode.Mouse0) && canFire)
         {
             canFire = false;
-
+            firingDelay = firerate;
             if (canShoot)
             {
                 Fire();
                 ammoCount--;
+                //canShoot = false;
                 if (ammoCount <= 0)
                 {
                     canShoot = false;

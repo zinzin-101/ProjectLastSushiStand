@@ -199,9 +199,9 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  spread: {x: 0, y: 0, z: 0}
+  spread: {x: 0.1, y: 0.1, z: 0.1}
   bulletTrail: {fileID: 2922578386348580161, guid: 430447bfff0b47a4f87930cbb03fa36b, type: 3}
-  bullet: 1
+  MaxBullet: 7
   reloadtime: 2
   Player: {fileID: 1542349749260659275, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
 --- !u!114 &5658628682069834549

@@ -41164,6 +41164,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1651584311}
     - target: {fileID: 1926916302359245902, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
+      propertyPath: maxAmmo
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926916302359245902, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
+      propertyPath: firerate
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926916302359245902, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}

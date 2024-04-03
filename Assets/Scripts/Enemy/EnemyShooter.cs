@@ -19,7 +19,8 @@ namespace Enemy
         [SerializeField] private Vector3 spread = new Vector3(0.06f, 0.06f, 0.06f);
         [SerializeField] private TrailRenderer bulletTrail;
       
-        [SerializeField] private int bullet = 1;
+        [SerializeField] private int MaxBullet = 1;
+        private int bullet;
         [SerializeField] private float reloadtime = 2;
         private float reloadTime = 0;
         private RaycastHit nexthit;
@@ -29,7 +30,7 @@ namespace Enemy
 
         public void Awake()
         {
-            
+            bullet = MaxBullet;
         }
 
         public void Shoot()
@@ -63,8 +64,8 @@ namespace Enemy
                 }
                 else
                 {
-                    
-                    bullet = 1;
+
+                    bullet = MaxBullet;
                 }
             }
             
