@@ -2249,7 +2249,7 @@ PrefabInstance:
       objectReference: {fileID: 495896790}
     - target: {fileID: 4094051134191980531, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
       propertyPath: allowWallrun
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4094051134191980531, guid: fab300c9158e4ae438892292d8bddca6, type: 3}
       propertyPath: playerCamera

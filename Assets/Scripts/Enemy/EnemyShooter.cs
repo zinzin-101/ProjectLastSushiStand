@@ -19,17 +19,21 @@ namespace Enemy
         [SerializeField] private Vector3 spread = new Vector3(0.06f, 0.06f, 0.06f);
         [SerializeField] private TrailRenderer bulletTrail;
       
-        [SerializeField] private int bullet = 1;
+        [SerializeField] private int MaxBullet = 1;
+        private int bullet;
         [SerializeField] private float reloadtime = 2;
         private float reloadTime = 0;
         private RaycastHit nexthit;
         private Vector3 directionRaycast;
 
-        [SerializeField] private GameObject Player;
+        [SerializeField] private GameObject player;
 
         public void Awake()
         {
-            
+            bullet = MaxBullet;
+
+            PlayerMovement playerScript = FindFirstObjectByType<PlayerMovement>();
+            player = playerScript.gameObject;
         }
 
         public void Shoot()
@@ -63,8 +67,8 @@ namespace Enemy
                 }
                 else
                 {
-                    
-                    bullet = 1;
+
+                    bullet = MaxBullet;
                 }
             }
             
@@ -92,7 +96,7 @@ namespace Enemy
             {
                 trail.transform.position = Vector3.Lerp(startPosition, nexthit.point, time);
                 time += Time.deltaTime / trail.time;
-                if(hit.point != Player.transform.position)
+                if(hit.point != player.transform.position)
                 {
                     nexthit.point += directionRaycast;
                 }

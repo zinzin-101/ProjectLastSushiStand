@@ -44,7 +44,8 @@ namespace Enemy
             enemyShooter = GetComponentInChildren<EnemyShooter>();
             cover = FindObjectOfType<Cover>();
             coverList = FindAnyObjectByType<ListCover>();
-            //player = GameObject.FindWithTag("Player");
+            PlayerMovement playerScript = FindFirstObjectByType<PlayerMovement>();
+            player = playerScript.gameObject;
             direction = GetComponentInChildren<EnemyDirection>();
         }
 

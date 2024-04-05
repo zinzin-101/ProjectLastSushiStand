@@ -12,6 +12,8 @@ namespace Enemy
         private void Awake()
         {
             //player = GameObject.FindWithTag("Player");
+            PlayerMovement playerScript = FindFirstObjectByType<PlayerMovement>();
+            player = playerScript.gameObject;
         }
 
         public void LookAtTarget()
