@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f171edfaf7118f4a999f690d93c3b9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHp: {fileID: 0}
+  enemyHp: {fileID: 5108492188140412020}
   critDamage: 2
 --- !u!1 &2555190582564495861
 GameObject:
