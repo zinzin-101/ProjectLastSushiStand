@@ -116,7 +116,7 @@ MonoBehaviour:
   crouchSpeed: 2.5
   airSpeed: 0.2
   defaultGravity: -21
-  jumpHeight: 4
+  jumpHeight: 2
   crouchHeight: 1.25
   defaultJumpCharges: 2
   groundCheck: {fileID: 4170347750273903395}
@@ -125,17 +125,17 @@ MonoBehaviour:
     m_Bits: 64
   lurchTimer: 0.1
   slideSpeedUp: 5
-  slideSpeedDown: 10
+  slideSpeedDown: 5
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
   defaultWallrunGravity: 0
   wallHangGravity: -5
   wallrunSpeed: 10
-  wallJumpBoost: 2
+  wallJumpBoost: 5
   wallrunTimer: 2.5
-  wallJumpBoostWindow: 0.1
-  wallJumpMaintainSpeedWindow: 0.1
+  wallJumpBoostWindow: 0.15
+  wallJumpMaintainSpeedWindow: 0.15
   playerCamera: {fileID: 0}
   specialFov: 110
   cameraTransitionTime: 5
