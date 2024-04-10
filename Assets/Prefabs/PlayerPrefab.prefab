@@ -173,6 +173,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3925577194170171714}
     - target: {fileID: 7986217047452643224, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
+      propertyPath: ceilingCheck
+      value: 
+      objectReference: {fileID: 7070264472563128997}
+    - target: {fileID: 7986217047452643224, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 828829006236846372}
@@ -211,6 +215,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e7394bd06c58f4e9e19bb2d2da1107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &7070264472563128997 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7891677182135578820, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
+  m_PrefabInstance: {fileID: 1124350171510975073}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5499088405747432737
 PrefabInstance:
   m_ObjectHideFlags: 0

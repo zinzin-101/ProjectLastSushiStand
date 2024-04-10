@@ -40,6 +40,9 @@ public class PlayerMovement : MonoBehaviour
     private bool isSliding;
     private bool isWallRunning;
 
+    [SerializeField] Transform ceilingCheck;
+    private bool canUncrouch;
+
     [SerializeField] float lurchTimer;
 
     [Header("Sliding")]
@@ -123,6 +126,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         CheckGround();
+        CheckCeiling();
 
         CameraEffect();
 
@@ -255,6 +259,10 @@ public class PlayerMovement : MonoBehaviour
             EnterCrouch();
         }
         if (Input.GetKeyUp(crouchKey))
+        {
+            ExitCrouch();
+        }
+        else if (!Input.GetKey(crouchKey) && canUncrouch)
         {
             ExitCrouch();
         }
@@ -505,6 +513,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void ExitCrouch()
     {
+        if (!canUncrouch)
+        {
+            return;
+        }
+
         controller.height = defaultHeight;
         //controller.center = standingCenter;
 
@@ -584,6 +597,11 @@ public class PlayerMovement : MonoBehaviour
             jumpCharges = defaultJumpCharges;
             hasWallrun = false;
         }
+    }
+
+    private void CheckCeiling()
+    {
+        canUncrouch = !Physics.Raycast(ceilingCheck.position, Vector3.up, 0.5f, groundLayer);
     }
 
     private void CheckWallHit()
