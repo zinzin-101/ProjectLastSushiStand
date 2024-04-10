@@ -544,6 +544,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isWallRunning = false;
         lastWallNormal = wallNormal;
+        hasWallrun = false;
     }
 
     private void IncreaseSpeed(float addSpeed)
