@@ -164,7 +164,7 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(movement * Time.deltaTime);
 
-        //print(controller.velocity.magnitude);
+        print(controller.velocity.magnitude);
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
@@ -195,6 +195,10 @@ public class PlayerMovement : MonoBehaviour
         if (fov > fovLimit)
         {
             fov = fovLimit;
+        }
+        else if (isCrouching)
+        {
+            fov = normalFov;
         }
 
 
@@ -423,11 +427,25 @@ public class PlayerMovement : MonoBehaviour
 
             if (wallrunTimer - wallrunTimerLeft <= wallJumpBoostWindow)
             {
-                IncreaseSpeed(wallJumpBoost * 1.5f);
+                if (speed > 25f)
+                {
+                    IncreaseSpeed(wallJumpBoost * (20f / speed));
+                }
+                else
+                {
+                    IncreaseSpeed(wallJumpBoost * 1.5f);
+                }
             }
             else
             {
-                IncreaseSpeed(wallJumpBoost);
+                if (speed > 25f)
+                {
+                    IncreaseSpeed(wallJumpBoost * (12f / speed));
+                }
+                else
+                {
+                    IncreaseSpeed(wallJumpBoost);
+                }
             }
         }
         else if (!grounded)
