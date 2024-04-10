@@ -8,6 +8,7 @@ namespace Enemy
     public class EnemyHp : MonoBehaviour
     {
         [SerializeField] private int HP = 3;
+        [SerializeField] private GameObject enemy;
         void Start()
         {
 
@@ -17,7 +18,7 @@ namespace Enemy
         void Update()
         {
             if(HP <= 0) {
-                Destroy(gameObject);
+                Destroy(enemy);
             }
         }
 

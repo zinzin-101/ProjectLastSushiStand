@@ -331,7 +331,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        if (controller.velocity.y < -0.75f)
+        if (controller.velocity.y < -0.5f)
         {
             speed += slideSpeedDown * (-controller.velocity.y / 4f) * Time.deltaTime;
         }
