@@ -343,7 +343,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        if (controller.velocity.y < -0.5f)
+        if (controller.velocity.y < -0.25f)
         {
             speed += slideSpeedDown * (-controller.velocity.y / 4f) * Time.deltaTime;
         }
@@ -584,7 +584,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void DecreaseSpeedOvertime(float reduceSpeed)
     {
-        speed -= reduceSpeed * Time.deltaTime;
+        if(controller.velocity.y > -0.5f)
+        {
+            speed -= reduceSpeed * Time.deltaTime;
+        }
     }
 
     private void CheckGround()
