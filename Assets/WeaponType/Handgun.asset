@@ -18,4 +18,4 @@ MonoBehaviour:
   range: 100
   maxAmmo: 12
   reloadDelay: 1.5
-  firerate: 0.5
+  firerate: 0.2
