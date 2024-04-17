@@ -8,7 +8,7 @@ public class UIScript : MonoBehaviour
     [SerializeField] PlayerStatus playerStatus; //might combine GunRayCast into PlayerStatus class
     [SerializeField] TMP_Text healthText;
 
-    [SerializeField] GunRayCast gunScript;
+    [SerializeField] GunScript gunScript;
     [SerializeField] TMP_Text ammoText;
 
     [SerializeField] UIController UIcontroller;

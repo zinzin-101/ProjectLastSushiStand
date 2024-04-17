@@ -45,7 +45,7 @@ ParticleSystem:
   m_GameObject: {fileID: 4925287687985423292}
   serializedVersion: 8
   lengthInSec: 0.25
-  simulationSpeed: 1
+  simulationSpeed: 10
   stopAction: 2
   cullingMode: 3
   ringBufferMode: 0
@@ -3841,7 +3841,7 @@ ParticleSystem:
     - serializedVersion: 3
       emitter: {fileID: 5088865543331646450}
       type: 0
-      properties: 0
+      properties: 12
       emitProbability: 1
   LightsModule:
     enabled: 0

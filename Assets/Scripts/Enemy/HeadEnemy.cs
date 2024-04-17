@@ -13,7 +13,8 @@ namespace Enemy
 
         public void Headshot(int damage)
         {
-            enemyHp.TakeDamage(damage * critDamage);
-        } 
+            //enemyHp.TakeDamage(damage * critDamage);
+            enemyHp.TakeDamage(damage);
+        }
     }
 }
