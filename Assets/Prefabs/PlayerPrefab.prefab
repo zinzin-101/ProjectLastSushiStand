@@ -201,8 +201,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 828829006236846372}
     - target: {fileID: 7986217047452643224, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
+      propertyPath: wallJumpBoost
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7986217047452643224, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
       propertyPath: allowDoubleJump
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7986217047452643224, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
+      propertyPath: wallJumpBoostWindow
+      value: 0.12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
