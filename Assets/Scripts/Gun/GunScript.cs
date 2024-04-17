@@ -102,7 +102,9 @@ public class GunScript : MonoBehaviour
     void Fire()
     {
         RaycastHit hit;
-
+        ParticleSystem effect = Instantiate(ShootingSystem, gunPos.position, Quaternion.identity);
+        effect.transform.parent = this.transform;
+        effect.Play();
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
             // Instantiate bullet trail
@@ -110,9 +112,7 @@ public class GunScript : MonoBehaviour
             StartCoroutine(SpawnTrail(trail, hit));
 
             // Instantiate shooting particle system
-            ParticleSystem effect = Instantiate(ShootingSystem, gunPos.position, Quaternion.identity);
-            effect.transform.parent = this.transform;
-            effect.Play();
+            
 
             Instantiate(ImpactParticleSystem, hit.point, Quaternion.LookRotation(hit.normal));
             // Instantiate impact particle system if hit enemy
