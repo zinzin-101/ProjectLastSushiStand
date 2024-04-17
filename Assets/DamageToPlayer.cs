@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class DamageToPlayer : MonoBehaviour
 {
+    [SerializeField] int damage = 1;
     [SerializeField] PlayerStatus PlayerHp;
 
     private void Awake()
@@ -15,7 +16,7 @@ public class DamageToPlayer : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            PlayerHp.TakeDamage(5);
+            PlayerHp.TakeDamage(damage);
         }
 
     }
