@@ -7,12 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class RestartScene : MonoBehaviour
 {
-
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.TryGetComponent(out PlayerMovement plrScript))
+        if (col.gameObject.TryGetComponent(out PlayerStatus playerStatus))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            playerStatus.SetPlayerAlive(false);
 
         }
     }

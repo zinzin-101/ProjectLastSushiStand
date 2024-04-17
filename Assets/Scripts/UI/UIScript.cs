@@ -12,6 +12,7 @@ public class UIScript : MonoBehaviour
     [SerializeField] TMP_Text ammoText;
 
     [SerializeField] UIController UIcontroller;
+    [SerializeField] RestartController RestartController;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -27,6 +28,14 @@ public class UIScript : MonoBehaviour
                     break;
             }
         }
+
+        if(playerStatus.IsPlayerAlive == false)
+        {
+            RestartController.Active();
+        }
+
+        
+
         switch (gunScript.IsReloading)
         {
             case true:
@@ -38,5 +47,6 @@ public class UIScript : MonoBehaviour
         }
 
         healthText.text = "Health: " + playerStatus.PlayerHealth;
+
     }
 }

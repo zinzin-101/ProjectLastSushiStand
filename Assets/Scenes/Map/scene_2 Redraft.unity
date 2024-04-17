@@ -940,8 +940,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.0937195, y: 6.2069397, z: 3.2595978}
-  m_Center: {x: 0.5465164, y: -0.5509548, z: 0.24750519}
+  m_Size: {x: 4.358696, y: 9.260622, z: 3.2595978}
+  m_Center: {x: -0.08597183, y: -2.077796, z: 0.24750519}
 --- !u!4 &30635111
 Transform:
   m_ObjectHideFlags: 0
@@ -3999,6 +3999,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5171d5eb12e0f184a8761aa4157f7d00, type: 3}
+--- !u!1 &179529444 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 544153269480206289, guid: 3bd28bdb16f9a85418dc34aca8a68951, type: 3}
+  m_PrefabInstance: {fileID: 706791035}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &179529446 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1203965458343822694, guid: 3bd28bdb16f9a85418dc34aca8a68951, type: 3}
+  m_PrefabInstance: {fileID: 706791035}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179529444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab7519df06b22d44f8648b085bbbe8eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &181487066
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4839,6 +4855,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5050a588cb8998945af5d7ef7a403910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStatus: {fileID: 1069603738}
 --- !u!65 &219763210
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11589,6 +11606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5050a588cb8998945af5d7ef7a403910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStatus: {fileID: 1069603738}
 --- !u!65 &542777449
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14727,6 +14745,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1185443712934350182, guid: 3bd28bdb16f9a85418dc34aca8a68951, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 179529446}
+    - target: {fileID: 1185443712934350182, guid: 3bd28bdb16f9a85418dc34aca8a68951, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GotoMainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1185443712934350182, guid: 3bd28bdb16f9a85418dc34aca8a68951, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: RestartController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1203965458343822694, guid: 3bd28bdb16f9a85418dc34aca8a68951, type: 3}
+      propertyPath: PausePanel
+      value: 
+      objectReference: {fileID: 179529444}
     - target: {fileID: 1238301248703312013, guid: 3bd28bdb16f9a85418dc34aca8a68951, type: 3}
       propertyPath: m_Name
       value: UI
@@ -14811,6 +14845,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5413528174035125514, guid: 3bd28bdb16f9a85418dc34aca8a68951, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 179529446}
+    - target: {fileID: 5413528174035125514, guid: 3bd28bdb16f9a85418dc34aca8a68951, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Restart
+      objectReference: {fileID: 0}
+    - target: {fileID: 5413528174035125514, guid: 3bd28bdb16f9a85418dc34aca8a68951, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: RestartController, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 7611316711242624748, guid: 3bd28bdb16f9a85418dc34aca8a68951, type: 3}
       propertyPath: gunScript
       value: 
@@ -14819,6 +14865,10 @@ PrefabInstance:
       propertyPath: playerStatus
       value: 
       objectReference: {fileID: 1069603738}
+    - target: {fileID: 7611316711242624748, guid: 3bd28bdb16f9a85418dc34aca8a68951, type: 3}
+      propertyPath: RestartController
+      value: 
+      objectReference: {fileID: 179529446}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24237,6 +24287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5050a588cb8998945af5d7ef7a403910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStatus: {fileID: 1069603738}
 --- !u!1001 &1127253793
 PrefabInstance:
   m_ObjectHideFlags: 0

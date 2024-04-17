@@ -28,6 +28,10 @@ public class PlayerStatus : MonoBehaviour
         {
             isPlayerAlive = false;
         }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            playerHealth--;
+        }
     }
 
     // Method to apply damage to the player
@@ -42,5 +46,10 @@ public class PlayerStatus : MonoBehaviour
     {
         playerHealth += amount;
         playerHealth = Mathf.Clamp(playerHealth, 0, maxPlayerHealth); // Ensure health stays within range
+    }
+
+    public void SetPlayerAlive(bool isAlive)
+    {
+        isPlayerAlive =isAlive;
     }
 }
