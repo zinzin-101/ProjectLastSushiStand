@@ -80,6 +80,10 @@ public class PlayerMovement : MonoBehaviour
 
     private float lurchTimeLeft;
 
+    private float currentYPos;
+    private float lastYPos;
+    private float yVel;
+
     [Header("Player Camera")]
     [SerializeField] Camera playerCamera;
     [SerializeField] float specialFov;
@@ -113,6 +117,9 @@ public class PlayerMovement : MonoBehaviour
         fovDifference = Mathf.Max(specialFov, normalFov) - Mathf.Min(specialFov, normalFov);
 
         fovSpeedScaler = (sprintSpeed + wallrunSpeed) / 2f;
+
+        currentYPos = transform.position.y;
+        lastYPos = currentYPos;
     }
 
     private void Update()
@@ -165,10 +172,16 @@ public class PlayerMovement : MonoBehaviour
         //    controller.Move(movement);
         //}
 
-
         controller.Move(movement * Time.deltaTime);
 
         //print(controller.velocity.magnitude);
+        //print(controller.velocity);
+
+        currentYPos = transform.position.y;
+        yVel = (currentYPos - lastYPos) / Time.deltaTime;
+        lastYPos = currentYPos;
+
+        print(yVel);
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
@@ -343,13 +356,14 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        if (controller.velocity.y < -0.25f)
+        if (yVel < -1f)
         {
-            speed += slideSpeedDown * (-controller.velocity.y / 3.5f) * Time.deltaTime;
+            print("in");
+            speed += slideSpeedDown * (-yVel / 3f) * Time.deltaTime;
         }
-        else if (controller.velocity.y > 1f)
+        else if (yVel > 1f)
         {
-            speed -= slideSpeedDown * (controller.velocity.y / 2f) * Time.deltaTime;
+            speed -= slideSpeedDown * (yVel / 6f) * Time.deltaTime;
         }
 
         movement += forwardDirection;
@@ -429,8 +443,8 @@ public class PlayerMovement : MonoBehaviour
         {
             ExitWallRun();
 
-            movement.x += input.x;
-            movement.z += input.z;
+            movement.x += input.x * (wallJumpBoost / 4.0f);
+            movement.z += input.z * (wallJumpBoost / 4.0f);
             movement += onBackWall ? wallNormal * 5f : wallNormal * 2.5f;
 
             if (wallrunTimer - wallrunTimerLeft <= wallJumpBoostWindow)
@@ -584,7 +598,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void DecreaseSpeedOvertime(float reduceSpeed)
     {
-        if (controller.velocity.y > -0.15f)
+        if (yVel > -0.25f)
         {
             speed -= reduceSpeed * Time.deltaTime;
         }
