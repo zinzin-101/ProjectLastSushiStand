@@ -321,7 +321,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7316805663550396062}
-  - component: {fileID: 1926916302359245902}
+  - component: {fileID: 4181561773542320040}
   - component: {fileID: 928139268252835904}
   m_Layer: 0
   m_Name: Gun
@@ -345,7 +345,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5332174298285117674}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1926916302359245902
+--- !u!114 &4181561773542320040
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -354,19 +354,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 5134703088243256265}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ea1a3e31a3206b4b86890504c3ab300, type: 3}
+  m_Script: {fileID: 11500000, guid: 75ecddbe08c7f93439fb012723e0ab3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  range: 100
   fpsCam: {fileID: 0}
-  maxAmmo: 6
-  reloadDelay: 1.5
-  firerate: 0.2
-  gunPos: {fileID: 7316805663550396062}
-  ShootingSystem: {fileID: 0}
-  ImpactParticleSystem: {fileID: 0}
+  gunPos: {fileID: 0}
+  ShootingSystem: {fileID: 198234346748616026, guid: 28ac96b973f78434fb7922f2ce0dd26f, type: 3}
+  ImpactParticleSystem: {fileID: 5088339112022350390, guid: c58f34d2178f5bb46b1cde6d324b092b, type: 3}
   bulletTrail: {fileID: 2922578386348580161, guid: dc139455dba739843a0f7280c6e48f14, type: 3}
+  gunList:
+  - GunInfo: {fileID: 11400000, guid: ae45769440e862844b15dfaf2161e99b, type: 2}
+  - GunInfo: {fileID: 11400000, guid: a702ec280e1774148846098698f80810, type: 2}
+  swapGunKey: 113
 --- !u!95 &928139268252835904
 Animator:
   serializedVersion: 5
