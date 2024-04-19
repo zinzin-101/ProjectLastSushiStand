@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  shootingDistance: 12
+  shootingDistance: 15
   followDistance: 70
   viewDistance: 60
   coverDistance: 0
@@ -232,6 +232,7 @@ MonoBehaviour:
   selectCover: 0
   center: {fileID: 3563782061046141242}
   maxFollowTime: 5
+  speedMovement: 15
 --- !u!114 &7214189972100393673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,6 +275,9 @@ MonoBehaviour:
   MaxBullet: 7
   reloadtime: 2
   player: {fileID: 0}
+  Bullet: {fileID: 1509077952655917628, guid: 430447bfff0b47a4f87930cbb03fa36b, type: 3}
+  SpeedBullet: 2
+  rateOnFire: 0.75
 --- !u!114 &8573664757002469488
 MonoBehaviour:
   m_ObjectHideFlags: 0

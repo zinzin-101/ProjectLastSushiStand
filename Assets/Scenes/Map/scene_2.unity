@@ -1322,6 +1322,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1069603735}
+    - target: {fileID: 5038250623368115796, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
+      propertyPath: shootingDistance
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 5658628682069834549, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
       propertyPath: HP
       value: 10
@@ -5850,7 +5854,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 06eb4254316ac1d4b906b95844be0e3c, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: c7de54b28478e354891991f03c5af0c4, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1001 &319232118
 PrefabInstance:

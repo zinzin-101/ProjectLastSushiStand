@@ -36,6 +36,7 @@ namespace Enemy
         [SerializeField] private Transform center;
         [SerializeField] private float maxFollowTime;
         private float followTime;
+        [SerializeField] private int speedMovement = 8;
 
 
         private void Awake()
@@ -51,7 +52,7 @@ namespace Enemy
 
         private void Start()
         {
-                    
+            enemyRef.agent.speed = speedMovement;
         }
 
         private void FixedUpdate()
@@ -105,8 +106,11 @@ namespace Enemy
                     }
                 }
             }
-
-            UpdatPath();
+            else
+            {
+                UpdatPath();
+            }
+            
 
         }
         
