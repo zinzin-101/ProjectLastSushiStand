@@ -23,6 +23,10 @@ public class MainMenuButton : MonoBehaviour
     {
         SceneManager.LoadScene(2);
     }
+    public void PlayStageThree()
+    {
+        SceneManager.LoadScene(3);
+    }
     public void PlayTest()
     {
         SceneManager.LoadScene("Sandbox");
