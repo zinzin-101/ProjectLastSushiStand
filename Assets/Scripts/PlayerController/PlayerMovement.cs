@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -44,6 +45,11 @@ public class PlayerMovement : MonoBehaviour
     private bool canUncrouch;
 
     [SerializeField] float lurchTimer;
+
+    [Header("Vaulting")]
+    [SerializeField] Transform frontCheckAbove;
+    [SerializeField] Transform frontCheckBelow;
+    [SerializeField] float vaultSpeed = 25f;
 
     [Header("Sliding")]
     //[SerializeField] float maxSlideTimer;
@@ -134,6 +140,7 @@ public class PlayerMovement : MonoBehaviour
 
         CheckGround();
         CheckCeiling();
+        CheckVault();
 
         CameraEffect();
 
@@ -181,7 +188,7 @@ public class PlayerMovement : MonoBehaviour
         yVel = (currentYPos - lastYPos) / Time.deltaTime;
         lastYPos = currentYPos;
 
-        print(yVel);
+        print(speed);
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
@@ -202,6 +209,14 @@ public class PlayerMovement : MonoBehaviour
         if (hit.controller.collisionFlags == CollisionFlags.Above)
         {
             YVelocity.y = 0f;
+        }   
+
+        if (hit.collider.TryGetComponent(out JumpPadScript jumpPadScript))
+        {
+            Vector3 jumpVector = jumpPadScript.GetJumpVector();
+            YVelocity.y = jumpVector.y;
+            movement += new Vector3(jumpVector.x + movement.x, 0f, jumpVector.z + movement.z);
+            controller.Move(movement * Time.deltaTime);
         }
     }
 
@@ -215,9 +230,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (isCrouching)
         {
-            fov = normalFov;
+            fov = normalFov + (fovDifference * ((walkSpeed - 5f) / fovSpeedScaler)); ;
         }
-
 
         playerCamera.fieldOfView = Mathf.MoveTowards(playerCamera.fieldOfView, fov, cameraTransitionTime * Time.deltaTime);
 
@@ -616,9 +630,38 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void CheckVault()
+    {
+        bool below = false;
+        float distanceChange = (frontCheckAbove.position.y - frontCheckBelow.position.y) / 100f;
+        Vector3 startPos = frontCheckAbove.position;
+        startPos.y += distanceChange;
+        for (int i = 0; i < 100;  i++)
+        {
+            bool check = Physics.Raycast(startPos, Vector3.forward, 0.7f);
+            if (check)
+            {
+                below = true;
+                break;
+            }
+        }
+        bool canVault = below && !Physics.Raycast(frontCheckAbove.position, Vector3.forward, 0.7f);
+        float angle = Vector3.Angle(input, Vector3.forward);
+
+        if (canVault && angle <= 15f && !grounded && !isCrouching && ((Mathf.Abs(input.z) > 0.5f || Mathf.Abs(input.x) > 0.5f)))
+        {
+            while (canVault)
+            {
+                controller.Move(Vector3.up);
+                canVault = Physics.Raycast(frontCheckBelow.position, Vector3.forward, 0.7f) && !Physics.Raycast(frontCheckAbove.position, Vector3.forward, 0.7f);
+            }
+            movement = Vector3.zero;
+        }
+    }
+
     private void CheckCeiling()
     {
-        canUncrouch = !Physics.Raycast(ceilingCheck.position, Vector3.up, 0.5f, groundLayer);
+        canUncrouch = !Physics.Raycast(ceilingCheck.position, Vector3.up, 0.5f);
     }
 
     private void CheckWallHit()
