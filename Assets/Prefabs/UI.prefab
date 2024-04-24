@@ -601,6 +601,7 @@ MonoBehaviour:
   gunScript: {fileID: 0}
   ammoText: {fileID: 5178898119318214370}
   UIcontroller: {fileID: 2638825070517634077}
+  RestartController: {fileID: 1203965458343822694}
 --- !u!114 &3428321629900857517
 MonoBehaviour:
   m_ObjectHideFlags: 0
