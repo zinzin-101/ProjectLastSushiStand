@@ -142,7 +142,7 @@ PrefabInstance:
     - target: {fileID: 4580615916344671762, guid: 5c0cf8a1485187f4498922e7d0e06f44, type: 3}
       propertyPath: shootPoint
       value: 
-      objectReference: {fileID: 1450787840}
+      objectReference: {fileID: 0}
     - target: {fileID: 4580615916344671762, guid: 5c0cf8a1485187f4498922e7d0e06f44, type: 3}
       propertyPath: viewDistance
       value: 10
@@ -198,14 +198,11 @@ PrefabInstance:
     - target: {fileID: 9180209455093474175, guid: 5c0cf8a1485187f4498922e7d0e06f44, type: 3}
       propertyPath: shootPoint
       value: 
-      objectReference: {fileID: 1450787840}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6922090769977931203, guid: 5c0cf8a1485187f4498922e7d0e06f44, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1450787841}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c0cf8a1485187f4498922e7d0e06f44, type: 3}
 --- !u!1 &201491438 stripped
 GameObject:
@@ -641,29 +638,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1450787839 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6922090769977931203, guid: 5c0cf8a1485187f4498922e7d0e06f44, type: 3}
-  m_PrefabInstance: {fileID: 200732372}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1450787840 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5029755142206041881, guid: 5c0cf8a1485187f4498922e7d0e06f44, type: 3}
-  m_PrefabInstance: {fileID: 200732372}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1450787841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1450787839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef57e6bf8efe4d04ebcdd86de5594197, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 201491438}
 --- !u!1 &1828226042
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,6 +954,18 @@ PrefabInstance:
       propertyPath: PlayerHp
       value: 
       objectReference: {fileID: 201491442}
+    - target: {fileID: 4323010199491016290, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
+      propertyPath: spread.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4323010199491016290, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
+      propertyPath: spread.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4323010199491016290, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
+      propertyPath: spread.z
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5038250623368115796, guid: e3f2357c82c7d1e419b2cf564d26c95e, type: 3}
       propertyPath: player
       value: 

@@ -21,12 +21,16 @@ namespace Enemy
       
         [SerializeField] private int MaxBullet = 1;
         private int bullet;
-        [SerializeField] private float reloadtime = 2;
+        [SerializeField] private float reloadtime = 3.5f;
         private float reloadTime = 0;
         private RaycastHit nexthit;
         private Vector3 directionRaycast;
 
         [SerializeField] private GameObject player;
+        [SerializeField] private GameObject Bullet;
+        [SerializeField] private int SpeedBullet = 2;
+        [SerializeField] private float rateOnFire = 0.5f;
+        private float RateOnFire;
 
         public void Awake()
         {
@@ -34,29 +38,32 @@ namespace Enemy
 
             PlayerMovement playerScript = FindFirstObjectByType<PlayerMovement>();
             player = playerScript.gameObject;
+            RateOnFire = rateOnFire;
         }
 
         public void Shoot()
         {
-            if(bullet != 0) 
+            if(bullet != 0 && RateOnFire >= rateOnFire) 
             {
-                
                 Vector3 direction = GetDirection();
-                
-                if (Physics.Raycast(shootPoint.position, direction, out RaycastHit hit, float.MaxValue, layerMask))
-                {
-                    //Debug.Log(hit.collider.gameObject.tag);
-                    if (hit.collider.gameObject.tag == "Player")
-                    {
-                        directionRaycast = direction;
-                        Debug.DrawLine(shootPoint.position, shootPoint.position + direction * 10f, Color.red, 1f);
-                        TrailRenderer trail = Instantiate(bulletTrail, gunPoint.position, Quaternion.identity);
-                        StartCoroutine(SpawnTrail(trail, hit));
-                        bullet--;
-                        reloadTime = reloadtime;
-                    }
-                    
-                }
+                Instantiate(Bullet, gunPoint.position, Quaternion.LookRotation(direction));
+                bullet--;
+                reloadTime = reloadtime;
+                RateOnFire = 0;
+                //if (Physics.Raycast(shootPoint.position, direction, out RaycastHit hit, float.MaxValue, layerMask))
+                //{
+                //    //Debug.Log(hit.collider.gameObject.tag);
+                //    if (hit.collider.gameObject.tag == "Player")
+                //    {
+                //        directionRaycast = direction;
+                //        Debug.DrawLine(shootPoint.position, shootPoint.position + direction * 10f, Color.red, 1f);
+                //        TrailRenderer trail = Instantiate(bulletTrail, gunPoint.position, Quaternion.identity);
+                //        StartCoroutine(SpawnTrail(trail, hit));
+                //        bullet--;
+                //        reloadTime = reloadtime;
+                //    }
+
+                //}
             }
             else
             {
@@ -71,7 +78,7 @@ namespace Enemy
                     bullet = MaxBullet;
                 }
             }
-            
+            RateOnFire += Time.deltaTime;
         }
 
         private Vector3 GetDirection()
