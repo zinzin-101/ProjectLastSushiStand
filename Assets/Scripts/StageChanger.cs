@@ -9,7 +9,7 @@ public class StageChanger : MonoBehaviour
     {
         if (col.gameObject.TryGetComponent(out PlayerMovement plrScript))
         {
-            if (SceneManager.GetActiveScene().buildIndex < 2)
+            if (SceneManager.GetActiveScene().buildIndex < 3)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }

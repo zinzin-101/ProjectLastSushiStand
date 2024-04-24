@@ -31,4 +31,8 @@ public class MainMenuButton : MonoBehaviour
     {
         SceneManager.LoadScene("Sandbox");
     }
+    public void QuitButton()
+    {
+        Application.Quit();
+    }
 }
