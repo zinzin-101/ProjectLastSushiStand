@@ -18,6 +18,7 @@ public class GunInfo : ScriptableObject
     public int maxAmmo;
     public float reloadDelay;
     public float firerate;
+    public float spreadAmount;
 
     //public ParticleSystem shootingSystem;
     //public ParticleSystem ImpactParticleSystem;

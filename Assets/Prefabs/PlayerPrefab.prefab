@@ -320,6 +320,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Handgun
       objectReference: {fileID: 0}
+    - target: {fileID: 9088697150846611906, guid: 1747933afeb8b4345b540bbb51ee8c16, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.4710007
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088697150846611906, guid: 1747933afeb8b4345b540bbb51ee8c16, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.6949999
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
