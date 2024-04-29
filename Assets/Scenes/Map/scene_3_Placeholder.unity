@@ -34481,6 +34481,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7011753401626838521, guid: 9e933a693ec54f24d891add3dacac2f9, type: 3}
+      propertyPath: lurchTimer
+      value: 0.075
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
