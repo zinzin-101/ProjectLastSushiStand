@@ -40,6 +40,7 @@ public class GunScript : MonoBehaviour
 
         foreach (GunObj gun in gunList)
         {
+            gun.InitAnimator();
             gun.SetCurrentAmmo(gun.GunInfo.maxAmmo);
             gun.GunModel.SetActive(false);
         }
@@ -101,6 +102,8 @@ public class GunScript : MonoBehaviour
 
     void Fire()
     {
+        gunList[currentIndex].TriggerFireAnim();
+
         RaycastHit hit;
         ParticleSystem effect = Instantiate(ShootingSystem, gunPos.position, Quaternion.identity);
         effect.transform.parent = this.transform;

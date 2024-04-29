@@ -11,8 +11,20 @@ public class GunObj
     private int currentAmmoCount;
     public int CurrentAmmoCount => currentAmmoCount;
 
+    private Animator animator;
+
+    public void InitAnimator()
+    {
+        animator = GunModel.GetComponent<Animator>();
+    }
+
     public void SetCurrentAmmo(int amount)
     {
         currentAmmoCount = amount;
+    }
+
+    public void TriggerFireAnim()
+    {
+        animator.SetTrigger("Fire");
     }
 }
