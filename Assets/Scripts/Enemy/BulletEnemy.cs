@@ -9,9 +9,20 @@ public class BulletEnemy : MonoBehaviour
     void Update()
     {
         lifeTime -= Time.deltaTime;
-        gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * speed * 500);
+        gameObject.GetComponent<Rigidbody>().velocity = transform.forward * speed * 10;
         if(lifeTime <= 0)
         {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == LayerMask.NameToLayer("Ground") ||
+           other.gameObject.layer == LayerMask.NameToLayer("Wall") ||
+           other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            Debug.Log("hit");
             Destroy(gameObject);
         }
     }
