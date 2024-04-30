@@ -61,7 +61,7 @@ namespace Enemy
 
         private void Move()
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, speed);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, speed/1.5f);
         }
 
         //debugZone
