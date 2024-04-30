@@ -18,6 +18,7 @@ namespace Enemy
         void Update()
         {
             if(HP <= 0) {
+                GameManager.Instance.UpdateEnemyCount();
                 Destroy(enemy);
             }
         }

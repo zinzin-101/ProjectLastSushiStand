@@ -86,8 +86,9 @@ public class PlayerMovement : MonoBehaviour
 
     private float lurchTimeLeft;
 
-    private float currentYPos;
-    private float lastYPos;
+    private Vector3 currentPos;
+    private Vector3 lastPos;
+    private Vector3 velocityVec;
     private float yVel;
 
     [Header("Player Camera")]
@@ -124,8 +125,8 @@ public class PlayerMovement : MonoBehaviour
 
         fovSpeedScaler = (sprintSpeed + wallrunSpeed) / 2f;
 
-        currentYPos = transform.position.y;
-        lastYPos = currentYPos;
+        currentPos = transform.position;
+        lastPos = currentPos;
     }
 
     private void Update()
@@ -184,11 +185,11 @@ public class PlayerMovement : MonoBehaviour
         //print(controller.velocity.magnitude);
         //print(controller.velocity);
 
-        currentYPos = transform.position.y;
-        yVel = (currentYPos - lastYPos) / Time.deltaTime;
-        lastYPos = currentYPos;
+        currentPos = transform.position;
+        velocityVec = (currentPos - lastPos) / Time.deltaTime;
+        lastPos = currentPos;
 
-        print(speed);
+        //print(speed);
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
@@ -370,14 +371,14 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        if (yVel < -1f)
+        if (velocityVec.y < -1f)
         {
             print("in");
-            speed += slideSpeedDown * (-yVel / 3f) * Time.deltaTime;
+            speed += slideSpeedDown * (-velocityVec.y / 3f) * Time.deltaTime;
         }
-        else if (yVel > 1f)
+        else if (velocityVec.y > 1f)
         {
-            speed -= slideSpeedDown * (yVel / 6f) * Time.deltaTime;
+            speed -= slideSpeedDown * (velocityVec.y / 6f) * Time.deltaTime;
         }
 
         movement += forwardDirection;
@@ -486,13 +487,15 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (!grounded)
         {
-            Vector3 currentMovingDirection = new Vector3(controller.velocity.x, 0f, controller.velocity.z);
+            Vector3 currentMovingDirection = new Vector3(velocityVec.x, 0f, velocityVec.z);
             float angleChange = Vector3.Angle(input, currentMovingDirection);
             float jumpSpeed = walkSpeed * 0.25f;
             if (angleChange > 90f)
             {
                 movement.x = input.x * jumpSpeed;
                 movement.z = input.z * jumpSpeed;
+                speed = jumpSpeed;
+                movement = Vector3.ClampMagnitude(movement, walkSpeed);
             }
             else
             {
@@ -612,7 +615,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void DecreaseSpeedOvertime(float reduceSpeed)
     {
-        if (yVel > -0.25f)
+        if (velocityVec.y > -0.25f)
         {
             speed -= reduceSpeed * Time.deltaTime;
         }
