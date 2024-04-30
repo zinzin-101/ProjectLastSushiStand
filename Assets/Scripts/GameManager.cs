@@ -38,9 +38,4 @@ public class GameManager : MonoBehaviour
     {
         isPaused = state;
     }
-
-    public void UpdateEnemyCount()
-    {
-        
-    }
 }
