@@ -1,6 +1,5 @@
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
@@ -107,14 +106,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] bool allowDoubleJump = true;
     [SerializeField] bool allowWallrun = true;
 
-    private SceneIndexManager sceneIndexManager;
-
-    private void Awake()
-    {
-        sceneIndexManager = FindObjectOfType<SceneIndexManager>();
-        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        sceneIndexManager.SetLastSceneIndex(nextSceneIndex);
-    }
     private void Start()
     {
         TryGetComponent(out controller);
