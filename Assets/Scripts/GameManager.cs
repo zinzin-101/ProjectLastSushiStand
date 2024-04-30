@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         UpdateEnemyCount(); // more reliable but computationally expensive to put in Update()
-        print(enemyCount);
+        //print(enemyCount);
     }
 
     public void ReloadCurrentScene()
