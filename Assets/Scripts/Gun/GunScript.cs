@@ -10,11 +10,13 @@ public class GunScript : MonoBehaviour
     [SerializeField] private ParticleSystem ShootingSystem;
     [SerializeField] private ParticleSystem ImpactParticleSystem;
     [SerializeField] private TrailRenderer bulletTrail;
+    [SerializeField] private PlayerMovement playerMovement;
 
     [SerializeField] List<GunObj> gunList;
     private int currentIndex, prevIndex;
 
     [SerializeField] KeyCode swapGunKey = KeyCode.Q;
+    [SerializeField] float recoilReductionScaling = 0.5f;
 
     private Transform gunPos;
     private int damage;
@@ -111,6 +113,15 @@ public class GunScript : MonoBehaviour
 
         Vector3 dir = fpsCam.transform.forward;
         float spreadAmount = gunList[currentIndex].GunInfo.spreadAmount;
+
+        if (playerMovement != null)
+        {
+            if (playerMovement.IsCrouching)
+            {
+                spreadAmount *= recoilReductionScaling;
+            }
+        }
+
         if (spreadAmount != 0f)
         {
             dir.x += Random.Range(-spreadAmount, spreadAmount);

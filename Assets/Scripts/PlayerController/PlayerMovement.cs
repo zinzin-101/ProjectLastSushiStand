@@ -38,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isSprinting;
     private bool isCrouching;
+    public bool IsCrouching => isCrouching;
     private bool isSliding;
     private bool isWallRunning;
 
@@ -72,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float wallJumpBoostWindow = 0.4f;
     [SerializeField] float wallJumpMaintainSpeedWindow = 0.25f;
     private float wallrunTimerLeft;
-    private bool onRightWall, onLeftWall, onBackWall;
+    private bool onRightWall, onLeftWall; //, onBackWall;
     private bool onWall;
     private RaycastHit leftWallHit, rightWallhit;//, backWallhit;
     private RaycastHit wallHit;
@@ -89,7 +90,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 currentPos;
     private Vector3 lastPos;
     private Vector3 velocityVec;
-    private float yVel;
 
     [Header("Player Camera")]
     [SerializeField] Camera playerCamera;
