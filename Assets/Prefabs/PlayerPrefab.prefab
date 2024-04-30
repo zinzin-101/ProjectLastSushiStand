@@ -129,6 +129,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 828829006236846372}
     - target: {fileID: 4181561773542320040, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
+      propertyPath: playerMovement
+      value: 
+      objectReference: {fileID: 7011753401626838521}
+    - target: {fileID: 4181561773542320040, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
       propertyPath: gunList.Array.data[0].GunPos
       value: 
       objectReference: {fileID: 8422586822392799543}

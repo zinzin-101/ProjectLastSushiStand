@@ -34,6 +34,10 @@ public class GunScript : MonoBehaviour
     private bool isReloading;
     public bool IsReloading => isReloading;
 
+    private void Awake()
+    {
+        transform.parent.gameObject.TryGetComponent(out playerMovement);
+    }
 
     private void Start()
     {
