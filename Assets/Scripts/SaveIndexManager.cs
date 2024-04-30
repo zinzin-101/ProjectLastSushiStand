@@ -9,6 +9,7 @@ public class SceneIndexManager : MonoBehaviour
     private void Start()
     {
         LoadLastSceneIndex();
+        GameManager.Instance.UpdateEnemyCount();
     }
 
     private void LoadLastSceneIndex()
