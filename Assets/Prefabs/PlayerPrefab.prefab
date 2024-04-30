@@ -75,7 +75,7 @@ PrefabInstance:
     - target: {fileID: 36659395057231289, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
       propertyPath: meleeObj
       value: 
-      objectReference: {fileID: 7585059412787122018, guid: ad49fb22575edf14bae219d87bb6ac6b, type: 3}
+      objectReference: {fileID: 2935618969336062652, guid: eb0b7b0563288444fae1e76bca5d0d5e, type: 3}
     - target: {fileID: 36659395057231289, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
       propertyPath: meleeTransform
       value: 

@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meleeKey: 102
-  meleeObj: {fileID: 0}
+  meleeObj: {fileID: 3340675814889471990, guid: 6e302e902cefd99419946c002350bb92, type: 3}
   meleeTransform: {fileID: 0}
   meleeDelay: 0.5
 --- !u!1 &4041246482963684537
@@ -428,6 +428,7 @@ MonoBehaviour:
   ShootingSystem: {fileID: 198234346748616026, guid: 28ac96b973f78434fb7922f2ce0dd26f, type: 3}
   ImpactParticleSystem: {fileID: 5088339112022350390, guid: c58f34d2178f5bb46b1cde6d324b092b, type: 3}
   bulletTrail: {fileID: 2922578386348580161, guid: dc139455dba739843a0f7280c6e48f14, type: 3}
+  playerMovement: {fileID: 0}
   gunList:
   - GunInfo: {fileID: 11400000, guid: ae45769440e862844b15dfaf2161e99b, type: 2}
     GunModel: {fileID: 0}
@@ -436,6 +437,7 @@ MonoBehaviour:
     GunModel: {fileID: 0}
     GunPos: {fileID: 0}
   swapGunKey: 113
+  recoilReductionScaling: 0.5
 --- !u!95 &928139268252835904
 Animator:
   serializedVersion: 5
