@@ -31710,6 +31710,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b705b36c0a031c74bb375ee73b5ecce3, type: 2}
+    - target: {fileID: 64184744005576314, guid: 5171d5eb12e0f184a8761aa4157f7d00, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -44783,6 +44787,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 168355717761734875, guid: 9e933a693ec54f24d891add3dacac2f9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 297678682447593673, guid: 9e933a693ec54f24d891add3dacac2f9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1524387852262546991, guid: 9e933a693ec54f24d891add3dacac2f9, type: 3}
       propertyPath: maxAmmo
       value: 12
@@ -44795,13 +44807,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 1944983752473542698, guid: 9e933a693ec54f24d891add3dacac2f9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3863414209447988681, guid: 9e933a693ec54f24d891add3dacac2f9, type: 3}
       propertyPath: gunList.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3906757100852295063, guid: 9e933a693ec54f24d891add3dacac2f9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4003448031106528984, guid: 9e933a693ec54f24d891add3dacac2f9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4123879498639349337, guid: 9e933a693ec54f24d891add3dacac2f9, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681360948773439502, guid: 9e933a693ec54f24d891add3dacac2f9, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5146845972869012447, guid: 9e933a693ec54f24d891add3dacac2f9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -44842,6 +44870,14 @@ PrefabInstance:
     - target: {fileID: 5146845972869012447, guid: 9e933a693ec54f24d891add3dacac2f9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5249050674571280808, guid: 9e933a693ec54f24d891add3dacac2f9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5515231057102750751, guid: 9e933a693ec54f24d891add3dacac2f9, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8237025252037294810, guid: 9e933a693ec54f24d891add3dacac2f9, type: 3}
       propertyPath: m_IsActive
