@@ -7,8 +7,9 @@ using UnityEngine.SceneManagement;
 namespace SlimUI.ModernMenu{
 	public class UIMenuManager : MonoBehaviour {
 		private Animator CameraObject;
+        private SceneIndexManager sceneIndexManager;
 
-		// campaign button sub menu
+        // campaign button sub menu
         [Header("MENUS")]
         [Tooltip("The Menu for when the MAIN menu buttons")]
         public GameObject mainMenu;
@@ -81,7 +82,8 @@ namespace SlimUI.ModernMenu{
         public AudioSource swooshSound;
 
 		void Start(){
-			CameraObject = transform.GetComponent<Animator>();
+            sceneIndexManager = FindObjectOfType<SceneIndexManager>();
+            CameraObject = transform.GetComponent<Animator>();
 
 			playMenu.SetActive(false);
 			exitMenu.SetActive(false);
@@ -141,6 +143,16 @@ namespace SlimUI.ModernMenu{
 			if(scene != ""){
 				StartCoroutine(LoadAsynchronously(scene));
 			}
+		}
+		public void LoadSave()
+		{
+			int lastSceneIndex = sceneIndexManager.GetLastSceneIndex();
+			SceneManager.LoadScene(lastSceneIndex);
+        }
+
+		public void NewGame()
+		{
+			SceneManager.LoadScene(1);
 		}
 
 		public void  DisablePlayCampaign(){
