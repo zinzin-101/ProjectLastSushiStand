@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.SceneManagement;
 
 public class PlayerStatus : MonoBehaviour
 {
@@ -9,6 +10,15 @@ public class PlayerStatus : MonoBehaviour
 
     private bool isPlayerAlive;
     public bool IsPlayerAlive => isPlayerAlive;
+
+    private SceneIndexManager sceneIndexManager;
+
+    private void Awake()
+    {
+        sceneIndexManager = FindObjectOfType<SceneIndexManager>();
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        sceneIndexManager.SetLastSceneIndex(nextSceneIndex);
+    }
 
     void Start()
     {
