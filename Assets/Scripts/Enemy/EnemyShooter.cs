@@ -13,11 +13,11 @@ namespace Enemy
         [Header("General")]
         [SerializeField ]private Transform shootPoint;
         [SerializeField] private Transform gunPoint;
-        [SerializeField] private LayerMask layerMask;
+        //[SerializeField] private LayerMask layerMask;
 
         [Header("Gun")]
         [SerializeField] private Vector3 spread = new Vector3(0.06f, 0.06f, 0.06f);
-        [SerializeField] private TrailRenderer bulletTrail;
+        //[SerializeField] private TrailRenderer bulletTrail;
       
         [SerializeField] private int MaxBullet = 1;
         private int bullet;

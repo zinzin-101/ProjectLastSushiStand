@@ -40,6 +40,7 @@ public class GunScript : MonoBehaviour
 
         foreach (GunObj gun in gunList)
         {
+            gun.InitAnimator();
             gun.SetCurrentAmmo(gun.GunInfo.maxAmmo);
             gun.GunModel.SetActive(false);
         }
@@ -101,11 +102,23 @@ public class GunScript : MonoBehaviour
 
     void Fire()
     {
+        gunList[currentIndex].TriggerFireAnim();
+
         RaycastHit hit;
         ParticleSystem effect = Instantiate(ShootingSystem, gunPos.position, Quaternion.identity);
         effect.transform.parent = this.transform;
         effect.Play();
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+
+        Vector3 dir = fpsCam.transform.forward;
+        float spreadAmount = gunList[currentIndex].GunInfo.spreadAmount;
+        if (spreadAmount != 0f)
+        {
+            dir.x += Random.Range(-spreadAmount, spreadAmount);
+            dir.y += Random.Range(-spreadAmount, spreadAmount);
+            dir.z += Random.Range(-spreadAmount, spreadAmount);
+        }
+        
+        if (Physics.Raycast(fpsCam.transform.position, dir, out hit, range))
         {
             // Instantiate bullet trail
             TrailRenderer trail = Instantiate(bulletTrail, gunPos.position, Quaternion.identity);

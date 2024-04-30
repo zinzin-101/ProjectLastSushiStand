@@ -5,10 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class StageChanger : MonoBehaviour
 {
+    private SceneIndexManager sceneIndexManager;
+
+    private void Awake()
+    {
+        sceneIndexManager = FindObjectOfType<SceneIndexManager>();
+    }
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.TryGetComponent(out PlayerMovement plrScript))
         {
+            int lastSceneIndex = sceneIndexManager.GetLastSceneIndex();
+            int nextSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            sceneIndexManager.SetLastSceneIndex(nextSceneIndex);
+
             if (SceneManager.GetActiveScene().buildIndex < 3)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -17,9 +27,8 @@ public class StageChanger : MonoBehaviour
             {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                SceneManager.LoadScene("Main Menu");
+                SceneManager.LoadScene("NewMainMenu");
             }
-            
         }
     }
 }

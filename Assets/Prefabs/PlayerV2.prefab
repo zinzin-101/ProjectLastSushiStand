@@ -158,7 +158,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   ceilingCheck: {fileID: 7891677182135578820}
-  lurchTimer: 0.1
+  lurchTimer: 0.075
   frontCheckAbove: {fileID: 2214504331199333743}
   frontCheckBelow: {fileID: 3317778347284793180}
   vaultSpeed: 25
@@ -169,13 +169,13 @@ MonoBehaviour:
     m_Bits: 128
   defaultWallrunGravity: 0
   wallHangGravity: -5
-  wallrunSpeed: 10
-  wallJumpBoost: 5
-  wallrunTimer: 2.5
+  wallrunSpeed: 12
+  wallJumpBoost: 2
+  wallrunTimer: 1.5
   wallJumpBoostWindow: 0.15
   wallJumpMaintainSpeedWindow: 0.15
   playerCamera: {fileID: 0}
-  specialFov: 110
+  specialFov: 100
   cameraTransitionTime: 5
   wallrunCamTiltAmount: 15
   fovLimit: 120

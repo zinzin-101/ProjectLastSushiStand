@@ -10,8 +10,5 @@ public class MainMenuController : MonoBehaviour
         SceneManager.LoadScene("scene_1");
     }
 
-    public void QuitButton()
-    {
-        Application.Quit();
-    }
+   
 }

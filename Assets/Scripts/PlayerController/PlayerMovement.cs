@@ -457,9 +457,9 @@ public class PlayerMovement : MonoBehaviour
         {
             ExitWallRun();
 
-            movement.x += input.x * (wallJumpBoost / 4.0f);
-            movement.z += input.z * (wallJumpBoost / 4.0f);
-            movement += onBackWall ? wallNormal * 5f : wallNormal * 2.5f;
+            movement.x += input.x * wallJumpBoost;
+            movement.z += input.z * wallJumpBoost;
+            movement += wallNormal * 2.5f;
 
             if (wallrunTimer - wallrunTimerLeft <= wallJumpBoostWindow)
             {
