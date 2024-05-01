@@ -565,7 +565,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isCrouching)
         {
-            IncreaseSpeed(wallJumpBoost / 2f);
+            speed *= 0.8f;
             movement += wallNormal;
             return;
         }      
