@@ -47,17 +47,18 @@ public class UIScript : MonoBehaviour
             RestartController.Active();
         }
 
-        
-
-        switch (gunScript.IsReloading)
+        if (gunScript != null)
         {
-            case true:
-                ammoText.text = "Ammo: Reloading /" + gunScript.MaxAmmo;
-                break;
-            case false:
-                ammoText.text = "Ammo: " + gunScript.AmmoCount + "/" + gunScript.MaxAmmo;
-                break;
-        }
+            switch (gunScript.IsReloading)
+            {
+                case true:
+                    ammoText.text = "Ammo: Reloading /" + gunScript.MaxAmmo;
+                    break;
+                case false:
+                    ammoText.text = "Ammo: " + gunScript.AmmoCount + "/" + gunScript.MaxAmmo;
+                    break;
+            }
+        }        
 
         healthText.text = "Health: " + playerStatus.PlayerHealth;
 
