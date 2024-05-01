@@ -19,4 +19,4 @@ MonoBehaviour:
   maxAmmo: 30
   reloadDelay: 2
   firerate: 0.1
-  spreadAmount: 0.0575
+  spreadAmount: 0.03
