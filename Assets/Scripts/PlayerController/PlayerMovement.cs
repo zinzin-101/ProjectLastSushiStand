@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform frontCheckAbove;
     [SerializeField] Transform frontCheckBelow;
     [SerializeField] float vaultSpeed = 25f;
+    private bool isVaulting;
 
     [Header("Sliding")]
     //[SerializeField] float maxSlideTimer;
@@ -174,11 +175,11 @@ public class PlayerMovement : MonoBehaviour
             WallRunningMovement();     
         }
 
-        //if (Mathf.Abs(controller.velocity.magnitude - prevSpeed) > 5f && controller.velocity.magnitude < prevSpeed)
-        //{
-        //    movement = new Vector3(0f, movement.y, 0f);
-        //    controller.Move(movement);
-        //}
+        if (isVaulting)
+        {
+            print("vaulting");
+            controller.Move(2f * sprintSpeed * Time.deltaTime * Vector3.up);
+        }
 
         controller.Move(movement * Time.deltaTime);
 
@@ -565,7 +566,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isCrouching)
         {
-            IncreaseSpeed(wallJumpBoost / 2f);
+            speed *= 0.8f;
             movement += wallNormal;
             return;
         }      
@@ -649,34 +650,19 @@ public class PlayerMovement : MonoBehaviour
             startPos.y += deltaDistance;
         }
         bool canVault = below && !Physics.Raycast(frontCheckAbove.position, Vector3.forward, 0.7f);
-        float angle = Vector3.Angle(input, Vector3.forward);
+        float angle = Vector3.Angle(input, transform.forward);
 
         if (canVault && angle <= 45f && !grounded && !isCrouching && ((Mathf.Abs(input.z) > 0.5f || Mathf.Abs(input.x) > 0.5f)))
         {
-            while (canVault)
+            if (isWallRunning)
             {
-                controller.Move(Vector3.up);
-                print("vaulting");
-                
-                below = false;
-                startPos = frontCheckBelow.position;
-                startPos.y += deltaDistance;
-                for (int i = 0; i < 50;  i++)
-                {
-                    bool check = Physics.Raycast(startPos, Vector3.forward, 0.7f, groundLayer) || Physics.Raycast(startPos, Vector3.forward, 0.7f, wallLayer);
-                    if (check)
-                    {
-                        below = true;
-                        break;
-                    }
-                    startPos.y += deltaDistance;
-                }
-
-                canVault = below && !Physics.Raycast(frontCheckAbove.position, Vector3.forward, 0.7f);
+                ExitWallRun();
             }
-            controller.Move(2f * Vector3.up);
-            controller.Move(10f * Time.deltaTime * Vector3.forward);
-            movement = Vector3.zero;
+            isVaulting = true;
+        }
+        else
+        {
+            isVaulting = false;
         }
     }
 
