@@ -49,4 +49,16 @@ public class UIScript : MonoBehaviour
         healthText.text = "Health: " + playerStatus.PlayerHealth;
 
     }
+
+    public void TriggerCritMarker()
+    {
+        //code to trigger red hit marker
+        print("crit"); // for debug
+    }
+
+    public void TriggerMarker()
+    {
+        //code to trigger normal hit marker
+        print("hit"); // for debug
+    }
 }

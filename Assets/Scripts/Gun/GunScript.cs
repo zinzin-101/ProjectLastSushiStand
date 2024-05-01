@@ -18,6 +18,8 @@ public class GunScript : MonoBehaviour
     [SerializeField] KeyCode swapGunKey = KeyCode.Q;
     [SerializeField] float recoilReductionScaling = 0.5f;
 
+    [SerializeField] UIScript ui;
+
     private Transform gunPos;
     private int damage;
     private float critMultiplier;
@@ -37,6 +39,8 @@ public class GunScript : MonoBehaviour
     private void Awake()
     {
         transform.parent.gameObject.TryGetComponent(out playerMovement);
+
+        ui = FindFirstObjectByType<UIScript>();
     }
 
     private void Start()
@@ -147,11 +151,20 @@ public class GunScript : MonoBehaviour
             if (hit.collider.gameObject.TryGetComponent(out EnemyHp enemyHp))
             {
                 enemyHp.TakeDamage(damage);
+                
+                if (ui != null)
+                {
+                    ui.TriggerMarker();
+                }
             }
             if (hit.collider.gameObject.TryGetComponent(out HeadEnemy headEnemy))
             {
                 //headEnemy.Headshot(damage);
                 headEnemy.Headshot((int)((float)damage * critMultiplier));
+                if (ui != null)
+                {
+                    ui.TriggerCritMarker();
+                }
                 //enemyHp.TakeDamage((int)((float)damage * critMultiplier));
             }
 
