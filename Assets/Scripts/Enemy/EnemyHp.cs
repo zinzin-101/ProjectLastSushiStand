@@ -7,7 +7,7 @@ namespace Enemy
 
     public class EnemyHp : MonoBehaviour
     {
-        [SerializeField] private int HP = 3;
+        [SerializeField] private int HP = 10;
         public int MaxHp => HP;
         [SerializeField] private GameObject enemy;
         void Start()

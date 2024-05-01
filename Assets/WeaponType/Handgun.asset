@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   damage: 2
-  critMultiplier: 5
+  critMultiplier: 2
   range: 100
   maxAmmo: 12
   reloadDelay: 1.5
   firerate: 0.2
+  spreadAmount: 0
