@@ -489,13 +489,13 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 currentMovingDirection = new Vector3(velocityVec.x, 0f, velocityVec.z);
             float angleChange = Vector3.Angle(input, currentMovingDirection);
-            float jumpSpeed = walkSpeed * 0.25f;
-            if (angleChange > 90f)
+            float jumpSpeed = sprintSpeed * 0.5f;
+            if (angleChange > 185f)
             {
                 movement.x = input.x * jumpSpeed;
                 movement.z = input.z * jumpSpeed;
                 speed = jumpSpeed;
-                movement = Vector3.ClampMagnitude(movement, walkSpeed);
+                movement = Vector3.ClampMagnitude(movement, jumpSpeed);
             }
             else
             {
