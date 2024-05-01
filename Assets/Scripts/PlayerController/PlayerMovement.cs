@@ -177,7 +177,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isVaulting)
         {
-            print("vaulting");
+            //print("vaulting");
             controller.Move(2f * sprintSpeed * Time.deltaTime * Vector3.up);
         }
 
