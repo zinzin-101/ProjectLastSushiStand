@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-using UnityEditor.SearchService;
+//using UnityEditor.SearchService;
 
 namespace SlimUI.ModernMenu{
 	public class UIMenuManager : MonoBehaviour {
@@ -287,13 +287,15 @@ namespace SlimUI.ModernMenu{
 				loadingBar.value = progress;
 
 				if (operation.progress >= 0.9f && waitForInput){
-					loadPromptText.text = "Press " + userPromptKey.ToString().ToUpper() + " to continue";
-					loadingBar.value = 1;
+                    loadPromptText.text = "Press any key to continue";
+                    loadingBar.value = 1;
 
-					if (Input.GetKeyDown(userPromptKey)){
-						operation.allowSceneActivation = true;
-					}
-                }else if(operation.progress >= 0.9f && !waitForInput){
+                    if (Input.anyKey)
+                    {
+                        operation.allowSceneActivation = true;
+                    }
+                }
+                else if(operation.progress >= 0.9f && !waitForInput){
 					operation.allowSceneActivation = true;
 				}
 
