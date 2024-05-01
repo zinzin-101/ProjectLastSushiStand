@@ -10,11 +10,13 @@ public class GunScript : MonoBehaviour
     [SerializeField] private ParticleSystem ShootingSystem;
     [SerializeField] private ParticleSystem ImpactParticleSystem;
     [SerializeField] private TrailRenderer bulletTrail;
+    [SerializeField] private PlayerMovement playerMovement;
 
     [SerializeField] List<GunObj> gunList;
     private int currentIndex, prevIndex;
 
     [SerializeField] KeyCode swapGunKey = KeyCode.Q;
+    [SerializeField] float recoilReductionScaling = 0.5f;
 
     private Transform gunPos;
     private int damage;
@@ -32,6 +34,10 @@ public class GunScript : MonoBehaviour
     private bool isReloading;
     public bool IsReloading => isReloading;
 
+    private void Awake()
+    {
+        transform.parent.gameObject.TryGetComponent(out playerMovement);
+    }
 
     private void Start()
     {
@@ -40,6 +46,7 @@ public class GunScript : MonoBehaviour
 
         foreach (GunObj gun in gunList)
         {
+            gun.InitAnimator();
             gun.SetCurrentAmmo(gun.GunInfo.maxAmmo);
             gun.GunModel.SetActive(false);
         }
@@ -101,11 +108,32 @@ public class GunScript : MonoBehaviour
 
     void Fire()
     {
+        gunList[currentIndex].TriggerFireAnim();
+
         RaycastHit hit;
         ParticleSystem effect = Instantiate(ShootingSystem, gunPos.position, Quaternion.identity);
         effect.transform.parent = this.transform;
         effect.Play();
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+
+        Vector3 dir = fpsCam.transform.forward;
+        float spreadAmount = gunList[currentIndex].GunInfo.spreadAmount;
+
+        if (playerMovement != null)
+        {
+            if (playerMovement.IsCrouching)
+            {
+                spreadAmount *= recoilReductionScaling;
+            }
+        }
+
+        if (spreadAmount != 0f)
+        {
+            dir.x += Random.Range(-spreadAmount, spreadAmount);
+            dir.y += Random.Range(-spreadAmount, spreadAmount);
+            dir.z += Random.Range(-spreadAmount, spreadAmount);
+        }
+        
+        if (Physics.Raycast(fpsCam.transform.position, dir, out hit, range))
         {
             // Instantiate bullet trail
             TrailRenderer trail = Instantiate(bulletTrail, gunPos.position, Quaternion.identity);

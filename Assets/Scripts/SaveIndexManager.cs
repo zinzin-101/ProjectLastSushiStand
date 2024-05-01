@@ -6,9 +6,17 @@ public class SceneIndexManager : MonoBehaviour
 
     private int lastSceneIndex;
 
+    [SerializeField] TimerScript timer;
+
+    private void Awake()
+    {
+        timer = GetComponent<TimerScript>();
+    }
+
     private void Start()
     {
         LoadLastSceneIndex();
+        GameManager.Instance.UpdateEnemyCount();
     }
 
     private void LoadLastSceneIndex()
@@ -26,5 +34,8 @@ public class SceneIndexManager : MonoBehaviour
         lastSceneIndex = sceneIndex;
         PlayerPrefs.SetInt(LAST_SCENE_INDEX_KEY, lastSceneIndex);
         PlayerPrefs.Save();
+
+        timer.ResetTimer();
+        timer.SetActivateTimer(true);
     }
 }

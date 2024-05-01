@@ -75,7 +75,7 @@ PrefabInstance:
     - target: {fileID: 36659395057231289, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
       propertyPath: meleeObj
       value: 
-      objectReference: {fileID: 7585059412787122018, guid: ad49fb22575edf14bae219d87bb6ac6b, type: 3}
+      objectReference: {fileID: 2935618969336062652, guid: eb0b7b0563288444fae1e76bca5d0d5e, type: 3}
     - target: {fileID: 36659395057231289, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
       propertyPath: meleeTransform
       value: 
@@ -128,6 +128,10 @@ PrefabInstance:
       propertyPath: fpsCam
       value: 
       objectReference: {fileID: 828829006236846372}
+    - target: {fileID: 4181561773542320040, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
+      propertyPath: playerMovement
+      value: 
+      objectReference: {fileID: 7011753401626838521}
     - target: {fileID: 4181561773542320040, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
       propertyPath: gunList.Array.data[0].GunPos
       value: 
@@ -327,6 +331,14 @@ PrefabInstance:
     - target: {fileID: 8460673028657867640, guid: 1747933afeb8b4345b540bbb51ee8c16, type: 3}
       propertyPath: m_Name
       value: Handgun
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088697150846611906, guid: 1747933afeb8b4345b540bbb51ee8c16, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.4710007
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088697150846611906, guid: 1747933afeb8b4345b540bbb51ee8c16, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.6949999
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

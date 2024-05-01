@@ -1,6 +1,5 @@
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
@@ -39,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isSprinting;
     private bool isCrouching;
+    public bool IsCrouching => isCrouching;
     private bool isSliding;
     private bool isWallRunning;
 
@@ -73,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float wallJumpBoostWindow = 0.4f;
     [SerializeField] float wallJumpMaintainSpeedWindow = 0.25f;
     private float wallrunTimerLeft;
-    private bool onRightWall, onLeftWall, onBackWall;
+    private bool onRightWall, onLeftWall; //, onBackWall;
     private bool onWall;
     private RaycastHit leftWallHit, rightWallhit;//, backWallhit;
     private RaycastHit wallHit;
@@ -87,9 +87,9 @@ public class PlayerMovement : MonoBehaviour
 
     private float lurchTimeLeft;
 
-    private float currentYPos;
-    private float lastYPos;
-    private float yVel;
+    private Vector3 currentPos;
+    private Vector3 lastPos;
+    private Vector3 velocityVec;
 
     [Header("Player Camera")]
     [SerializeField] Camera playerCamera;
@@ -107,14 +107,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] bool allowDoubleJump = true;
     [SerializeField] bool allowWallrun = true;
 
-    private SceneIndexManager sceneIndexManager;
-
-    private void Awake()
-    {
-        sceneIndexManager = FindObjectOfType<SceneIndexManager>();
-        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        sceneIndexManager.SetLastSceneIndex(nextSceneIndex);
-    }
     private void Start()
     {
         TryGetComponent(out controller);
@@ -133,8 +125,8 @@ public class PlayerMovement : MonoBehaviour
 
         fovSpeedScaler = (sprintSpeed + wallrunSpeed) / 2f;
 
-        currentYPos = transform.position.y;
-        lastYPos = currentYPos;
+        currentPos = transform.position;
+        lastPos = currentPos;
     }
 
     private void Update()
@@ -193,11 +185,11 @@ public class PlayerMovement : MonoBehaviour
         //print(controller.velocity.magnitude);
         //print(controller.velocity);
 
-        currentYPos = transform.position.y;
-        yVel = (currentYPos - lastYPos) / Time.deltaTime;
-        lastYPos = currentYPos;
+        currentPos = transform.position;
+        velocityVec = (currentPos - lastPos) / Time.deltaTime;
+        lastPos = currentPos;
 
-        print(speed);
+        //print(speed);
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
@@ -379,14 +371,14 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        if (yVel < -1f)
+        if (velocityVec.y < -1f)
         {
             print("in");
-            speed += slideSpeedDown * (-yVel / 3f) * Time.deltaTime;
+            speed += slideSpeedDown * (-velocityVec.y / 3f) * Time.deltaTime;
         }
-        else if (yVel > 1f)
+        else if (velocityVec.y > 1f)
         {
-            speed -= slideSpeedDown * (yVel / 6f) * Time.deltaTime;
+            speed -= slideSpeedDown * (velocityVec.y / 6f) * Time.deltaTime;
         }
 
         movement += forwardDirection;
@@ -466,9 +458,9 @@ public class PlayerMovement : MonoBehaviour
         {
             ExitWallRun();
 
-            movement.x += input.x * (wallJumpBoost / 4.0f);
-            movement.z += input.z * (wallJumpBoost / 4.0f);
-            movement += onBackWall ? wallNormal * 5f : wallNormal * 2.5f;
+            movement.x += input.x * wallJumpBoost;
+            movement.z += input.z * wallJumpBoost;
+            movement += wallNormal * 2.5f;
 
             if (wallrunTimer - wallrunTimerLeft <= wallJumpBoostWindow)
             {
@@ -495,13 +487,15 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (!grounded)
         {
-            Vector3 currentMovingDirection = new Vector3(controller.velocity.x, 0f, controller.velocity.z);
+            Vector3 currentMovingDirection = new Vector3(velocityVec.x, 0f, velocityVec.z);
             float angleChange = Vector3.Angle(input, currentMovingDirection);
             float jumpSpeed = walkSpeed * 0.25f;
             if (angleChange > 90f)
             {
                 movement.x = input.x * jumpSpeed;
                 movement.z = input.z * jumpSpeed;
+                speed = jumpSpeed;
+                movement = Vector3.ClampMagnitude(movement, walkSpeed);
             }
             else
             {
@@ -621,7 +615,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void DecreaseSpeedOvertime(float reduceSpeed)
     {
-        if (yVel > -0.25f)
+        if (velocityVec.y > -0.25f)
         {
             speed -= reduceSpeed * Time.deltaTime;
         }
