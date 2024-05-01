@@ -36,7 +36,7 @@ public class UIController : MonoBehaviour
     public void GotoMainMenu()
     {
         Time.timeScale = 1.0f;
-        SceneManager.LoadScene("NewMainMenu");
+        SceneManager.LoadScene(0);
     }
 
     public void Restart()

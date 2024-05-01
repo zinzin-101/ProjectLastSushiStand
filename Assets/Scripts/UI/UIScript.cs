@@ -11,8 +11,19 @@ public class UIScript : MonoBehaviour
     [SerializeField] GunScript gunScript;
     [SerializeField] TMP_Text ammoText;
 
+    [SerializeField] TimerScript timerScript;
+    [SerializeField] TMP_Text timerText;
+
     [SerializeField] UIController UIcontroller;
     [SerializeField] RestartController RestartController;
+
+    [SerializeField] GameObject critMarker;
+    [SerializeField] GameObject hitMarker;
+
+    private void Awake()
+    {
+        timerScript = FindFirstObjectByType<TimerScript>();
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -48,17 +59,37 @@ public class UIScript : MonoBehaviour
 
         healthText.text = "Health: " + playerStatus.PlayerHealth;
 
+        int minute = Mathf.FloorToInt(timerScript.CurrentTime / 60);
+        int second = Mathf.FloorToInt(timerScript.CurrentTime % 60);
+        timerText.text = string.Format("{0:00}:{1:00}",minute,second);
+       
     }
 
     public void TriggerCritMarker()
     {
-        //code to trigger red hit marker
+        StartCoroutine(critHit(true));
         print("crit"); // for debug
     }
 
     public void TriggerMarker()
     {
-        //code to trigger normal hit marker
+        StartCoroutine(critHit(false));
         print("hit"); // for debug
+    }
+
+    IEnumerator critHit(bool isCrit)
+    {
+        if(isCrit)
+        {
+            critMarker.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            critMarker.SetActive(false);
+        }else
+        {
+            hitMarker.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            hitMarker.SetActive(false);
+        }
+        
     }
 }
