@@ -70,17 +70,17 @@ public class UIScript : MonoBehaviour
 
     public void TriggerCritMarker()
     {
-        StartCoroutine(critHit(true));
-        print("crit"); // for debug
+        StartCoroutine(CritHit(true));
+        //print("crit");
     }
 
     public void TriggerMarker()
     {
-        StartCoroutine(critHit(false));
-        print("hit"); // for debug
+        StartCoroutine(CritHit(false));
+        //print("hit");
     }
 
-    IEnumerator critHit(bool isCrit)
+    IEnumerator CritHit(bool isCrit)
     {
         if(isCrit)
         {
@@ -94,5 +94,18 @@ public class UIScript : MonoBehaviour
             hitMarker.SetActive(false);
         }
         
+    }
+
+    public void TriggerDamageDirection(float angle)
+    {
+        print("angle = " + angle);
+        StartCoroutine(DamageIndicator(angle));
+    }
+
+    IEnumerator DamageIndicator(float angle)
+    {
+        //CODE -- show indicator that rotate with angle
+        yield return new WaitForSeconds(0.75f); // can modify to any
+        //CODE -- hide indicator
     }
 }

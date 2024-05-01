@@ -6,6 +6,14 @@ public class BulletEnemy : MonoBehaviour
 {
     [SerializeField] private float speed = 1;
     [SerializeField] private float lifeTime = 5;
+    private Vector3 origin;
+    public Vector3 Origin => origin;
+
+    private void Start()
+    {
+        origin = transform.position;
+    }
+
     void Update()
     {
         lifeTime -= Time.deltaTime;
@@ -22,7 +30,7 @@ public class BulletEnemy : MonoBehaviour
            other.gameObject.layer == LayerMask.NameToLayer("Wall") ||
            other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            Debug.Log("hit");
+            //Debug.Log("hit");
             Destroy(gameObject);
         }
     }

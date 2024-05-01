@@ -6,6 +6,7 @@ using UnityEngine;
 public class DamageToPlayer : MonoBehaviour
 {
     [SerializeField] int damage = 1;
+    [SerializeField] BulletEnemy bullet;
     //[SerializeField] PlayerStatus PlayerHp;
 
     private void Awake()
@@ -16,7 +17,7 @@ public class DamageToPlayer : MonoBehaviour
     {
         if (col.TryGetComponent(out PlayerStatus PlayerHp))
         {
-            PlayerHp.TakeDamage(damage);
+            PlayerHp.TakeDamage(damage, bullet.Origin);
         }
 
     }
