@@ -23,6 +23,8 @@ public class UIScript : MonoBehaviour
     private void Awake()
     {
         timerScript = FindFirstObjectByType<TimerScript>();
+        playerStatus = FindFirstObjectByType<PlayerStatus>();
+        gunScript = FindFirstObjectByType<GunScript>();
     }
     private void Update()
     {
