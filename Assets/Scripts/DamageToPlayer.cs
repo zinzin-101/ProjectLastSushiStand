@@ -6,15 +6,15 @@ using UnityEngine;
 public class DamageToPlayer : MonoBehaviour
 {
     [SerializeField] int damage = 1;
-    [SerializeField] PlayerStatus PlayerHp;
+    //[SerializeField] PlayerStatus PlayerHp;
 
     private void Awake()
     {
-        PlayerHp = FindAnyObjectByType<PlayerStatus>();
+        //PlayerHp = FindAnyObjectByType<PlayerStatus>();
     }
     private void OnTriggerEnter(Collider col)
     {
-        if (col.CompareTag("Player"))
+        if (col.TryGetComponent(out PlayerStatus PlayerHp))
         {
             PlayerHp.TakeDamage(damage);
         }

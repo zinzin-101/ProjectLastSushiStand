@@ -373,7 +373,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (velocityVec.y < -1f)
         {
-            print("in");
             speed += slideSpeedDown * (-velocityVec.y / 3f) * Time.deltaTime;
         }
         else if (velocityVec.y > 1f)
@@ -636,28 +635,47 @@ public class PlayerMovement : MonoBehaviour
     private void CheckVault()
     {
         bool below = false;
-        float distanceChange = (frontCheckAbove.position.y - frontCheckBelow.position.y) / 100f;
-        Vector3 startPos = frontCheckAbove.position;
-        startPos.y += distanceChange;
-        for (int i = 0; i < 100;  i++)
+        float deltaDistance = (frontCheckAbove.position.y - frontCheckBelow.position.y) / 50f;
+        Vector3 startPos = frontCheckBelow.position;
+        startPos.y += deltaDistance;
+        for (int i = 0; i < 50;  i++)
         {
-            bool check = Physics.Raycast(startPos, Vector3.forward, 0.7f);
+            bool check = Physics.Raycast(startPos, Vector3.forward, 0.7f, groundLayer) || Physics.Raycast(startPos, Vector3.forward, 0.7f, wallLayer);
             if (check)
             {
                 below = true;
                 break;
             }
+            startPos.y += deltaDistance;
         }
         bool canVault = below && !Physics.Raycast(frontCheckAbove.position, Vector3.forward, 0.7f);
         float angle = Vector3.Angle(input, Vector3.forward);
 
-        if (canVault && angle <= 15f && !grounded && !isCrouching && ((Mathf.Abs(input.z) > 0.5f || Mathf.Abs(input.x) > 0.5f)))
+        if (canVault && angle <= 45f && !grounded && !isCrouching && ((Mathf.Abs(input.z) > 0.5f || Mathf.Abs(input.x) > 0.5f)))
         {
             while (canVault)
             {
                 controller.Move(Vector3.up);
-                canVault = Physics.Raycast(frontCheckBelow.position, Vector3.forward, 0.7f) && !Physics.Raycast(frontCheckAbove.position, Vector3.forward, 0.7f);
+                print("vaulting");
+                
+                below = false;
+                startPos = frontCheckBelow.position;
+                startPos.y += deltaDistance;
+                for (int i = 0; i < 50;  i++)
+                {
+                    bool check = Physics.Raycast(startPos, Vector3.forward, 0.7f, groundLayer) || Physics.Raycast(startPos, Vector3.forward, 0.7f, wallLayer);
+                    if (check)
+                    {
+                        below = true;
+                        break;
+                    }
+                    startPos.y += deltaDistance;
+                }
+
+                canVault = below && !Physics.Raycast(frontCheckAbove.position, Vector3.forward, 0.7f);
             }
+            controller.Move(2f * Vector3.up);
+            controller.Move(10f * Time.deltaTime * Vector3.forward);
             movement = Vector3.zero;
         }
     }
