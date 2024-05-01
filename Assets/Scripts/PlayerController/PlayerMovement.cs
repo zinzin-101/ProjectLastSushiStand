@@ -652,7 +652,7 @@ public class PlayerMovement : MonoBehaviour
         bool canVault = below && !Physics.Raycast(frontCheckAbove.position, Vector3.forward, 0.7f);
         float angle = Vector3.Angle(input, transform.forward);
 
-        if (canVault && angle <= 45f && !grounded && !isCrouching && ((Mathf.Abs(input.z) > 0.5f || Mathf.Abs(input.x) > 0.5f)))
+        if (canVault && angle <= 15f && !grounded && !isCrouching && ((Mathf.Abs(input.z) > 0.5f || Mathf.Abs(input.x) > 0.5f)))
         {
             if (isWallRunning)
             {
