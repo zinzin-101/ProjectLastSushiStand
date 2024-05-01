@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEditor.SearchService;
 
 namespace SlimUI.ModernMenu{
 	public class UIMenuManager : MonoBehaviour {
@@ -144,10 +145,11 @@ namespace SlimUI.ModernMenu{
 				StartCoroutine(LoadAsynchronously(scene));
 			}
 		}
-		public void LoadSave()
+        public void LoadSave()
 		{
-			int lastSceneIndex = sceneIndexManager.GetLastSceneIndex();
-			SceneManager.LoadScene(lastSceneIndex);
+            
+            int lastSceneIndex = sceneIndexManager.GetLastSceneIndex();
+			StartCoroutine(LoadAsynchronouslyInt(lastSceneIndex));
         }
 
 		public void NewGame()
@@ -298,5 +300,36 @@ namespace SlimUI.ModernMenu{
 				yield return null;
 			}
 		}
-	}
+
+        IEnumerator LoadAsynchronouslyInt(int sceneName)
+        { // scene name is just the name of the current scene being loaded
+            AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+            operation.allowSceneActivation = false;
+            mainCanvas.SetActive(false);
+            loadingMenu.SetActive(true);
+
+            while (!operation.isDone)
+            {
+                float progress = Mathf.Clamp01(operation.progress / .95f);
+                loadingBar.value = progress;
+
+                if (operation.progress >= 0.9f && waitForInput)
+                {
+                    loadPromptText.text = "Press " + userPromptKey.ToString().ToUpper() + " to continue";
+                    loadingBar.value = 1;
+
+                    if (Input.GetKeyDown(userPromptKey))
+                    {
+                        operation.allowSceneActivation = true;
+                    }
+                }
+                else if (operation.progress >= 0.9f && !waitForInput)
+                {
+                    operation.allowSceneActivation = true;
+                }
+
+                yield return null;
+            }
+        }
+    }
 }

@@ -19,7 +19,7 @@ public class StageChanger : MonoBehaviour
             int nextSceneIndex = SceneManager.GetActiveScene().buildIndex;
             sceneIndexManager.SetLastSceneIndex(nextSceneIndex);
 
-            if (SceneManager.GetActiveScene().buildIndex < 3)
+            if (SceneManager.GetActiveScene().buildIndex < 4)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
