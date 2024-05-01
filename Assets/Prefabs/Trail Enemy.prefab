@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  PlayerHp: {fileID: 0}
+  bullet: {fileID: 6552059242656385331}
 --- !u!65 &1653543151944706547
 BoxCollider:
   m_ObjectHideFlags: 0
