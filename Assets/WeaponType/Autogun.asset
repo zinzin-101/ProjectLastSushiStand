@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Autogun
   m_EditorClassIdentifier: 
   type: 1
-  damage: 1
-  critMultiplier: 2
+  damage: 2
+  critMultiplier: 1.5
   range: 75
   maxAmmo: 30
   reloadDelay: 2
