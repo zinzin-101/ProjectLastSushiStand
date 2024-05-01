@@ -268,11 +268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 4380904635434054175}
   gunPoint: {fileID: 4380904635434054175}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
   spread: {x: 0.1, y: 0.1, z: 0.1}
-  bulletTrail: {fileID: 2922578386348580161, guid: 430447bfff0b47a4f87930cbb03fa36b, type: 3}
   MaxBullet: 7
   reloadtime: 2
   player: {fileID: 0}
@@ -658,7 +654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1abff7f1b9c93464b860f85f3acb6060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 3
+  HP: 10
   enemy: {fileID: 8109965990127184921}
 --- !u!1 &5543709812924055344
 GameObject:

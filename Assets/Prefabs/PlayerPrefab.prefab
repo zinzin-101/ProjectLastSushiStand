@@ -188,6 +188,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6807725781802973067, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
+      propertyPath: maxPlayerHealth
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7986217047452643224, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
       propertyPath: airSpeed
       value: 0.2
