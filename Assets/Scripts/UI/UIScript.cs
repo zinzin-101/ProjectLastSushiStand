@@ -20,11 +20,17 @@ public class UIScript : MonoBehaviour
     [SerializeField] GameObject critMarker;
     [SerializeField] GameObject hitMarker;
 
+    [SerializeField] GameObject warningText;
+    [SerializeField] blockerController blockerController;
+    [SerializeField] Map3BlockerController map3BlockerController;
+
     private void Awake()
     {
         timerScript = FindFirstObjectByType<TimerScript>();
         playerStatus = FindFirstObjectByType<PlayerStatus>();
         gunScript = FindFirstObjectByType<GunScript>();
+        blockerController = FindFirstObjectByType<blockerController>();
+        map3BlockerController = FindFirstObjectByType<Map3BlockerController>();
     }
     private void Update()
     {
@@ -59,7 +65,10 @@ public class UIScript : MonoBehaviour
                     break;
             }
         }        
-
+        if(blockerController.isCollide == true||map3BlockerController.isCollide == true)
+        {
+            StartCoroutine(warnPlayer(true));
+        }
         healthText.text = "Health: " + playerStatus.PlayerHealth;
 
         int minute = Mathf.FloorToInt(timerScript.CurrentTime / 60);
@@ -107,5 +116,14 @@ public class UIScript : MonoBehaviour
         //CODE -- show indicator that rotate with angle
         yield return new WaitForSeconds(0.75f); // can modify to any
         //CODE -- hide indicator
+    }
+    IEnumerator warnPlayer(bool check)
+    {
+        if (check)
+        {
+            warningText.SetActive(true) ;
+            yield return new WaitForSeconds(5);
+            warningText.SetActive(false);
+        }
     }
 }
