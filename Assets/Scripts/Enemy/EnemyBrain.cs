@@ -1,9 +1,11 @@
-using System;
+
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SocialPlatforms;
+using UnityEngine.UIElements;
 
 namespace Enemy
 {
@@ -37,6 +39,7 @@ namespace Enemy
         [SerializeField] private float maxFollowTime;
         private float followTime;
         [SerializeField] private int speedMovement = 8;
+        bool check = true;
 
 
         private void Awake()
@@ -57,7 +60,7 @@ namespace Enemy
 
         private void FixedUpdate()
         {
-            if (isPlayerNear() || seePlayer)
+            if (isPlayerNear())
             {
                 inRange = Vector3.Distance(transform.position, player.transform.position) <= followDistance;
                 if (inRange)
@@ -98,6 +101,7 @@ namespace Enemy
                 }
                 else
                 {
+                    //enemyRef.agent.stoppingDistance = shootingDistance;
                     UpdatPath();
                     direction.LookAtTarget();
                     if (inRange = Vector3.Distance(transform.position, player.transform.position) <= shootingDistance)
@@ -110,33 +114,59 @@ namespace Enemy
             {
                 UpdatPath();
             }
-            
 
+            Debug.Log(enemyRef.agent.pathEndPosition);
         }
         
 
 
         private void UpdatPath()
         {
-            
+
             if(Time.time >= pathUpdataDeadline)
             {
+                
                 if (isPlayerNear())
                 {
-                    pathUpdataDeadline = Time.time + enemyRef.pathUpdateDelay;
-                    enemyRef.agent.stoppingDistance = shootingDistance;
-                    enemyRef.agent.SetDestination(player.transform.position);
+                    if (ramdomNext() && Vector3.Distance(transform.position, player.transform.position) <= shootingDistance && check)
+                    {
+                        float x = Random.Range(-2.0f, 2.0f);
+                        float z = Random.Range(-2.0f, 2.0f);
+                        enemyRef.agent.stoppingDistance = 0;
+                        Vector3 pos = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
+                        Debug.Log("Enemy Pos" + transform.position);
+                        Debug.Log("target RandomPos" + pos);
+                        enemyRef.agent.SetDestination(pos);
+                        check = false;
+                    }
+
+                    else if(check)
+                    {
+                        pathUpdataDeadline = Time.time + enemyRef.pathUpdateDelay;
+                        enemyRef.agent.SetDestination(player.transform.position);
+                        Debug.Log("target Player");
+                    }
                 }
+
                 else
                 { 
                     enemyRef.agent.stoppingDistance = 0;
                     enemyRef.agent.SetDestination(center.position);
+                    check = true;
+                    Debug.Log("target Center");
                 }
+
+                
+                
                 
                 //Debug.Log("Path Updata");
                 //Debug.Log(enemyRef.agent.destination);
             }
-            
+            if (Vector3.Distance(transform.position, enemyRef.agent.pathEndPosition) <= 1.5f)
+            {
+                Debug.Log("New End Pos");
+                check = true;
+            }
         }
 
         private void GoToCover()
@@ -182,19 +212,47 @@ namespace Enemy
                 followTime = maxFollowTime;
                 seePlayer = true;
                 return true;
-    
+                
             }
             if (followTime > 0)
             {
+                seePlayer = true;
                 return true;
+                
             }
 
-            
             seePlayer = false;
             return false;
             
 
         }
+
+        private bool isSeePlayer()
+        {
+            Vector3 dir = player.transform.position - transform.position;
+            if(Mathf.Abs(Vector3.Angle(transform.forward, dir)) < 65)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool ramdomNext()
+        {
+            int random = Random.Range(0, 100);
+            
+            if (random >= 50)
+            {
+                    return true;
+            }
+
+            return false;
+        }
+
+
 
         private void OnDrawGizmos()
         {
