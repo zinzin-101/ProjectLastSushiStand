@@ -22,7 +22,7 @@ public class TimerScript : MonoBehaviour
             currentTime += Time.deltaTime;
         }
 
-        print("time: " + currentTime);
+        //print("time: " + currentTime);
     }
 
     public void ResetTimer()
