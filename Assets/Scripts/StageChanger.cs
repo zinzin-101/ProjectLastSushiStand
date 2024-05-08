@@ -7,15 +7,22 @@ public class StageChanger : MonoBehaviour
 {
     private SceneIndexManager sceneIndexManager;
 
+    private bool win = false;
+
+    public bool Win => win;
+
     private void Awake()
     {
         sceneIndexManager = FindObjectOfType<SceneIndexManager>();
+        win = false;
     }
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.TryGetComponent(out PlayerMovement plrScript))
         {
-            int lastSceneIndex = sceneIndexManager.GetLastSceneIndex();
+            win = true;
+
+            /*
             int nextSceneIndex = SceneManager.GetActiveScene().buildIndex;
             sceneIndexManager.SetLastSceneIndex(nextSceneIndex);
 
@@ -29,6 +36,7 @@ public class StageChanger : MonoBehaviour
                 Cursor.visible = true;
                 SceneManager.LoadScene("NewMainMenu");
             }
+            */
         }
     }
 }

@@ -144,7 +144,15 @@ namespace SlimUI.ModernMenu{
 				StartCoroutine(LoadAsynchronously(scene));
 			}
 		}
+<<<<<<< Updated upstream
 		public void LoadSave()
+=======
+        public void LoadSceneInt(int scene)
+        {
+            StartCoroutine(LoadAsynchronouslyInt(scene));
+        }
+        public void LoadSave()
+>>>>>>> Stashed changes
 		{
 			int lastSceneIndex = sceneIndexManager.GetLastSceneIndex();
 			SceneManager.LoadScene(lastSceneIndex);

@@ -13,6 +13,30 @@ public class UIScript : MonoBehaviour
 
     [SerializeField] UIController UIcontroller;
     [SerializeField] RestartController RestartController;
+<<<<<<< Updated upstream
+=======
+
+    [SerializeField] GameObject critMarker;
+    [SerializeField] GameObject hitMarker;
+
+    [SerializeField] GameObject warningText;
+    [SerializeField] blockerController blockerController;
+    [SerializeField] Map3BlockerController map3BlockerController;
+
+    [SerializeField] StageComplete stageCompleteScript;
+    [SerializeField] StageChanger stageChangerScript;
+
+    private void Awake()
+    {
+        timerScript = FindFirstObjectByType<TimerScript>();
+        playerStatus = FindFirstObjectByType<PlayerStatus>();
+        gunScript = FindFirstObjectByType<GunScript>();
+        blockerController = FindFirstObjectByType<blockerController>();
+        map3BlockerController = FindFirstObjectByType<Map3BlockerController>();
+        stageCompleteScript = FindAnyObjectByType<StageComplete>();
+        stageChangerScript = FindAnyObjectByType<StageChanger>();
+    }
+>>>>>>> Stashed changes
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -48,5 +72,66 @@ public class UIScript : MonoBehaviour
 
         healthText.text = "Health: " + playerStatus.PlayerHealth;
 
+<<<<<<< Updated upstream
+=======
+        int minute = Mathf.FloorToInt(timerScript.CurrentTime / 60);
+        int second = Mathf.FloorToInt(timerScript.CurrentTime % 60);
+        timerText.text = string.Format("{0:00}:{1:00}",minute,second);
+        if(stageChangerScript.Win == true)
+        {
+            stageCompleteScript.Active();
+            
+        }
+    }
+
+    public void TriggerCritMarker()
+    {
+        StartCoroutine(CritHit(true));
+        //print("crit");
+    }
+
+    public void TriggerMarker()
+    {
+        StartCoroutine(CritHit(false));
+        //print("hit");
+    }
+
+    IEnumerator CritHit(bool isCrit)
+    {
+        if(isCrit)
+        {
+            critMarker.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            critMarker.SetActive(false);
+        }else
+        {
+            hitMarker.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            hitMarker.SetActive(false);
+        }
+        
+    }
+
+    public void TriggerDamageDirection(float angle)
+    {
+        print("angle = " + angle);
+        StartCoroutine(DamageIndicator(angle));
+    }
+
+    IEnumerator DamageIndicator(float angle)
+    {
+        //CODE -- show indicator that rotate with angle
+        yield return new WaitForSeconds(0.75f); // can modify to any
+        //CODE -- hide indicator
+    }
+    IEnumerator warnPlayer(bool check)
+    {
+        if (check)
+        {
+            warningText.SetActive(true) ;
+            yield return new WaitForSeconds(5);
+            warningText.SetActive(false);
+        }
+>>>>>>> Stashed changes
     }
 }
