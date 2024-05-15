@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 7986217047452643224}
   - component: {fileID: 6807725781802973067}
   - component: {fileID: 36659395057231289}
+  - component: {fileID: 3619266458566544800}
   m_Layer: 0
   m_Name: PlayerV2
   m_TagString: Player
@@ -210,6 +211,29 @@ MonoBehaviour:
   meleeObj: {fileID: 3340675814889471990, guid: 6e302e902cefd99419946c002350bb92, type: 3}
   meleeTransform: {fileID: 0}
   meleeDelay: 0.5
+--- !u!136 &3619266458566544800
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1542349749260659275}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4041246482963684537
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,8 +460,10 @@ MonoBehaviour:
   - GunInfo: {fileID: 11400000, guid: a702ec280e1774148846098698f80810, type: 2}
     GunModel: {fileID: 0}
     GunPos: {fileID: 0}
+  activateIndex: 0101
   swapGunKey: 113
   recoilReductionScaling: 0.5
+  ui: {fileID: 0}
 --- !u!95 &928139268252835904
 Animator:
   serializedVersion: 5
