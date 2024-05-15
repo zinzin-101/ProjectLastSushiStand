@@ -34,7 +34,7 @@ public class UIScript : MonoBehaviour
 
     private void Awake()
     {
-        timerScript = FindFirstObjectByType<TimerScript>();
+        timerScript = FindObjectOfType<TimerScript>();
         playerStatus = FindFirstObjectByType<PlayerStatus>();
         gunScript = FindFirstObjectByType<GunScript>();
         blockerController = FindFirstObjectByType<blockerController>();
