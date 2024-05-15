@@ -8,6 +8,8 @@ public class PlayerMelee : MonoBehaviour
     [SerializeField] GameObject meleeObj;
     [SerializeField] Transform meleeTransform;
     
+
+
     [SerializeField] float meleeDelay;
     private bool canMelee;
     private float delayLeft;
@@ -24,6 +26,7 @@ public class PlayerMelee : MonoBehaviour
             canMelee = false;
             Instantiate(meleeObj, meleeTransform);
             SoundManager.PlaySound(SoundManager.Sound.Melee);
+            
         }
 
         if (!canMelee)

@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: meleeTransform
       value: 
       objectReference: {fileID: 1684555190764278104}
+    - target: {fileID: 36659395057231289, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
+      propertyPath: ImpactParticleSystem
+      value: 
+      objectReference: {fileID: 5088339112022350390, guid: c58f34d2178f5bb46b1cde6d324b092b, type: 3}
     - target: {fileID: 1542349749260659275, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
       propertyPath: m_Name
       value: Player

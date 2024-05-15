@@ -331,7 +331,19 @@ public class PlayerMovement : MonoBehaviour
         if (input.x != 0f)
         {
             movement.x += input.x * speed;
-            SoundManager.PlaySound(SoundManager.Sound.Walk);
+            if (isCrouching)
+            {
+                SoundManager.PlaySound(SoundManager.Sound.Walk);
+            }
+            else if (isSprinting)
+            {
+                SoundManager.PlaySound(SoundManager.Sound.Walk);
+            }
+            else
+            {
+                SoundManager.PlaySound(SoundManager.Sound.Walk);
+            }
+            
         }
         else
         {
