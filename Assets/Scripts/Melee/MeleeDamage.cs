@@ -7,6 +7,7 @@ public class MeleeDamage : MonoBehaviour
 {
     [SerializeField] float lifespan = 0.2f;
     [SerializeField] int meleeDamage = 10;
+    [SerializeField] ParticleSystem impactFX;
     //[SerializeField] float knockbackForce = 15f;
 
     void Start()
@@ -18,8 +19,9 @@ public class MeleeDamage : MonoBehaviour
     {
         if (col.gameObject.TryGetComponent(out EnemyHp enemyHp))
         {
-            print("collided");
+            //print("collided");
             enemyHp.TakeDamage(meleeDamage);
+            Instantiate(impactFX, enemyHp.transform);
 
             //col.gameObject.TryGetComponent(out Rigidbody rb);
             //if (rb != null)

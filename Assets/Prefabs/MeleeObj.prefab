@@ -120,4 +120,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifespan: 0.1
   meleeDamage: 1
-  knockbackForce: 1500
+  impactFX: {fileID: 5088339112022350390, guid: c58f34d2178f5bb46b1cde6d324b092b, type: 3}

@@ -15541,6 +15541,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: RestartController, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 6222911109315565637, guid: 3bd28bdb16f9a85418dc34aca8a68951, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7611316711242624748, guid: 3bd28bdb16f9a85418dc34aca8a68951, type: 3}
       propertyPath: gunScript
       value: 
