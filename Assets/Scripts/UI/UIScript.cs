@@ -75,10 +75,10 @@ public class UIScript : MonoBehaviour
                     break;
             }
         }
-        if (blockerController.isCollide == true)
-        {
-            StartCoroutine(warnPlayer());
-        }
+        //if (blockerController.isCollide == true)
+        //{
+        //    StartCoroutine(warnPlayer());
+        //}
         healthText.text = "Health: " + playerStatus.PlayerHealth;
 
         int minute = Mathf.FloorToInt(timerScript.CurrentTime / 60);
