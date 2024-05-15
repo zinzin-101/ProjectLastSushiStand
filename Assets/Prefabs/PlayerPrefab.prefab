@@ -141,6 +141,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6455983750742782160}
     - target: {fileID: 4181561773542320040, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
+      propertyPath: gunList.Array.data[0].GunInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: ae45769440e862844b15dfaf2161e99b, type: 2}
+    - target: {fileID: 4181561773542320040, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
+      propertyPath: gunList.Array.data[1].GunInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: a702ec280e1774148846098698f80810, type: 2}
+    - target: {fileID: 4181561773542320040, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
       propertyPath: gunList.Array.data[0].GunModel
       value: 
       objectReference: {fileID: 4123879498639349337}
@@ -202,7 +210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7986217047452643224, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
       propertyPath: lurchTimer
-      value: 0
+      value: 0.075
       objectReference: {fileID: 0}
     - target: {fileID: 7986217047452643224, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
       propertyPath: groundCheck
@@ -338,11 +346,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9088697150846611906, guid: 1747933afeb8b4345b540bbb51ee8c16, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.4710007
+      value: 0.795
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088697150846611906, guid: 1747933afeb8b4345b540bbb51ee8c16, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.217
       objectReference: {fileID: 0}
     - target: {fileID: 9088697150846611906, guid: 1747933afeb8b4345b540bbb51ee8c16, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.6949999
+      value: 0.701
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

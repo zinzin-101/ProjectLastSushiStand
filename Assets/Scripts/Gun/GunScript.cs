@@ -112,64 +112,70 @@ public class GunScript : MonoBehaviour
 
     void Fire()
     {
-        gunList[currentIndex].TriggerFireAnim();
-
-        RaycastHit hit;
-        ParticleSystem effect = Instantiate(ShootingSystem, gunPos.position, Quaternion.identity);
-        effect.transform.parent = this.transform;
-        effect.Play();
-
-        Vector3 dir = fpsCam.transform.forward;
-        float spreadAmount = gunList[currentIndex].GunInfo.spreadAmount;
-
-        if (playerMovement != null)
+        if(Time.timeScale > 0f)
         {
-            if (playerMovement.IsCrouching)
+            gunList[currentIndex].TriggerFireAnim();
+
+            RaycastHit hit;
+            ParticleSystem effect = Instantiate(ShootingSystem, gunPos.position, Quaternion.identity);
+            effect.transform.parent = this.transform;
+            effect.Play();
+            SoundManager.PlaySound(SoundManager.Sound.AutoRifle);
+
+            Vector3 dir = fpsCam.transform.forward;
+            float spreadAmount = gunList[currentIndex].GunInfo.spreadAmount;
+
+            if (playerMovement != null)
             {
-                spreadAmount *= recoilReductionScaling;
+                if (playerMovement.IsCrouching)
+                {
+                    spreadAmount *= recoilReductionScaling;
+                }
             }
-        }
 
-        if (spreadAmount != 0f)
-        {
-            dir.x += Random.Range(-spreadAmount, spreadAmount);
-            dir.y += Random.Range(-spreadAmount, spreadAmount);
-            dir.z += Random.Range(-spreadAmount, spreadAmount);
+            if (spreadAmount != 0f)
+            {
+                dir.x += Random.Range(-spreadAmount, spreadAmount);
+                dir.y += Random.Range(-spreadAmount, spreadAmount);
+                dir.z += Random.Range(-spreadAmount, spreadAmount);
+            }
+
+            if (Physics.Raycast(fpsCam.transform.position, dir, out hit, range))
+            {
+                // Instantiate bullet trail
+                TrailRenderer trail = Instantiate(bulletTrail, gunPos.position, Quaternion.identity);
+                StartCoroutine(SpawnTrail(trail, hit));
+
+                // Instantiate shooting particle system
+
+
+                Instantiate(ImpactParticleSystem, hit.point, Quaternion.LookRotation(hit.normal));
+                // Instantiate impact particle system if hit enemy
+                if (hit.collider.gameObject.TryGetComponent(out EnemyHp enemyHp))
+                {
+                    enemyHp.TakeDamage(damage);
+                    SoundManager.PlaySound(SoundManager.Sound.EnemyHitted);
+                    if (ui != null)
+                    {
+                        ui.TriggerMarker();
+                    }
+                }
+                if (hit.collider.gameObject.TryGetComponent(out HeadEnemy headEnemy))
+                {
+                    //headEnemy.Headshot(damage);
+                    headEnemy.Headshot((int)((float)damage * critMultiplier));
+                    SoundManager.PlaySound(SoundManager.Sound.EnemyHitted);
+                    if (ui != null)
+                    {
+                        ui.TriggerCritMarker();
+                    }
+                    //enemyHp.TakeDamage((int)((float)damage * critMultiplier));
+                }
+
+
+            }
         }
         
-        if (Physics.Raycast(fpsCam.transform.position, dir, out hit, range))
-        {
-            // Instantiate bullet trail
-            TrailRenderer trail = Instantiate(bulletTrail, gunPos.position, Quaternion.identity);
-            StartCoroutine(SpawnTrail(trail, hit));
-
-            // Instantiate shooting particle system
-            
-
-            Instantiate(ImpactParticleSystem, hit.point, Quaternion.LookRotation(hit.normal));
-            // Instantiate impact particle system if hit enemy
-            if (hit.collider.gameObject.TryGetComponent(out EnemyHp enemyHp))
-            {
-                enemyHp.TakeDamage(damage);
-                
-                if (ui != null)
-                {
-                    ui.TriggerMarker();
-                }
-            }
-            if (hit.collider.gameObject.TryGetComponent(out HeadEnemy headEnemy))
-            {
-                //headEnemy.Headshot(damage);
-                headEnemy.Headshot((int)((float)damage * critMultiplier));
-                if (ui != null)
-                {
-                    ui.TriggerCritMarker();
-                }
-                //enemyHp.TakeDamage((int)((float)damage * critMultiplier));
-            }
-
-
-        }
     }
 
     IEnumerator Reload()
@@ -177,7 +183,7 @@ public class GunScript : MonoBehaviour
         if (!isReloading && ammoCount < maxAmmo)
         {
             isReloading = true;
-
+            SoundManager.PlaySound(SoundManager.Sound.ReloadAssult);
             yield return new WaitForSeconds(reloadDelay);
 
             ammoCount = maxAmmo;

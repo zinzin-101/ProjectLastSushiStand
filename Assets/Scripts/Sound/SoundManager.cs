@@ -9,21 +9,18 @@ public static class SoundManager
 
     public enum Sound
     {
-        Blanked,
-        FindingLockPick,
-        PlayerMove,
-        KeyPickUp,
-        OpenDrawer,
-        Paper,
-        ChairDown,
-        PlaceComClue,
-        StandOnChair,
-        UseKey,
-        WardropeOpen,
-        PickupItem,
-        Dialog,
-        Start,
-        BGM
+        Walk,
+        AutoRifle,
+        DoubleJump,
+        WallJump,
+        Jump,
+        Melee,
+        BGM,
+        ReloadAssult,
+        EnemyHitted,
+        EnemyDead,
+        bgm2,
+        bgm3,
 
     }
 
@@ -32,16 +29,16 @@ public static class SoundManager
     public static void Initialize()
     {
         soundTimerDictionary = new Dictionary<Sound, float>();
-        soundTimerDictionary[Sound.PlayerMove] = 0f;
+        soundTimerDictionary[Sound.Walk] = 0f;
     }
     public static void PlaySound(Sound sound)
     {
         if (CanPlaySound(sound))
         {
-            GameObject soundGameObject = new GameObject("Sound");
+            GameObject soundGameObject = new GameObject("GeneratedSound");
             AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
             DestroySound destroySound = soundGameObject.AddComponent<DestroySound>();
-            destroySound.delay = 20f;
+            destroySound.delay = 180f;
             audioSource.PlayOneShot(GetAudioClip(sound));
         }
 
@@ -53,7 +50,7 @@ public static class SoundManager
         {
             default:
                 return true;
-            case Sound.PlayerMove:
+            case Sound.Walk:
                 if (soundTimerDictionary.ContainsKey(sound))
                 {
                     float lastTimePlayed = soundTimerDictionary[sound];
@@ -70,7 +67,7 @@ public static class SoundManager
                 }
                 else
                 {
-                    return false;
+                    return true;
                 }
 
         }

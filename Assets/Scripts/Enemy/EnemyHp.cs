@@ -20,6 +20,7 @@ namespace Enemy
         {
             if(HP <= 0) {
                 GameManager.Instance.UpdateEnemyCount();
+                SoundManager.PlaySound(SoundManager.Sound.EnemyDead);
                 Destroy(enemy);
             }
         }
