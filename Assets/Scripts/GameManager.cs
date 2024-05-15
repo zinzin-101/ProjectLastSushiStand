@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        SoundManager.Initialize();
         Win = false;
         if (instance != null && instance != this)
         {
