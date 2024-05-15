@@ -30,6 +30,7 @@ namespace Enemy
         [SerializeField] private GameObject Bullet;
         [SerializeField] private int SpeedBullet = 2;
         [SerializeField] private float rateOnFire = 0.5f;
+        [SerializeField] private EnemyDirection DirectionGunpoint;
         private float RateOnFire;
 
         public void Awake()
@@ -46,6 +47,7 @@ namespace Enemy
             if(bullet != 0 && RateOnFire >= rateOnFire) 
             {
                 Vector3 direction = GetDirection();
+                DirectionGunpoint.LookAtTarget();
                 Instantiate(Bullet, gunPoint.position, Quaternion.LookRotation(direction));
                 bullet--;
                 reloadTime = reloadtime;

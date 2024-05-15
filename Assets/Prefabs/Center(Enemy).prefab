@@ -275,6 +275,7 @@ MonoBehaviour:
   Bullet: {fileID: 1509077952655917628, guid: 430447bfff0b47a4f87930cbb03fa36b, type: 3}
   SpeedBullet: 2
   rateOnFire: 0.75
+  DirectionGunpoint: {fileID: 4073303276778645856}
 --- !u!114 &8573664757002469488
 MonoBehaviour:
   m_ObjectHideFlags: 0
