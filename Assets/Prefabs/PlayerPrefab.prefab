@@ -141,6 +141,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6455983750742782160}
     - target: {fileID: 4181561773542320040, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
+      propertyPath: gunList.Array.data[0].GunInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: ae45769440e862844b15dfaf2161e99b, type: 2}
+    - target: {fileID: 4181561773542320040, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
+      propertyPath: gunList.Array.data[1].GunInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: a702ec280e1774148846098698f80810, type: 2}
+    - target: {fileID: 4181561773542320040, guid: 5d5669ec9e5f5e1409cd36d3cc3dba0d, type: 3}
       propertyPath: gunList.Array.data[0].GunModel
       value: 
       objectReference: {fileID: 4123879498639349337}
