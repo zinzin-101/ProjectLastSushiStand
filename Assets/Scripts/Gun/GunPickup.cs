@@ -6,8 +6,9 @@ public class GunPickup : MonoBehaviour
 {
     private void OnTriggerEnter(Collider col)
     {
-        if (col.TryGetComponent(out GunScript gunScript))
+        if (col.gameObject.TryGetComponent(out PlayerMovement plrScript))
         {
+            GunScript gunScript = plrScript.GetComponentInChildren<GunScript>();
             gunScript.ActivateGun(1, true);
             print("activated");
             Destroy(gameObject);
