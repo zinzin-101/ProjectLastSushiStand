@@ -118,6 +118,7 @@ public class GunScript : MonoBehaviour
         ParticleSystem effect = Instantiate(ShootingSystem, gunPos.position, Quaternion.identity);
         effect.transform.parent = this.transform;
         effect.Play();
+        SoundManager.PlaySound(SoundManager.Sound.AutoRifle);
 
         Vector3 dir = fpsCam.transform.forward;
         float spreadAmount = gunList[currentIndex].GunInfo.spreadAmount;
@@ -177,7 +178,7 @@ public class GunScript : MonoBehaviour
         if (!isReloading && ammoCount < maxAmmo)
         {
             isReloading = true;
-
+            SoundManager.PlaySound(SoundManager.Sound.ReloadAssult);
             yield return new WaitForSeconds(reloadDelay);
 
             ammoCount = maxAmmo;

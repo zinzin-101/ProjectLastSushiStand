@@ -23,6 +23,7 @@ public class PlayerMelee : MonoBehaviour
         {
             canMelee = false;
             Instantiate(meleeObj, meleeTransform);
+            SoundManager.PlaySound(SoundManager.Sound.Melee);
         }
 
         if (!canMelee)

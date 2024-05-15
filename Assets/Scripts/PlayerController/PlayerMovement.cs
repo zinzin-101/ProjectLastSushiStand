@@ -172,7 +172,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (isWallRunning)
         {
-            WallRunningMovement();     
+            WallRunningMovement();
+            
         }
 
         if (isVaulting)
@@ -324,6 +325,7 @@ public class PlayerMovement : MonoBehaviour
         if (input.x != 0f)
         {
             movement.x += input.x * speed;
+            SoundManager.PlaySound(SoundManager.Sound.Walk);
         }
         else
         {
@@ -338,6 +340,7 @@ public class PlayerMovement : MonoBehaviour
         {
             movement.z = 0f;
         }
+        
 
         movement = Vector3.ClampMagnitude(movement, speed);
 
@@ -387,6 +390,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void WallRunningMovement()
     {
+        SoundManager.PlaySound(SoundManager.Sound.Walk);
         if (wallrunTimerLeft <= 0f)
         {
             IncreaseSpeed(wallJumpBoost / 2f);
@@ -449,15 +453,17 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         jumpCharges--;
+        
         if (!grounded && !isWallRunning)
         {
             jumpCharges--;
+            SoundManager.PlaySound(SoundManager.Sound.DoubleJump);
         }
 
         if (isWallRunning)
         {
             ExitWallRun();
-
+            SoundManager.PlaySound(SoundManager.Sound.WallJump);
             movement.x += input.x * wallJumpBoost;
             movement.z += input.z * wallJumpBoost;
             movement += wallNormal * 2.5f;
@@ -487,6 +493,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (!grounded)
         {
+
             Vector3 currentMovingDirection = new Vector3(velocityVec.x, 0f, velocityVec.z);
             float angleChange = Vector3.Angle(input, currentMovingDirection);
             float jumpSpeed = sprintSpeed * 0.5f;
@@ -499,12 +506,17 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
+
                 movement.x += input.x * jumpSpeed;
                 movement.z += input.z * jumpSpeed;
             }
             
         }
-
+        if (grounded)
+        {
+            SoundManager.PlaySound(SoundManager.Sound.Jump);
+        }
+        
         YVelocity.y = Mathf.Sqrt(jumpHeight * -2f * defaultGravity);
         /* v2 = u2 + 2gs
            v2 = 0 + 2gs
