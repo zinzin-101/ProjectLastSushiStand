@@ -27,7 +27,6 @@ public class GunScript : MonoBehaviour
     private int maxAmmo;
     private float reloadDelay;
     private float firerate;
-    private SoundManager.Sound sound;
     private float firingDelay;
     private bool canFire;
     public int MaxAmmo => maxAmmo;
@@ -82,7 +81,7 @@ public class GunScript : MonoBehaviour
         {
             canFire = false;
             firingDelay = firerate;
-            if (canShoot && !isReloading)
+            if (canShoot)
             {
                 Fire();
                 ammoCount--;
@@ -121,7 +120,7 @@ public class GunScript : MonoBehaviour
             ParticleSystem effect = Instantiate(ShootingSystem, gunPos.position, Quaternion.identity);
             effect.transform.parent = this.transform;
             effect.Play();
-            SoundManager.PlaySound(sound);
+            SoundManager.PlaySound(SoundManager.Sound.AutoRifle);
 
             Vector3 dir = fpsCam.transform.forward;
             float spreadAmount = gunList[currentIndex].GunInfo.spreadAmount;
@@ -185,9 +184,8 @@ public class GunScript : MonoBehaviour
         {
             isReloading = true;
             SoundManager.PlaySound(SoundManager.Sound.ReloadAssult);
-            gunList[currentIndex].TriggerReloadStart();
             yield return new WaitForSeconds(reloadDelay);
-            gunList[currentIndex].TriggerReloadEnd();
+
             ammoCount = maxAmmo;
             canShoot = true;
 
@@ -228,7 +226,6 @@ public class GunScript : MonoBehaviour
         maxAmmo = gunList[currentIndex].GunInfo.maxAmmo;
         reloadDelay = gunList[currentIndex].GunInfo.reloadDelay;
         firerate = gunList[currentIndex].GunInfo.firerate;
-        sound = gunList[currentIndex].GunInfo.sound;
 
         gunList[prevIndex].SetCurrentAmmo(ammoCount);
         ammoCount = gunList[currentIndex].CurrentAmmoCount;
@@ -251,7 +248,6 @@ public class GunScript : MonoBehaviour
         maxAmmo = gunList[currentIndex].GunInfo.maxAmmo;
         reloadDelay = gunList[currentIndex].GunInfo.reloadDelay;
         firerate = gunList[currentIndex].GunInfo.firerate;
-        sound = gunList[currentIndex].GunInfo.sound;
 
         ammoCount = gunList[currentIndex].CurrentAmmoCount;
     }

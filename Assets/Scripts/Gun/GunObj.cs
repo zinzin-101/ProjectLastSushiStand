@@ -27,14 +27,4 @@ public class GunObj
     {
         animator.SetTrigger("Fire");
     }
-
-    public void TriggerReloadStart()
-    {
-        animator.SetTrigger("ReloadStart");
-    }
-
-    public void TriggerReloadEnd()
-    {
-        animator.SetTrigger("ReloadEnd");
-    }
 }
