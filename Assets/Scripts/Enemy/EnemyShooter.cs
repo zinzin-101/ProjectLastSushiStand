@@ -47,6 +47,7 @@ namespace Enemy
             {
                 Vector3 direction = GetDirection();
                 Instantiate(Bullet, gunPoint.position, Quaternion.LookRotation(direction));
+                SoundManager.PlaySound(SoundManager.Sound.EnemyShoot);
                 bullet--;
                 reloadTime = reloadtime;
                 RateOnFire = 0;

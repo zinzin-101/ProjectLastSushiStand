@@ -18,10 +18,12 @@ public class GameManager : MonoBehaviour
     private bool enemiesExist;
     public bool EnemiesExist => enemiesExist;
 
+    public bool Win = false;
+
     private void Awake()
     {
         SoundManager.Initialize();
-
+        Win = false;
         if (instance != null && instance != this)
         {
             Destroy(this);
