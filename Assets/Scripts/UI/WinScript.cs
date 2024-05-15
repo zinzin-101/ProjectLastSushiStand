@@ -11,6 +11,18 @@ public class WinScript : MonoBehaviour
     [SerializeField] GameObject RestartPanel;
     [SerializeField] GameObject crosshair;
 
+    [SerializeField] TimerScript timerScript;
+    [SerializeField] TMP_Text timerText;
+
+    private void Start()
+    {
+        timerScript = FindObjectOfType<TimerScript>();
+        int minute = Mathf.FloorToInt(timerScript.CurrentTime / 60);
+        int second = Mathf.FloorToInt(timerScript.CurrentTime % 60);
+        timerText.text = string.Format("{0:00}:{1:00}", minute, second);
+
+    }
+    
     public void Active()
     {
         Time.timeScale = 0.0f;

@@ -80,10 +80,17 @@ public class UIScript : MonoBehaviour
         //    StartCoroutine(warnPlayer());
         //}
         healthText.text = "Health: " + playerStatus.PlayerHealth;
+        if (Time.timeScale > 0)
+        {
+            int minute = Mathf.FloorToInt(timerScript.CurrentTime / 60);
+            int second = Mathf.FloorToInt(timerScript.CurrentTime % 60);
+            timerText.text = string.Format("{0:00}:{1:00}", minute, second);
+        }
+        else
+        {
 
-        int minute = Mathf.FloorToInt(timerScript.CurrentTime / 60);
-        int second = Mathf.FloorToInt(timerScript.CurrentTime % 60);
-        timerText.text = string.Format("{0:00}:{1:00}",minute,second);
+        }
+        
 
         if(gameManager.WinCheck == true)
         {

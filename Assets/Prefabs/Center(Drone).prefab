@@ -66,7 +66,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1abff7f1b9c93464b860f85f3acb6060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 3
+  hp: 2
+  explosionFX: {fileID: 198146752706458318, guid: 4dd02b5f854b6c84990fbeb810abffe4, type: 3}
   enemy: {fileID: 3205569867919365692}
 --- !u!1 &3205569867919365692
 GameObject:

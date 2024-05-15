@@ -1084,6 +1084,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RestartPanel: {fileID: 8093660509909292457}
   crosshair: {fileID: 351499944424977151}
+  timerScript: {fileID: 0}
+  timerText: {fileID: 548964544678565924}
 --- !u!1 &3253374713087518129
 GameObject:
   m_ObjectHideFlags: 0
@@ -4450,7 +4452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.7019608}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

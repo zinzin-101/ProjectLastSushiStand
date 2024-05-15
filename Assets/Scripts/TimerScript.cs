@@ -9,6 +9,8 @@ public class TimerScript : MonoBehaviour
 
     private bool timerActivate;
 
+
+
     private void Start()
     {
         timerActivate = true;
