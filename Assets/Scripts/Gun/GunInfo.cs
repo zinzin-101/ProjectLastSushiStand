@@ -19,7 +19,6 @@ public class GunInfo : ScriptableObject
     public float reloadDelay;
     public float firerate;
     public float spreadAmount;
-    public SoundManager.Sound sound;
 
     //public ParticleSystem shootingSystem;
     //public ParticleSystem ImpactParticleSystem;

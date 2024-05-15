@@ -4917,7 +4917,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifespan: 0.1
   meleeDamage: 5
-  impactFX: {fileID: 5088339112022350390, guid: c58f34d2178f5bb46b1cde6d324b092b, type: 3}
 --- !u!135 &1687717522222990108
 SphereCollider:
   m_ObjectHideFlags: 0

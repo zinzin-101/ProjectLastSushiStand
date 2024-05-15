@@ -115,7 +115,7 @@ namespace Enemy
                 UpdatPath();
             }
 
-            //Debug.Log(enemyRef.agent.pathEndPosition);
+            Debug.Log(enemyRef.agent.pathEndPosition);
         }
         
 
@@ -134,8 +134,8 @@ namespace Enemy
                         float z = Random.Range(-2.0f, 2.0f);
                         enemyRef.agent.stoppingDistance = 0;
                         Vector3 pos = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
-                        //Debug.Log("Enemy Pos" + transform.position);
-                        //Debug.Log("target RandomPos" + pos);
+                        Debug.Log("Enemy Pos" + transform.position);
+                        Debug.Log("target RandomPos" + pos);
                         enemyRef.agent.SetDestination(pos);
                         check = false;
                     }
