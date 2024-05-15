@@ -17,7 +17,7 @@ public class StageChanger : MonoBehaviour
     {
         if (col.gameObject.TryGetComponent(out PlayerMovement plrScript))
         {
-            gameManager.Win = true;
+            gameManager.WinCheck = true;
             int lastSceneIndex = sceneIndexManager.GetLastSceneIndex();
             int nextSceneIndex = SceneManager.GetActiveScene().buildIndex;
             sceneIndexManager.SetLastSceneIndex(nextSceneIndex);

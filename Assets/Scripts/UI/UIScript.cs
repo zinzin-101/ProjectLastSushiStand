@@ -25,7 +25,7 @@ public class UIScript : MonoBehaviour
     [SerializeField] Map3BlockerController map3BlockerController;
 
     [SerializeField] GameObject winPanel;
-    [SerializeField] Win winScript;
+    [SerializeField] WinScript winScript;
 
     [SerializeField] GameObject indicatorTransform;
     [SerializeField] GameObject damageIndicator;
@@ -40,7 +40,7 @@ public class UIScript : MonoBehaviour
         blockerController = FindFirstObjectByType<blockerController>();
         map3BlockerController = FindFirstObjectByType<Map3BlockerController>();
         gameManager = FindFirstObjectByType<GameManager>();
-        winScript = FindFirstObjectByType<Win>();
+        winScript = FindFirstObjectByType<WinScript>();
     }
     private void Update()
     {
@@ -85,23 +85,21 @@ public class UIScript : MonoBehaviour
         int second = Mathf.FloorToInt(timerScript.CurrentTime % 60);
         timerText.text = string.Format("{0:00}:{1:00}",minute,second);
 
-        if(gameManager.Win == true)
+        if(gameManager.WinCheck == true)
         {
             winScript.Active();
+            
         }
-       
     }
 
     public void TriggerCritMarker()
     {
         StartCoroutine(CritHit(true));
-        //print("crit");
     }
 
     public void TriggerMarker()
     {
         StartCoroutine(CritHit(false));
-        //print("hit");
     }
 
     IEnumerator CritHit(bool isCrit)

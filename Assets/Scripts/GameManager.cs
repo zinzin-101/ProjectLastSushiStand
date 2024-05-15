@@ -18,11 +18,11 @@ public class GameManager : MonoBehaviour
     private bool enemiesExist;
     public bool EnemiesExist => enemiesExist;
 
-    public bool Win = false;
+    public bool WinCheck = false;
 
     private void Awake()
     {
-        Win = false;
+        WinCheck = false;
         if (instance != null && instance != this)
         {
             Destroy(this);
