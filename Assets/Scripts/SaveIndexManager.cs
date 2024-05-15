@@ -10,7 +10,10 @@ public class SceneIndexManager : MonoBehaviour
 
     private void Awake()
     {
+        SoundManager.Initialize();
         timer = GetComponent<TimerScript>();
+
+
     }
 
     private void Start()
