@@ -7,8 +7,10 @@ namespace Enemy
 
     public class EnemyHp : MonoBehaviour
     {
-        [SerializeField] private int HP = 10;
-        public int MaxHp => HP;
+        [SerializeField] private int hp = 10;
+        [SerializeField] ParticleSystem explosionFX;
+        public int HP => hp;
+
         [SerializeField] private GameObject enemy;
         void Start()
         {
@@ -18,9 +20,12 @@ namespace Enemy
         // Update is called once per frame
         void Update()
         {
-            if(HP <= 0) {
+            if(hp <= 0) {
                 GameManager.Instance.UpdateEnemyCount();
                 SoundManager.PlaySound(SoundManager.Sound.EnemyDead);
+
+                Instantiate(explosionFX, transform.position, Quaternion.identity);
+
                 Destroy(enemy);
             }
         }
@@ -35,7 +40,7 @@ namespace Enemy
 
         public void TakeDamage(int damage)
         {
-            HP -= damage;
+            hp -= damage;
         }
     }
 }

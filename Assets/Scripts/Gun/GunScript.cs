@@ -297,5 +297,6 @@ public class GunScript : MonoBehaviour
     public void ActivateGun(int index, bool value)
     {
         activateIndex[index] = value;
+        SwitchGun();
     }
 }
