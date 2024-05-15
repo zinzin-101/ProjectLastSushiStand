@@ -17,6 +17,7 @@ public class DamageToPlayer : MonoBehaviour
     {
         if (col.TryGetComponent(out PlayerStatus PlayerHp))
         {
+            SoundManager.PlaySound(SoundManager.Sound.PlayerGothit);
             PlayerHp.TakeDamage(damage, bullet.Origin);
         }
 

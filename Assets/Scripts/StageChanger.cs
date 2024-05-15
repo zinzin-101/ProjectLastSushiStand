@@ -21,8 +21,6 @@ public class StageChanger : MonoBehaviour
             int lastSceneIndex = sceneIndexManager.GetLastSceneIndex();
             int nextSceneIndex = SceneManager.GetActiveScene().buildIndex;
             sceneIndexManager.SetLastSceneIndex(nextSceneIndex);
-
-            
         }
     }
 }

@@ -27,6 +27,8 @@ public static class SoundManager
         Run,
         crouch,
         Pistol,
+        PlayerGothit,
+        Pickup,
     }
 
     private static Dictionary<Sound, float> soundTimerDictionary;

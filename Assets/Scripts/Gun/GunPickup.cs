@@ -10,7 +10,8 @@ public class GunPickup : MonoBehaviour
         {
             GunScript gunScript = plrScript.GetComponentInChildren<GunScript>();
             gunScript.ActivateGun(1, true);
-            print("activated");
+            SoundManager.PlaySound(SoundManager.Sound.Pickup);
+            //print("activated");
             Destroy(gameObject);
         }
     }

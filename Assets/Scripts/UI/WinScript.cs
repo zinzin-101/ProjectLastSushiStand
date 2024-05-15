@@ -17,12 +17,11 @@ public class WinScript : MonoBehaviour
     private void Start()
     {
         timerScript = FindObjectOfType<TimerScript>();
-        int minute = Mathf.FloorToInt(timerScript.CurrentTime / 60);
-        int second = Mathf.FloorToInt(timerScript.CurrentTime % 60);
-        timerText.text = string.Format("{0:00}:{1:00}", minute, second);
+        
 
     }
-    
+
+
     public void Active()
     {
         Time.timeScale = 0.0f;
@@ -30,6 +29,9 @@ public class WinScript : MonoBehaviour
         crosshair.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        int minute = Mathf.FloorToInt(timerScript.CurrentTime / 60);
+        int second = Mathf.FloorToInt(timerScript.CurrentTime % 60);
+        timerText.text = string.Format("{0:00}:{1:00}", minute, second);
 
         GameManager.Instance.SetGamePause(true);
     }

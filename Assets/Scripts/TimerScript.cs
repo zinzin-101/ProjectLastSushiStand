@@ -21,9 +21,13 @@ public class TimerScript : MonoBehaviour
     {
         if (timerActivate && !GameManager.Instance.IsPaused)
         {
-            currentTime += Time.deltaTime;
+            if(Time.timeScale > 0)
+            {
+                currentTime += Time.deltaTime;
+            }
+            
 
-            Debug.Log("Current Time: " + currentTime);
+            //Debug.Log("Current Time: " + currentTime);
         }
 
         //print("time: " + currentTime);
