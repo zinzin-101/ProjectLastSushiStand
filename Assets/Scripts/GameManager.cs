@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
 
     public bool WinCheck = false;
 
+    [SerializeField] TimerScript timer;
+    public TimerScript Timer => timer;
+
     private void Awake()
     {
         WinCheck = false;
@@ -31,6 +34,8 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
+        TryGetComponent(out timer);
+
         Time.timeScale = 1.0f;
 
         if(SceneManager.GetActiveScene().buildIndex == 1)
