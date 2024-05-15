@@ -79,6 +79,8 @@ public class PlayerMovement : MonoBehaviour
     private RaycastHit leftWallHit, rightWallhit;//, backWallhit;
     private RaycastHit wallHit;
     private Vector3 wallNormal;
+    private Vector3 wallPosition;
+    private Vector3 lastWallPosition;
     private Vector3 lastWallNormal;
     //private LastWall lastWall;
     private bool hasWallrun = false;
@@ -454,7 +456,7 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         jumpCharges--;
-        
+
         if (!grounded && !isWallRunning)
         {
             jumpCharges--;
@@ -619,6 +621,8 @@ public class PlayerMovement : MonoBehaviour
     {
         isWallRunning = false;
         lastWallNormal = wallNormal;
+
+        lastWallPosition = wallPosition;
     }
 
     private void IncreaseSpeed(float addSpeed)
@@ -753,6 +757,7 @@ public class PlayerMovement : MonoBehaviour
         //}
 
         wallNormal = wallHit.normal;
+        wallPosition = wallHit.transform.position;
 
         //if ((lastWallRight && onLeftWall) || (lastWallLeft && onRightWall))
         //{
@@ -761,9 +766,15 @@ public class PlayerMovement : MonoBehaviour
 
         if (hasWallrun)
         {
-            float wallAngle = Vector3.Angle(wallNormal, lastWallNormal);
+            //float wallAngle = Vector3.Angle(wallNormal, lastWallNormal);
 
-            if (wallAngle > 1f)
+            //if (wallAngle > 1f)
+            //{
+            //    EnterWallRun();
+            //    return;
+            //}
+
+            if (wallPosition != lastWallPosition)
             {
                 EnterWallRun();
                 return;
