@@ -34,7 +34,7 @@ public class UIScript : MonoBehaviour
 
     private void Awake()
     {
-        timerScript = FindFirstObjectByType<TimerScript>();
+        timerScript = FindObjectOfType<TimerScript>();
         playerStatus = FindFirstObjectByType<PlayerStatus>();
         gunScript = FindFirstObjectByType<GunScript>();
         blockerController = FindFirstObjectByType<blockerController>();
@@ -75,10 +75,10 @@ public class UIScript : MonoBehaviour
                     break;
             }
         }
-        if (blockerController.isCollide == true)
-        {
-            StartCoroutine(warnPlayer());
-        }
+        //if (blockerController.isCollide == true)
+        //{
+        //    StartCoroutine(warnPlayer());
+        //}
         healthText.text = "Health: " + playerStatus.PlayerHealth;
 
         int minute = Mathf.FloorToInt(timerScript.CurrentTime / 60);
