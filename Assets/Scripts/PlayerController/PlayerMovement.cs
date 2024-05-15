@@ -110,6 +110,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] bool allowDoubleJump = true;
     [SerializeField] bool allowWallrun = true;
 
+    [SerializeField] private SoundManager.Sound groundImpactSound = SoundManager.Sound.GroundImpact;
+    private bool wasGrounded = true;
+
     private void Start()
     {
         TryGetComponent(out controller);
@@ -641,7 +644,13 @@ public class PlayerMovement : MonoBehaviour
     private void CheckGround()
     {
         grounded = Physics.CheckSphere(groundCheck.position, 0.2f, groundLayer);
-        //grounded = Physics.Raycast(groundCheck.position, Vector3.down, 0.5f, groundLayer);
+
+        if (!wasGrounded && grounded)
+        {
+            SoundManager.PlaySound(groundImpactSound);
+        }
+
+        wasGrounded = grounded;
 
         if (grounded)
         {
