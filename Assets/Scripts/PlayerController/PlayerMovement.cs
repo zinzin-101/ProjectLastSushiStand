@@ -384,7 +384,7 @@ public class PlayerMovement : MonoBehaviour
         {
             speed -= slideSpeedDown * (velocityVec.y / 6f) * Time.deltaTime;
         }
-
+        
         movement += forwardDirection;
         movement = Vector3.ClampMagnitude(movement, speed);
     }

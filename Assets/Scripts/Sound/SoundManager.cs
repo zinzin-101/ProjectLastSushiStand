@@ -21,6 +21,8 @@ public static class SoundManager
         EnemyDead,
         bgm2,
         bgm3,
+        EnemyShoot,
+        Slide,
 
     }
 
@@ -37,8 +39,17 @@ public static class SoundManager
         {
             GameObject soundGameObject = new GameObject("GeneratedSound");
             AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
-            DestroySound destroySound = soundGameObject.AddComponent<DestroySound>();
-            destroySound.delay = 180f;
+
+            if (sound == Sound.BGM || sound == Sound.bgm2 || sound == Sound.bgm3)
+            {
+                audioSource.loop = true;
+            }
+            else
+            {
+                DestroySound destroySound = soundGameObject.AddComponent<DestroySound>();
+                destroySound.delay = 180f;
+            }
+
             audioSource.PlayOneShot(GetAudioClip(sound));
         }
 
@@ -83,7 +94,8 @@ public static class SoundManager
                 return soundAudioclip.audioClip;
             }
         }
-        Debug.LogError("Sound" + sound + "not found");
+        Debug.LogError("Sound " + sound + " not found");
         return null;
     }
+
 }

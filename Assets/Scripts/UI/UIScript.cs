@@ -24,6 +24,12 @@ public class UIScript : MonoBehaviour
     [SerializeField] blockerController blockerController;
     [SerializeField] Map3BlockerController map3BlockerController;
 
+    [SerializeField] GameObject winPanel;
+    [SerializeField] Win winScript;
+    
+
+    [SerializeField] GameManager gameManager;
+
     private void Awake()
     {
         timerScript = FindFirstObjectByType<TimerScript>();
@@ -31,6 +37,8 @@ public class UIScript : MonoBehaviour
         gunScript = FindFirstObjectByType<GunScript>();
         blockerController = FindFirstObjectByType<blockerController>();
         map3BlockerController = FindFirstObjectByType<Map3BlockerController>();
+        gameManager = FindFirstObjectByType<GameManager>();
+        winScript = FindFirstObjectByType<Win>();
     }
     private void Update()
     {
@@ -64,16 +72,21 @@ public class UIScript : MonoBehaviour
                     ammoText.text = "Ammo: " + gunScript.AmmoCount + "/" + gunScript.MaxAmmo;
                     break;
             }
-        }        
-        //if(blockerController.isCollide == true||map3BlockerController.isCollide == true)
-        //{
-        //    StartCoroutine(warnPlayer(true));
-        //}
+        }
+        if (blockerController.isCollide == true)
+        {
+            StartCoroutine(warnPlayer());
+        }
         healthText.text = "Health: " + playerStatus.PlayerHealth;
 
         int minute = Mathf.FloorToInt(timerScript.CurrentTime / 60);
         int second = Mathf.FloorToInt(timerScript.CurrentTime % 60);
         timerText.text = string.Format("{0:00}:{1:00}",minute,second);
+
+        if(gameManager.Win == true)
+        {
+            winScript.Active();
+        }
        
     }
 
@@ -117,13 +130,11 @@ public class UIScript : MonoBehaviour
         yield return new WaitForSeconds(0.75f); // can modify to any
         //CODE -- hide indicator
     }
-    IEnumerator warnPlayer(bool check)
+    IEnumerator warnPlayer()
     {
-        if (check)
-        {
-            warningText.SetActive(true) ;
-            yield return new WaitForSeconds(5);
-            warningText.SetActive(false);
-        }
+         warningText.SetActive(true) ;
+         yield return new WaitForSeconds(5);
+         warningText.SetActive(false);
+        
     }
 }

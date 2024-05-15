@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DestroySound : MonoBehaviour
@@ -8,6 +6,9 @@ public class DestroySound : MonoBehaviour
 
     private void Start()
     {
-        Destroy(gameObject, delay);
+        if (delay > 0)
+        {
+            Destroy(gameObject, delay);
+        }
     }
 }
