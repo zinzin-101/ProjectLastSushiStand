@@ -154,7 +154,7 @@ public class GunScript : MonoBehaviour
                 if (hit.collider.gameObject.TryGetComponent(out EnemyHp enemyHp))
                 {
                     enemyHp.TakeDamage(damage);
-
+                    SoundManager.PlaySound(SoundManager.Sound.EnemyHitted);
                     if (ui != null)
                     {
                         ui.TriggerMarker();
@@ -164,6 +164,7 @@ public class GunScript : MonoBehaviour
                 {
                     //headEnemy.Headshot(damage);
                     headEnemy.Headshot((int)((float)damage * critMultiplier));
+                    SoundManager.PlaySound(SoundManager.Sound.EnemyHitted);
                     if (ui != null)
                     {
                         ui.TriggerCritMarker();

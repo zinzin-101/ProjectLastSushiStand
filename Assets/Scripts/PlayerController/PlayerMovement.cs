@@ -216,6 +216,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (hit.collider.TryGetComponent(out JumpPadScript jumpPadScript))
         {
+            SoundManager.PlaySound(SoundManager.Sound.DoubleJump);
             Vector3 jumpVector = jumpPadScript.GetJumpVector();
             YVelocity.y = jumpVector.y;
             movement += new Vector3(jumpVector.x + movement.x, 0f, jumpVector.z + movement.z);

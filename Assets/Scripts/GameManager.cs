@@ -31,6 +31,22 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
         Time.timeScale = 1.0f;
+
+        if(SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            SoundManager.PlaySound(SoundManager.Sound.bgm2);
+        }else if(SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            SoundManager.PlaySound(SoundManager.Sound.bgm2);
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            SoundManager.PlaySound(SoundManager.Sound.bgm2);
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == 4)
+        {
+            SoundManager.PlaySound(SoundManager.Sound.bgm2);
+        }
     }
 
     private void Start()

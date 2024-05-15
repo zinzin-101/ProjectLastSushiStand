@@ -16,7 +16,11 @@ public static class SoundManager
         Jump,
         Melee,
         BGM,
-        ReloadAssult
+        ReloadAssult,
+        EnemyHitted,
+        EnemyDead,
+        bgm2,
+        bgm3,
 
     }
 
@@ -34,7 +38,7 @@ public static class SoundManager
             GameObject soundGameObject = new GameObject("GeneratedSound");
             AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
             DestroySound destroySound = soundGameObject.AddComponent<DestroySound>();
-            destroySound.delay = 20f;
+            destroySound.delay = 180f;
             audioSource.PlayOneShot(GetAudioClip(sound));
         }
 
