@@ -15569,6 +15569,10 @@ PrefabInstance:
       propertyPath: RestartController
       value: 
       objectReference: {fileID: 179529446}
+    - target: {fileID: 7611316711242624748, guid: 3bd28bdb16f9a85418dc34aca8a68951, type: 3}
+      propertyPath: blockerController
+      value: 
+      objectReference: {fileID: 903167052}
     m_RemovedComponents:
     - {fileID: 35591843331633162, guid: 3bd28bdb16f9a85418dc34aca8a68951, type: 3}
     m_RemovedGameObjects: []

@@ -26,7 +26,9 @@ public class UIScript : MonoBehaviour
 
     [SerializeField] GameObject winPanel;
     [SerializeField] Win winScript;
-    
+
+    [SerializeField] GameObject indicatorTransform;
+    [SerializeField] GameObject damageIndicator;
 
     [SerializeField] GameManager gameManager;
 
@@ -120,16 +122,11 @@ public class UIScript : MonoBehaviour
 
     public void TriggerDamageDirection(float angle)
     {
-        print("angle = " + angle);
-        StartCoroutine(DamageIndicator(angle));
+        //print("angle = " + angle);
+        GameObject rect = Instantiate(damageIndicator, indicatorTransform.transform);
+        rect.transform.rotation = Quaternion.Euler(0, 0, -angle);
     }
 
-    IEnumerator DamageIndicator(float angle)
-    {
-        //CODE -- show indicator that rotate with angle
-        yield return new WaitForSeconds(0.75f); // can modify to any
-        //CODE -- hide indicator
-    }
     IEnumerator warnPlayer()
     {
          warningText.SetActive(true) ;
