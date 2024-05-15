@@ -14,6 +14,7 @@ public class GunScript : MonoBehaviour
 
     [SerializeField] List<GunObj> gunList;
     private int currentIndex, prevIndex;
+    [SerializeField] bool[] activateIndex;
 
     [SerializeField] KeyCode swapGunKey = KeyCode.Q;
     [SerializeField] float recoilReductionScaling = 0.5f;
@@ -266,10 +267,20 @@ public class GunScript : MonoBehaviour
         switch (currentIndex)
         {
             case 0:
+
+                if (!activateIndex[1])
+                {
+                    break;
+                }
+
                 currentIndex = 1;
                 break;
 
             case 1:
+                if (!activateIndex[0])
+                {
+                    break;
+                }
                 currentIndex = 0;
                 break;
         }
@@ -281,5 +292,10 @@ public class GunScript : MonoBehaviour
         {
             canShoot = false;
         }
+    }
+
+    public void ActivateGun(int index, bool value)
+    {
+        activateIndex[index] = value;
     }
 }
