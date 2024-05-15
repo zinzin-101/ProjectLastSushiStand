@@ -23,6 +23,7 @@ public static class SoundManager
         bgm3,
         EnemyShoot,
         Slide,
+        GroundImpact,
 
     }
 

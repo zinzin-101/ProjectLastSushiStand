@@ -20,3 +20,4 @@ MonoBehaviour:
   reloadDelay: 1.5
   firerate: 0.2
   spreadAmount: 0
+  sound: 1
