@@ -8,7 +8,7 @@ public class PlayerMelee : MonoBehaviour
     [SerializeField] GameObject meleeObj;
     [SerializeField] Transform meleeTransform;
     
-
+    [SerializeField] PlayerStatus playerStatus;
 
     [SerializeField] float meleeDelay;
     private bool canMelee;
@@ -16,6 +16,8 @@ public class PlayerMelee : MonoBehaviour
 
     private void Start()
     {
+        TryGetComponent(out playerStatus);
+
         canMelee = true;
     }
 
@@ -24,7 +26,14 @@ public class PlayerMelee : MonoBehaviour
         if (Input.GetKeyDown(meleeKey) && canMelee)
         {
             canMelee = false;
-            Instantiate(meleeObj, meleeTransform);
+            GameObject _meleeObj = Instantiate(meleeObj, meleeTransform);
+            _meleeObj.TryGetComponent(out MeleeDamage melee);
+
+            if (melee != null)
+            {
+                melee.PlayerStat = playerStatus;
+            }
+
             SoundManager.PlaySound(SoundManager.Sound.Melee);
             
         }
