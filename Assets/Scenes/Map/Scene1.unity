@@ -6995,6 +6995,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 548964544678565924, guid: 3bd28bdb16f9a85418dc34aca8a68951, type: 3}
+      propertyPath: m_margin.z
+      value: -231.32874
+      objectReference: {fileID: 0}
     - target: {fileID: 1203965458343822694, guid: 3bd28bdb16f9a85418dc34aca8a68951, type: 3}
       propertyPath: PausePanel
       value: 
@@ -7107,6 +7111,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6772481906094857495, guid: 3bd28bdb16f9a85418dc34aca8a68951, type: 3}
+      propertyPath: countingSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7611316711242624748, guid: 3bd28bdb16f9a85418dc34aca8a68951, type: 3}
       propertyPath: gunScript
       value: 
@@ -7122,6 +7130,10 @@ PrefabInstance:
     - target: {fileID: 8093660509909292457, guid: 3bd28bdb16f9a85418dc34aca8a68951, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900438824421120196, guid: 3bd28bdb16f9a85418dc34aca8a68951, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

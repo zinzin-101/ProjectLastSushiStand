@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        
+        
+        
         WinCheck = false;
         if (instance != null && instance != this)
         {

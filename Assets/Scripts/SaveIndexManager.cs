@@ -37,8 +37,9 @@ public class SceneIndexManager : MonoBehaviour
         lastSceneIndex = sceneIndex;
         PlayerPrefs.SetInt(LAST_SCENE_INDEX_KEY, lastSceneIndex);
         PlayerPrefs.Save();
-
+        timer.getTime();
         timer.ResetTimer();
         timer.SetActivateTimer(true);
+
     }
 }

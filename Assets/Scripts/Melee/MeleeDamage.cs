@@ -30,7 +30,7 @@ public class MeleeDamage : MonoBehaviour
                 playerStat.RestoreHealth(2);
             }
 
-            Instantiate(ImpactParticleSystem, enemyHp.transform.position, Quaternion.identity);
+            //Instantiate(ImpactParticleSystem, enemyHp.transform.position, Quaternion.identity);
 
             //col.gameObject.TryGetComponent(out Rigidbody rb);
             //if (rb != null)

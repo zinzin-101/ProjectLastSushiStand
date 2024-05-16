@@ -165,7 +165,10 @@ namespace SlimUI.ModernMenu{
 			DisablePlayCampaign();
 			CameraObject.SetFloat("Animate",1);
 		}
-
+		public void LoadCredit()
+		{
+			SceneManager.LoadScene(5);
+		}
 		public void Position1(){
 			CameraObject.SetFloat("Animate",0);
 		}

@@ -33,6 +33,7 @@ namespace ThePed
 
         public void Start()
         {
+            SoundManager.PlaySound(SoundManager.Sound.bgm3);
             delayWFS = new WaitForSeconds(delay);
             startingPos = textTrans.anchoredPosition;
 
@@ -74,11 +75,12 @@ namespace ThePed
             while (y >= yDistance)
             {
                 //Switch the alignment after the first credit has left the screen
+
                 if (linesDisplayed > maxLinesOnScreen+2 && text.alignment != TextAnchor.UpperCenter)
                     text.alignment = TextAnchor.UpperCenter;
 
                 LinesToText();
-
+                
                 y -= yDistance;
 
                 linesDisplayed++;
@@ -86,8 +88,9 @@ namespace ThePed
                 if (linesDisplayed > creditLines.Length)
                     play = false;
             }
-
+            
             textTrans.anchoredPosition = startingPos + new Vector2(0, y);
+            
         }
 
         public void LinesToText()

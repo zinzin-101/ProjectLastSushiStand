@@ -9,7 +9,7 @@ public class TimerScript : MonoBehaviour
 
     private bool timerActivate;
 
-
+    public float ExportTime;
 
     private void Start()
     {
@@ -41,5 +41,9 @@ public class TimerScript : MonoBehaviour
     public void SetActivateTimer(bool value)
     {
         timerActivate = value;
+    }
+    public void getTime()
+    {
+        ExportTime = currentTime;
     }
 }
